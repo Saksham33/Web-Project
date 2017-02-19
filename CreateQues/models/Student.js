@@ -14,8 +14,6 @@ var Student = module.exports = mongoose.model('logindb', studentSchema, 'Student
 
 module.exports.checkStudent = function(name, password, callback) {
 	var query = {name: name, password: password};
-	// console.log(name);
-	// console.log(password);
 	Student.findOne(query, callback);
 }
 

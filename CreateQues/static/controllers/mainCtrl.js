@@ -1,14 +1,9 @@
 var app = angular.module("myApp", []);
 
-app.service("shareUname", function() {
-});
-
-app.controller("loginCtrl", function($scope, $http, $window, shareUname) {
+app.controller("loginCtrl", function($scope, $http, $window) {
 	$scope.validate = function() {
 		console.log("Validate func");
-		shareUname.uname = $scope.uname1;
-		// console.log("Angular name: " + $scope.uname1);
-		// console.log("Angular pass: " + $scope.pass1);
+
 		$http({
 			method: "POST",
 			url: "/login/",
@@ -43,9 +38,50 @@ app.controller("loginCtrl", function($scope, $http, $window, shareUname) {
 });
 
 // MCQ page ctrl
-app.controller("QuesCtrl", function($scope, shareUname) {
-	$scope.f = function() {
-		console.log("Inside ques ctrl");
-		console.log(shareUname.uname);
-	}
+app.controller("QuesCtrl", function($scope, $http) {
+
+	$scope.addQuestion = function() {
+		console.log("Add ques function");
+
+		var question = $("#t1").val().trim();
+		if(question == "") {
+			$("#emptyQues").css('display','inline');
+			return;
+		}
+		else {
+			$("#emptyQues").css('display','none');
+		}
+
+		var optionsArray = new Array();
+		var answer = $("input[name=mcq]:checked").val();
+		$("#options").find("span").each(function() {
+			optionsArray.push($(this).text());
+		});
+
+		if(optionsArray.length < 2) {
+			$("#emptyOptions").css('display', 'block');
+			return;
+		}
+		else {
+			$("#emptyOptions").css('display', 'none');
+		}
+
+		if(answer == null) {
+			$("#emptyAnswer").css('display', 'block');
+			return;
+		}
+		else {
+			$("#emptyAnswer").css('display', 'none');
+		}
+
+		console.log(question);
+		console.log(optionsArray);
+		console.log(answer);
+		var form = document.getElementById("mcq_form");
+		form.reset();
+		$("#options").children().remove();
+
+		// http request
+	};
 });
+

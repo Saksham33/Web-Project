@@ -12,19 +12,18 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 		<scipt src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></scipt>
 		<script type="text/javascript" src="js/append_options.js"></script>
-		<!-- <script type="text/javascript" src="js/controllers/quesCtrl.js"></script> -->
 		<script type="text/javascript" src="/controllers/mainCtrl.js"></script>
 	</head>
 	
 	<body ng-app="myApp" ng-controller="QuesCtrl">
 		<form class="container" method="post" style="font-family: 'Quicksand', sans-serif;" id="mcq_form">
 			<div>
-				<p style="font-size: 40px;" ng-click="f()">Create MCQ</p>
+				<p style="font-size: 40px;">Create MCQ</p>
 			</div>
 			<div class="form-group">
 				<div>
    					<label for="statement">Problem Statement</label><label id="emptyQues" style="color: red; float: right; display: none">Please enter a question</label>
-   					<textarea id="t1" class="form-control" placeholder="Eg: What is the complexity of Binary Search Tree?" style="resize: none"></textarea><br>
+   					<textarea id="t1" class="form-control" placeholder="Eg: What is the complexity of Binary Search Tree?" style="resize: none" ng-model="question"></textarea><br>
    				</div>
    				<div id="options"></div>
    				<div>
@@ -34,7 +33,7 @@
    					<button id="b1" type="button" class="btn btn-primary">Create Option</button>
    				</div>
    				<div id="footer">
-   					<button id="b2" style="width: 7em;" type="button" class="btn btn-success">Create</button>
+   					<button id="b2" style="width: 7em;" type="button" class="btn btn-success" ng-click="addQuestion()">Create</button>
    				</div>
 			</div>
 		</form>

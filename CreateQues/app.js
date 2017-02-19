@@ -15,8 +15,6 @@ var db = mongoose.connection;
 app.post('/login/', function(req, res) {
 	var name = req.body.name;
 	var passw = req.body.passw;
-	// console.log(name);
-	// console.log(passw);
 	Student.checkStudent(name, passw, function(err, student) {
 		if(err) {
 			throw err;
