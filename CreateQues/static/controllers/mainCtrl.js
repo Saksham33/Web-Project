@@ -39,7 +39,10 @@ app.controller("loginCtrl", function($scope, $http, $window) {
 
 // MCQ page ctrl
 app.controller("QuesCtrl", function($scope, $http) {
-
+	$scope.setTopic = "Select Topic";
+	$scope.selectTop = function(text) {
+		$scope.setTopic = text;
+	};
 	$scope.addQuestion = function() {
 		console.log("Add ques function");
 
@@ -77,6 +80,7 @@ app.controller("QuesCtrl", function($scope, $http) {
 		console.log(question);
 		console.log(optionsArray);
 		console.log(answer);
+		console.log($scope.setTopic);
 		var form = document.getElementById("mcq_form");
 		form.reset();
 		$("#options").children().remove();

@@ -8,11 +8,13 @@
 		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/radio_button.css">
 		<link rel="stylesheet" type="text/css" href="css/modifications.css">
+		<link rel="stylesheet" type="text/css" href="css/dropdown_button.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 		<scipt src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></scipt>
 		<script type="text/javascript" src="js/append_options.js"></script>
-		<script type="text/javascript" src="/controllers/mainCtrl.js"></script>
+		<script type="text/javascript" src="controllers/mainCtrl.js"></script>
+		<script src="js/dropdown_effect.js"></script>
 	</head>
 	
 	<body ng-app="myApp" ng-controller="QuesCtrl">
@@ -32,6 +34,16 @@
    					<input class="form-control" type="text" id="i1" placeholder="Enter an option" name="option" style="width: 18%; float: left">&nbsp;
    					<button id="b1" type="button" class="btn btn-primary">Create Option</button>
    				</div>
+   				<span class="dropdown"><br>
+   					<button class="btn btn-primary btn-default" data-toggle="dropdown" class="dropdown-toggle" id="button2">{{setTopic}} <b class="caret"></b>
+   					</button>
+		            <ul class="dropdown-menu">
+		                <li><a ng-click="selectTop('Stack')">Stack</a></li>
+		                <li><a ng-click="selectTop('Queue')">Queue</a></li>
+		                <li><a ng-click="selectTop('Trees')">Trees</a></li>
+		                <li><a ng-click="selectTop('Graph')">Graph</a></li>
+		            </ul>
+   				</span>
    				<div id="footer">
    					<button id="b2" style="width: 7em;" type="button" class="btn btn-success" ng-click="addQuestion()">Create</button>
    				</div>
