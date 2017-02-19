@@ -1,0 +1,263 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/DS.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/boot.js"></script>
+  <title>Stack</title>
+</head>
+<body >
+<div class="navbar-wrapper">
+    <div class="container-fluid" >
+        <nav class="navbar navbar-fixed-top">
+            <div class="container" style="width: 100%;line-height: 0px">
+	  <div class="row add" style="min-height: 83px;margin-bottom: 0px;background-color:#80b0da">
+	       <div class="col-md-6 col-xs-2 col-sm-6">
+	       		<img src="1.png" alt="logo" height="75px" style="padding-top: 8px">
+	       </div>
+	       <div class="col-md-6 col-xs-10 col-sm-6 text-right " >
+	        	<ul class=" dropdown pull-right " style="padding: 10px;margin-top:23px;margin-bottom: 0px;padding-right: 3px">
+	        		<span class="glyphicon glyphicon-user" style="font-size: 18px"></span>
+	          		<a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" style="font-size: 20px;color:rgba(0,0,0,0.52)">hello user 
+	            			<span class="caret"></span>
+	          		</a>
+	            	<ul class="dropdown-menu" style="color:rgba(126,122,158,0.52);margin:0px;background-color: rgba(137,153,171,0)">
+	                  <li><a href="#" style="color:rgba(0,0,0,0.75)">Change Password</a></li>
+	                  <li><a href="#" style="color:rgba(0,0,0,0.75)">My Profile</a></li>
+	                  <li><a href="#" style="color:rgba(0,0,0,0.75)">LogOut</a></li>
+	              	</ul>
+	            </ul>
+	      </div>
+	  </div>
+	 </div>
+   </nav>
+   </div>
+   </div>
+ 	 <div id="wrapper" style="margin-top: 75px">
+	 <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav">
+                <li class="sidebar-brand">
+                    <a href="ip.html" style="color: rgb(50, 53, 68)">Home</a>
+                </li>
+                <li>
+                    <a href="Graph.html" style="color: rgb(50, 53, 68)">Graphs</a>
+                </li>
+                <li>
+                    <a href="Tree.html" style="color: rgb(50, 53, 68)">Trees</a>
+                </li>
+                <li>
+                  <a href="Queue.html" style="color: rgb(50, 53, 68)">Queues</a>
+                </li>
+            </ul>
+        </div>
+		<!-- Page content -->
+        <div id="page-content-wrapper">
+            <div class="content-header" style="padding-top: 5px">
+                <h1 id="home" class="glyphicon glyphicon-align-justify"><font size="20px">Stacks </font></h1>
+            </div>
+            </div>
+            
+            <div class="row" style="margin-left: 15px;margin-right: 20px">
+            <p id="demo" style="font-size: 18px;line-height: 35px">
+              <b>1. The postfix form of the expression (A+ B)*(C*D- E)*F / G is?</b>
+              <br>
+              <input type="radio" id="q11" name="1" onclick="f1()" >AB+ CD*E - FG /**<br>
+              <input type="radio" id="q12" name="1" onclick="f1()" >AB + CD* E - F **G /<br>
+              <input type="radio" id="q13" name="1" onclick="f1()" >AB + CD* E - *F *G /<br>
+              <input type="radio" id="q14" name="1" onclick="f1()" >AB + CDE * - * F *G /<br>
+              
+              <span id="q15" class="glyphicon glyphicon-ok " style="display: none; color:#3fa50d;font-size:24px;padding-left: 10% ;"></span>
+              <span id="q16" class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
+            </p>
+            <p style="font-size: 18px;line-height: 35px">
+              <b>2. The data structure required to check whether an expression contains balanced parenthesis is?</b>
+              <br>
+              <input type="radio" id="q21" name="2" onclick="f2()" >Stack<br>
+              <input type="radio" id="q22" name="2" onclick="f2()" >Queue<br>
+              <input type="radio" id="q23" name="2" onclick="f2()" >Tree<br>
+              <input type="radio" id="q24" name="2" onclick="f2()" >Array<br>
+               <span id="q25" class="glyphicon glyphicon-ok " style="display: none; color:#3fa50d;font-size:24px;padding-left: 10% ;"></span>
+              <span id="q26" class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
+            </p>
+            <p style="font-size: 18px;line-height: 35px">
+              <b>3. The prefix form of A-B/ (C * D ^ E) is?</b>
+              <br>
+              <input type="radio" id="q31" name="3" onclick="f3()" > -/*^ACBDE<br>
+              <input type="radio" id="q32" name="3" onclick="f3()" >-ABCD*^DE<br>
+              <input type="radio" id="q33" name="3" onclick="f3()" >-A/B*C^DE<br>
+              <input type="radio" id="q34" name="3" onclick="f3()" >-A/BC*^DE<br>
+               <span id="q35" class="glyphicon glyphicon-ok " style="display: none; color:#3fa50d;font-size:24px;padding-left: 10% ;"></span>
+              <span id="q36" class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
+            </p>
+            <p style="font-size: 18px;line-height: 35px">
+              <b>4. Which data structure is used for implementing recursion?</b>
+              <br>
+              <input type="radio" id="q41" name="4" onclick="f4()" >Stack<br>
+              <input type="radio" id="q42" name="4" onclick="f4()" >Queue<br>
+              <input type="radio" id="q43" name="4" onclick="f4()" >Array<br>
+              <input type="radio" id="q44" name="4" onclick="f4()" >List<br>
+               <span id="q45" class="glyphicon glyphicon-ok " style="display: none; color:#3fa50d;font-size:24px;padding-left: 10% ;"></span>
+              <span id="q46" class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
+            </p>
+            <p style="font-size: 18px;line-height: 35px">
+              <b> Which of the following application generally use a stack?</b>
+              <br>
+              <input type="radio" id="q51" name="5" onclick="f5()" >Parenthesis balancing program<br>
+              <input type="radio" id="q52" name="5" onclick="f5()" >Syntax analyzer in compiler<br>
+              <input type="radio" id="q53" name="5" onclick="f5()" >Keeping track of local variables at run time<br>
+              <input type="radio" id="q54" name="5" onclick="f5()" >All of the above<br>
+               <span id="q55" class="glyphicon glyphicon-ok " style="display: none; color:#3fa50d;font-size:24px;padding-left: 10% ;"></span>
+              <span id="q56" class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
+            </p>
+            <p style="font-size: 18px;line-height: 35px">
+              <b>6. What is the minimum number of stacks of size n required to implement a queue of size n?</b>
+              <br>
+              <input type="radio" id="q61" name="6" onclick="f6()" >1<br>
+              <input type="radio" id="q62" name="6" onclick="f6()" >2<br>
+              <input type="radio" id="q63" name="6" onclick="f6()" >3<br>
+              <input type="radio" id="q64" name="6" onclick="f6()" >4<br>
+               <span id="q65" class="glyphicon glyphicon-ok " style="display: none; color:#3fa50d;font-size:24px;padding-left: 10% ;"></span>
+              <span id="q66" class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
+            </p>
+            
+            <center><a role="button" class="btn btn-success btn-lg btn3d" style="font-size: 24px" >Submit</a></center>
+            </div>
+            
+	</div>
+<script>
+function f1()
+{
+  correct=document.getElementById('q11');
+      if(correct.checked)
+       {
+        document.getElementById("q15").style.display="inline";
+        document.getElementById("q16").style.display="none";
+       
+     }
+      else {
+        
+        document.getElementById("q15").style.display="none";
+        document.getElementById("q16").style.display="inline";
+      
+      }
+}
+function f2()
+{
+  correct=document.getElementById('q21');
+      if(correct.checked)
+       {
+        document.getElementById("q25").style.display="inline";
+        document.getElementById("q26").style.display="none";
+       
+     }
+      else {
+        
+        document.getElementById("q25").style.display="none";
+        document.getElementById("q26").style.display="inline";
+      
+      }
+}
+function f3()
+{
+  correct=document.getElementById('q33');
+      if(correct.checked)
+       {
+        document.getElementById("q35").style.display="inline";
+        document.getElementById("q36").style.display="none";
+       
+     }
+      else {
+        
+        document.getElementById("q35").style.display="none";
+        document.getElementById("q36").style.display="inline";
+      
+      }
+}
+function f4()
+{
+  correct=document.getElementById('q41');
+      if(correct.checked)
+       {
+        document.getElementById("q45").style.display="inline";
+        document.getElementById("q46").style.display="none";
+       
+     }
+      else {
+        
+        document.getElementById("q45").style.display="none";
+        document.getElementById("q46").style.display="inline";
+      
+      }
+}
+function f5()
+{
+  correct=document.getElementById('q54');
+      if(correct.checked)
+       {
+        document.getElementById("q55").style.display="inline";
+        document.getElementById("q56").style.display="none";
+       
+     }
+      else {
+        
+        document.getElementById("q55").style.display="none";
+        document.getElementById("q56").style.display="inline";
+      
+      }
+}
+function f6()
+{
+  correct=document.getElementById('q62');
+      if(correct.checked)
+       {
+        document.getElementById("q65").style.display="inline";
+        document.getElementById("q66").style.display="none";
+       
+     }
+      else {
+        
+        document.getElementById("q65").style.display="none";
+        document.getElementById("q66").style.display="inline";
+      
+      }
+}
+</script>
+</body>
+</html>
+
+<!--
+<a href="#" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span></a>
+            <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Default text here</a>
+            <a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-remove"></span> submit</a>
+            <label for="success" class="btn btn-success">Success <input type="checkbox" id="success" class="badgebox"><span class="badge">&check;</span></label>
+            <div class="round hollow blue"><span class="glyphicon glyphicon-user"></span></div>
+            <button type="button" class="btn btn-success btn-lg btn3d"><span class="glyphicon glyphicon-ok"></span> Success</button>
+
+
+
+
+            correct=document.getElementById('q11').value;
+if (document.getElementById('q11').checked) {
+  chosen = document.getElementById('q11').value;
+}
+else if (document.getElementById('q12').checked) {
+  chosen = document.getElementById('q12').value;
+}
+else if (document.getElementById('q13').checked) {
+  chosen = document.getElementById('q13').value;
+}
+else if (document.getElementById('q14').checked) {
+  chosen = document.getElementById('q14').value;
+}
+
+if(chosen == correct)
+{
+document.getElementById("q15").style.display="inline";
+}
+else
+{
+  document.getElementById("q16").style.display="inline";
+}
+-->

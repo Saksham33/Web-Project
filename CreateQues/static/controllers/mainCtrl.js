@@ -7,7 +7,6 @@ app.controller("loginCtrl", function($scope, $http, $window, shareUname) {
 	$scope.validate = function() {
 		console.log("Validate func");
 		shareUname.uname = $scope.uname1;
-		console.log("Username added: " + shareUname.uname);
 		// console.log("Angular name: " + $scope.uname1);
 		// console.log("Angular pass: " + $scope.pass1);
 		$http({
@@ -19,7 +18,7 @@ app.controller("loginCtrl", function($scope, $http, $window, shareUname) {
 			}
 		}).then(function(response) {
 			console.log("Res: " + response);
-			$window.location.href = './MCQ.html';
+			$window.location.href = './ip.html';
 		});
 	};
 
