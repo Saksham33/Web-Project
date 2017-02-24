@@ -8,16 +8,20 @@ var quesSchema = mongoose.Schema({
 	},
 	options:{
 		type: [String]
+	},
+	topic:{
+		type: String
 	}
 });
 
 var MCQ = module.exports = mongoose.model('logindb2', quesSchema, 'MCQ');
 
-module.exports.addQues = function(question, answer, options, callback) {
-	var query = {question: question, answer: answer, options: options};
+module.exports.addQues = function(question, answer, options, topic, callback) {
+	var query = {question: question, answer: answer, options: options, topic: topic};
 	MCQ.create(query, callback);
 }
 
-module.exports.getStackQues = function(callback, limit) {
-	MCQ.find(callback).limit(limit);
+module.exports.getStackQues = function(topic, callback) {
+	var query = {topic: topic};
+	MCQ.find(query, callback);
 }

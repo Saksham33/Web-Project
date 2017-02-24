@@ -5,9 +5,12 @@
   <link rel="stylesheet" type="text/css" href="css/DS.css">
   <script src="jq/jquery.js"></script>
   <script src="jq/boot.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script type="text/javascript" src="controllers/mainCtrl.js"></script>
   <title>Tree</title>
 </head>
-<body >
+<body ng-app="myApp" ng-controller="treeController" ng-init="loadData()">
 <div class="navbar-wrapper">
     <div class="container-fluid" >
         <nav class="navbar navbar-fixed-top">
@@ -121,6 +124,17 @@
                <span id="q65" class="glyphicon glyphicon-ok " style="display: none; color:#3fa50d;font-size:24px;padding-left: 10% ;"></span>
               <span id="q66" class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
             </p>
+
+            <!-- Adding data from server -->
+            <div ng-repeat="x in arr">
+            <p style="font-size: 18px;line-height: 35px">
+              <b>Ques. {{x.question}}</b>
+              <br>
+              <div ng-repeat="op in x.options"><input type="radio" name="">{{op}}</div>
+              <span class="glyphicon glyphicon-ok " style="display: none; color:#3fa50d;font-size:24px;padding-left: 10% ;"></span>
+              <span class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
+            </p>
+            </div>
             
             <center><a role="button" class="btn btn-success btn-lg btn3d" style="font-size: 24px" >Submit</a></center>
             </div>

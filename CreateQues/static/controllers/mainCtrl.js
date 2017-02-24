@@ -88,10 +88,6 @@ app.controller("QuesCtrl", function($scope, $http) {
 		console.log(optionsArray);
 		console.log(answer);
 		console.log($scope.setTopic);
-		var form = document.getElementById("mcq_form");
-		form.reset();
-		$("#options").children().remove();
-		$scope.setTopic = "Select Topic";
 
 		// http request
 		$http({
@@ -101,10 +97,18 @@ app.controller("QuesCtrl", function($scope, $http) {
 				question: question,
 				answer: answer,
 				options: optionsArray,
+				topic: $scope.setTopic,
 			}
 		}).then(function(response) {
 			console.log("Response: " + response);
 		});
+
+		// Reset everything
+		var form = document.getElementById("mcq_form");
+		form.reset();
+		$("#options").children().remove();
+		$scope.setTopic = "Select Topic";
+
 	};
 });
 
@@ -115,7 +119,51 @@ app.controller('stackController', function($scope, $http) {
 			method: "GET",
 			url: "/stack/",
 		}).then(function(response) {
-			console.log("Question: " + response.data[0].question);
+			$scope.arr = response.data;
+			for(x in $scope.arr)
+				console.log("Question: " + $scope.arr[x].question);
+		});
+	};
+});
+
+// Queue controller
+app.controller('queueController', function($scope, $http) {
+	$scope.loadData = function() {
+		$http({
+			method: "GET",
+			url: "/queue/",
+		}).then(function(response) {
+			$scope.arr = response.data;
+			for(x in $scope.arr)
+				console.log("Question: " + $scope.arr[x].question);
+		});
+	};
+});
+
+// Tree controller
+app.controller('treeController', function($scope, $http) {
+	$scope.loadData = function() {
+		$http({
+			method: "GET",
+			url: "/tree/",
+		}).then(function(response) {
+			$scope.arr = response.data;
+			for(x in $scope.arr)
+				console.log("Question: " + $scope.arr[x].question);
+		});
+	};
+});
+
+// Graph controller
+app.controller('graphController', function($scope, $http) {
+	$scope.loadData = function() {
+		$http({
+			method: "GET",
+			url: "/graph/",
+		}).then(function(response) {
+			$scope.arr = response.data;
+			for(x in $scope.arr)
+				console.log("Question: " + $scope.arr[x].question);
 		});
 	};
 });

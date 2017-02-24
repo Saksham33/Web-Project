@@ -55,8 +55,9 @@ app.post('/addQues/', function(req, res) {
 	var ques = req.body.question;
 	var options = req.body.options;
 	var ans = req.body.answer;
+	var topic = req.body.topic;
 
-	MCQ.addQues(ques, ans, options, function(err, resp) {
+	MCQ.addQues(ques, ans, options, topic, function(err, resp) {
 		if(err) {
 			throw err;
 		}
@@ -66,7 +67,38 @@ app.post('/addQues/', function(req, res) {
 });
 
 app.get('/stack/', function(req, res) {
-	MCQ.getStackQues(function(err, ques) {
+	var topic = "Stack";
+	MCQ.getStackQues(topic, function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send(ques);
+	});
+});
+
+app.get('/queue/', function(req, res) {
+	var topic = "Queue";
+	MCQ.getStackQues(topic, function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send(ques);
+	});
+});
+
+app.get('/tree/', function(req, res) {
+	var topic = "Tree";
+	MCQ.getStackQues(topic, function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send(ques);
+	});
+});
+
+app.get('/graph/', function(req, res) {
+	var topic = "Graph";
+	MCQ.getStackQues(topic, function(err, ques) {
 		if(err) {
 			throw err;
 		}
