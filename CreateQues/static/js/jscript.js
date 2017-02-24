@@ -16,3 +16,7 @@ $(function() {
 	});
 
 });
+
+function hideInvalidLogin() {
+	$("#invalidLogin").css("display", "none");
+}

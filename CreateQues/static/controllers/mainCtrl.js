@@ -1,6 +1,8 @@
 var app = angular.module("myApp", []);
 
 app.controller("loginCtrl", function($scope, $http, $window) {
+	
+	// Login
 	$scope.validate = function() {
 		console.log("Validate func");
 
@@ -12,11 +14,20 @@ app.controller("loginCtrl", function($scope, $http, $window) {
 				passw: $scope.pass1,
 			}
 		}).then(function(response) {
-			console.log("Res: " + response);
-			$window.location.href = './ip.html';
+			var flag = response.data;
+			console.log("Res: " + flag);
+
+			if(flag == false) {
+				console.log("Invalid login");
+				$("#invalidLogin").css("display", "block");
+				return;
+			}
+			else
+				$window.location.href = './ip.html';
 		});
 	};
 
+	// Register
 	$scope.add = function() {
 		console.log("Register function");	// uname2 email2 pass2 pass3
 
@@ -33,6 +44,33 @@ app.controller("loginCtrl", function($scope, $http, $window) {
 				email: $scope.email2,
 				passw: $scope.pass2,
 			}
+		}).then(function(response) {
+			var result = response.data;
+			console.log("Result: " + result);
+			if(result == "uname") {
+				$("#invalidUser").css("display", "block");
+				return;
+			}
+			else {
+				$("#invalidUser").css("display", "none");
+			}
+
+			if(result == "email") {
+				$("#invalidEmail").css("display", "block");
+				return;
+			}
+			else {
+				$("#invalidEmail").css("display", "none");
+			}
+
+			if(result == "done") {
+				console.log("Registered!");
+				$("#registered").css("display", "block");
+			}
+			else {
+				$("#registered").css("display", "none");
+			}
+
 		});
 	};
 });

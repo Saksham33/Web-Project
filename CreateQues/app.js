@@ -24,10 +24,11 @@ app.post('/login/', function(req, res) {
 		}
 		if(student != null) {
 			console.log("Done!");
-			res.send(student);
+			res.send(true);
 		}
 		else {
 			console.log("You are not registered");
+			res.send(false);
 		}
 	});
 });
@@ -37,15 +38,27 @@ app.post('/register', function(req, res) {
 	var name = req.body.name;
 	var passw = req.body.passw;
 	var email = req.body.email;
-	console.log(name);
-	console.log(passw);
-	console.log(email);
 
-	Student.addUser(name, passw, email, function(err, student) {
-		if(err) {
-			throw err;
+	Student.findUser(name, function(err, student) {
+		if(student == null) {
+			Student.findEmail(email, function(err, student2) {
+				if(student2 == null) {
+					Student.addUser(name, passw, email, function(err, student3) {
+						if(err) {
+							throw err;
+						}
+						console.log("Registered!");
+						res.send("done");
+					});
+				}
+				else {
+					res.send("email");
+				}
+			});
 		}
-		console.log("Registered!");
+		else {
+			res.send("uname");
+		}
 	});
 });
 

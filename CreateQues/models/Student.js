@@ -22,6 +22,16 @@ module.exports.addUser = function(name, password, email, callback) {
 	Student.create(query, callback);
 }
 
+module.exports.findUser = function(name, callback) {
+	var query = {name: name};
+	Student.findOne(query, callback);
+}
+
+module.exports.findEmail = function(email, callback) {
+	var query = {email: email};
+	Student.findOne(query, callback);
+}
+
 // module.exports.getStudent = function(callback, limit){	// callback is function from app.js, limit is second parameter(not passed here)
 // 	Student.find(callback).limit(limit);
 // }
