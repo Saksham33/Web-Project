@@ -39,6 +39,7 @@ app.controller("loginCtrl", function($scope, $http, $window) {
 
 // MCQ page ctrl
 app.controller("QuesCtrl", function($scope, $http) {
+
 	$scope.setTopic = "Select Topic";
 	$scope.selectTop = function(text) {
 		$scope.setTopic = text;
@@ -76,7 +77,13 @@ app.controller("QuesCtrl", function($scope, $http) {
 		else {
 			$("#emptyAnswer").css('display', 'none');
 		}
-
+		if($scope.setTopic == "Select Topic") {
+			$("#emptyTopic").css('display', 'block');
+			return;
+		}
+		else {
+			$("#emptyTopic").css('display', 'none');	
+		}
 		console.log(question);
 		console.log(optionsArray);
 		console.log(answer);
@@ -84,8 +91,31 @@ app.controller("QuesCtrl", function($scope, $http) {
 		var form = document.getElementById("mcq_form");
 		form.reset();
 		$("#options").children().remove();
+		$scope.setTopic = "Select Topic";
 
 		// http request
+		$http({
+			method: "POST",
+			url: "/addQues/",
+			data: {
+				question: question,
+				answer: answer,
+				options: optionsArray,
+			}
+		}).then(function(response) {
+			console.log("Response: " + response);
+		});
 	};
 });
 
+// Stack controller
+app.controller('stackController', function($scope, $http) {
+	$scope.loadData = function() {
+		$http({
+			method: "GET",
+			url: "/stack/",
+		}).then(function(response) {
+			console.log("Question: " + response.data[0].question);
+		});
+	};
+});

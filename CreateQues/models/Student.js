@@ -10,7 +10,7 @@ var studentSchema = mongoose.Schema({
 		type: String
 	}
 });
-var Student = module.exports = mongoose.model('logindb', studentSchema, 'Student');	// db, schema, collection
+var Student = module.exports = mongoose.model('logindb1', studentSchema, 'Student');	// db, schema, collection
 
 module.exports.checkStudent = function(name, password, callback) {
 	var query = {name: name, password: password};

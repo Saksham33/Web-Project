@@ -8,10 +8,13 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/static/'));
 
-Student = require('./models/Student');	// Student.js file
+Student = require('./models/Student');	// Student.js file for login info in login db
+MCQ = require('./models/MCQ');			// MCQ.js file for mcqs in login db
+
 mongoose.connect(config.connectionString);	// config file where mongodb connection path is present
 var db = mongoose.connection;
  
+// Login
 app.post('/login/', function(req, res) {
 	var name = req.body.name;
 	var passw = req.body.passw;
@@ -29,6 +32,7 @@ app.post('/login/', function(req, res) {
 	});
 });
 
+// Register
 app.post('/register', function(req, res) {
 	var name = req.body.name;
 	var passw = req.body.passw;
@@ -42,6 +46,31 @@ app.post('/register', function(req, res) {
 			throw err;
 		}
 		console.log("Registered!");
+	});
+});
+
+
+// MCQs
+app.post('/addQues/', function(req, res) {
+	var ques = req.body.question;
+	var options = req.body.options;
+	var ans = req.body.answer;
+
+	MCQ.addQues(ques, ans, options, function(err, resp) {
+		if(err) {
+			throw err;
+		}
+		console.log("Added the question");
+		res.send("YES");
+	});
+});
+
+app.get('/stack/', function(req, res) {
+	MCQ.getStackQues(function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send(ques);
 	});
 });
 
