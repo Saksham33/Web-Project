@@ -8,10 +8,13 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/static/'));
 
-Student = require('./models/Student');	// Student.js file
+Student = require('./models/Student');	// Student.js file for login info in login db
+MCQ = require('./models/MCQ');			// MCQ.js file for mcqs in login db
+
 mongoose.connect(config.connectionString);	// config file where mongodb connection path is present
 var db = mongoose.connection;
  
+// Login
 app.post('/login/', function(req, res) {
 	var name = req.body.name;
 	var passw = req.body.passw;
@@ -21,27 +24,98 @@ app.post('/login/', function(req, res) {
 		}
 		if(student != null) {
 			console.log("Done!");
-			res.send(student);
+			res.send(true);
 		}
 		else {
 			console.log("You are not registered");
+			res.send(false);
 		}
 	});
 });
 
+// Register
 app.post('/register', function(req, res) {
 	var name = req.body.name;
 	var passw = req.body.passw;
 	var email = req.body.email;
-	console.log(name);
-	console.log(passw);
-	console.log(email);
 
-	Student.addUser(name, passw, email, function(err, student) {
+	Student.findUser(name, function(err, student) {
+		if(student == null) {
+			Student.findEmail(email, function(err, student2) {
+				if(student2 == null) {
+					Student.addUser(name, passw, email, function(err, student3) {
+						if(err) {
+							throw err;
+						}
+						console.log("Registered!");
+						res.send("done");
+					});
+				}
+				else {
+					res.send("email");
+				}
+			});
+		}
+		else {
+			res.send("uname");
+		}
+	});
+});
+
+
+// MCQs
+app.post('/addQues/', function(req, res) {
+	var ques = req.body.question;
+	var options = req.body.options;
+	var ans = req.body.answer;
+	var topic = req.body.topic;
+
+	MCQ.addQues(ques, ans, options, topic, function(err, resp) {
 		if(err) {
 			throw err;
 		}
-		console.log("Registered!");
+		console.log("Added the question");
+		res.send("YES");
+	});
+});
+
+app.get('/stack/', function(req, res) {
+	var topic = "Stack";
+	MCQ.getStackQues(topic, function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send(ques);
+	});
+});
+
+app.get('/queue/', function(req, res) {
+	var topic = "Queue";
+	MCQ.getStackQues(topic, function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send(ques);
+	});
+});
+
+app.get('/tree/', function(req, res) {
+	var topic = "Tree";
+	MCQ.getStackQues(topic, function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send(ques);
+	});
+});
+
+app.get('/graph/', function(req, res) {
+	var topic = "Graph";
+	MCQ.getStackQues(topic, function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send(ques);
 	});
 });
 

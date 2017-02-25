@@ -1,15 +1,19 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/DS.css">
   <script src="js/jquery.js"></script>
   <script src="js/boot.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script type="text/javascript" src="controllers/mainCtrl.js"></script>
+
   <title>Stack</title>
 </head>
-<body >
+<body ng-app="myApp" ng-controller="stackController" ng-init="loadData()">
 <div class="navbar-wrapper">
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <nav class="navbar navbar-fixed-top">
             <div class="container" style="width: 100%;line-height: 0px">
 	  <div class="row add" style="min-height: 83px;margin-bottom: 0px;background-color:#80b0da">
@@ -102,7 +106,7 @@
               <span id="q46" class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
             </p>
             <p style="font-size: 18px;line-height: 35px">
-              <b> Which of the following application generally use a stack?</b>
+              <b>5. Which of the following application generally use a stack?</b>
               <br>
               <input type="radio" id="q51" name="5" onclick="f5()" >Parenthesis balancing program<br>
               <input type="radio" id="q52" name="5" onclick="f5()" >Syntax analyzer in compiler<br>
@@ -122,6 +126,17 @@
               <span id="q66" class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
             </p>
             
+            <!-- Adding data from server -->
+            <div ng-repeat="x in arr">
+            <p style="font-size: 18px;line-height: 35px">
+              <b>Ques. {{x.question}}</b>
+              <br>
+              <div ng-repeat="op in x.options"><input type="radio" name="">{{op}}</div>
+              <span class="glyphicon glyphicon-ok " style="display: none; color:#3fa50d;font-size:24px;padding-left: 10% ;"></span>
+              <span class="glyphicon glyphicon-remove" style="display: none ;color:#ef0d0d;font-size:24px;padding-left: 10% "></span>
+            </p>
+            </div>
+
             <center><a role="button" class="btn btn-success btn-lg btn3d" style="font-size: 24px" >Submit</a></center>
             </div>
             

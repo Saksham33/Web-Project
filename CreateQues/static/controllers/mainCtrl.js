@@ -1,6 +1,8 @@
-var app = angular.module("myApp", []);
+var app = angular.module("myApp", ['ngCookies']);
 
-app.controller("loginCtrl", function($scope, $http, $window) {
+app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
+	
+	// Login
 	$scope.validate = function() {
 		console.log("Validate func");
 
@@ -12,11 +14,22 @@ app.controller("loginCtrl", function($scope, $http, $window) {
 				passw: $scope.pass1,
 			}
 		}).then(function(response) {
-			console.log("Res: " + response);
-			$window.location.href = './ip.html';
+			var flag = response.data;
+			console.log("Res: " + flag);
+
+			if(flag == false) {
+				console.log("Invalid login");
+				$("#invalidLogin").css("display", "block");
+				return;
+			}
+			else {
+				$cookies.put('myUname', $scope.uname1);
+				$window.location.href = './ip.html';
+			}
 		});
 	};
 
+	// Register
 	$scope.add = function() {
 		console.log("Register function");	// uname2 email2 pass2 pass3
 
@@ -33,12 +46,46 @@ app.controller("loginCtrl", function($scope, $http, $window) {
 				email: $scope.email2,
 				passw: $scope.pass2,
 			}
+		}).then(function(response) {
+			var result = response.data;
+			console.log("Result: " + result);
+			if(result == "uname") {
+				$("#invalidUser").css("display", "block");
+				return;
+			}
+			else {
+				$("#invalidUser").css("display", "none");
+			}
+
+			if(result == "email") {
+				$("#invalidEmail").css("display", "block");
+				return;
+			}
+			else {
+				$("#invalidEmail").css("display", "none");
+			}
+
+			if(result == "done") {
+				console.log("Registered!");
+				$("#registered").css("display", "block");
+			}
+			else {
+				$("#registered").css("display", "none");
+			}
+
 		});
 	};
 });
 
+// Main page (ip.html) controller
+app.controller("mainPageCtrl", function($scope, $cookies) {
+	$scope.myText = $cookies.get('myUname');
+});
+
+
 // MCQ page ctrl
 app.controller("QuesCtrl", function($scope, $http) {
+
 	$scope.setTopic = "Select Topic";
 	$scope.selectTop = function(text) {
 		$scope.setTopic = text;
@@ -76,16 +123,93 @@ app.controller("QuesCtrl", function($scope, $http) {
 		else {
 			$("#emptyAnswer").css('display', 'none');
 		}
-
+		if($scope.setTopic == "Select Topic") {
+			$("#emptyTopic").css('display', 'block');
+			return;
+		}
+		else {
+			$("#emptyTopic").css('display', 'none');	
+		}
 		console.log(question);
 		console.log(optionsArray);
 		console.log(answer);
 		console.log($scope.setTopic);
+
+		// http request
+		$http({
+			method: "POST",
+			url: "/addQues/",
+			data: {
+				question: question,
+				answer: answer,
+				options: optionsArray,
+				topic: $scope.setTopic,
+			}
+		}).then(function(response) {
+			console.log("Response: " + response);
+		});
+
+		// Reset everything
 		var form = document.getElementById("mcq_form");
 		form.reset();
 		$("#options").children().remove();
+		$scope.setTopic = "Select Topic";
 
-		// http request
 	};
 });
 
+// Stack controller
+app.controller('stackController', function($scope, $http) {
+	$scope.loadData = function() {
+		$http({
+			method: "GET",
+			url: "/stack/",
+		}).then(function(response) {
+			$scope.arr = response.data;
+			for(x in $scope.arr)
+				console.log("Question: " + $scope.arr[x].question);
+		});
+	};
+});
+
+// Queue controller
+app.controller('queueController', function($scope, $http) {
+	$scope.loadData = function() {
+		$http({
+			method: "GET",
+			url: "/queue/",
+		}).then(function(response) {
+			$scope.arr = response.data;
+			for(x in $scope.arr)
+				console.log("Question: " + $scope.arr[x].question);
+		});
+	};
+});
+
+// Tree controller
+app.controller('treeController', function($scope, $http) {
+	$scope.loadData = function() {
+		$http({
+			method: "GET",
+			url: "/tree/",
+		}).then(function(response) {
+			$scope.arr = response.data;
+			for(x in $scope.arr)
+				console.log("Question: " + $scope.arr[x].question);
+		});
+	};
+});
+
+// Graph controller
+app.controller('graphController', function($scope, $http) {
+	$scope.loadData = function() {
+		$http({
+			method: "GET",
+			url: "/graph/",
+		}).then(function(response) {
+			$scope.arr = response.data;
+			for(x in $scope.arr)
+				console.log("Question: " + $scope.arr[x].question);
+		});
+	};
+});
