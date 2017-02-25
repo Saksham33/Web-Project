@@ -100,7 +100,7 @@ app.get('/queue/', function(req, res) {
 });
 
 app.get('/tree/', function(req, res) {
-	var topic = "Tree";
+	var topic = "Trees";
 	MCQ.getStackQues(topic, function(err, ques) {
 		if(err) {
 			throw err;

@@ -24,7 +24,7 @@ app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 			}
 			else {
 				$cookies.put('myUname', $scope.uname1);
-				$window.location.href = './ip.html';
+				$window.location.href = './Main.html';
 			}
 		});
 	};
@@ -77,7 +77,7 @@ app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 	};
 });
 
-// Main page (ip.html) controller
+// Main page controller
 app.controller("mainPageCtrl", function($scope, $cookies) {
 	$scope.myText = $cookies.get('myUname');
 });
@@ -159,57 +159,57 @@ app.controller("QuesCtrl", function($scope, $http) {
 });
 
 // Stack controller
-app.controller('stackController', function($scope, $http) {
-	$scope.loadData = function() {
-		$http({
-			method: "GET",
-			url: "/stack/",
-		}).then(function(response) {
-			$scope.arr = response.data;
-			for(x in $scope.arr)
-				console.log("Question: " + $scope.arr[x].question);
-		});
-	};
-});
+// app.controller('stackController', function($scope, $http) {
+// 	$scope.loadData = function() {
+// 		$http({
+// 			method: "GET",
+// 			url: "/stack/",
+// 		}).then(function(response) {
+// 			$scope.arr = response.data;
+// 			for(x in $scope.arr)
+// 				console.log("Question: " + $scope.arr[x].question);
+// 		});
+// 	};
+// });
 
 // Queue controller
-app.controller('queueController', function($scope, $http) {
-	$scope.loadData = function() {
-		$http({
-			method: "GET",
-			url: "/queue/",
-		}).then(function(response) {
-			$scope.arr = response.data;
-			for(x in $scope.arr)
-				console.log("Question: " + $scope.arr[x].question);
-		});
-	};
-});
+// app.controller('queueController', function($scope, $http) {
+// 	$scope.loadData = function() {
+// 		$http({
+// 			method: "GET",
+// 			url: "/queue/",
+// 		}).then(function(response) {
+// 			$scope.arr = response.data;
+// 			for(x in $scope.arr)
+// 				console.log("Question: " + $scope.arr[x].question);
+// 		});
+// 	};
+// });
 
 // Tree controller
-app.controller('treeController', function($scope, $http) {
-	$scope.loadData = function() {
-		$http({
-			method: "GET",
-			url: "/tree/",
-		}).then(function(response) {
-			$scope.arr = response.data;
-			for(x in $scope.arr)
-				console.log("Question: " + $scope.arr[x].question);
-		});
-	};
-});
+// app.controller('treeController', function($scope, $http) {
+// 	$scope.loadData = function() {
+// 		$http({
+// 			method: "GET",
+// 			url: "/tree/",
+// 		}).then(function(response) {
+// 			$scope.arr = response.data;
+// 			for(x in $scope.arr)
+// 				console.log("Question: " + $scope.arr[x].question);
+// 		});
+// 	};
+// });
 
 // Graph controller
-app.controller('graphController', function($scope, $http) {
-	$scope.loadData = function() {
-		$http({
-			method: "GET",
-			url: "/graph/",
-		}).then(function(response) {
-			$scope.arr = response.data;
-			for(x in $scope.arr)
-				console.log("Question: " + $scope.arr[x].question);
-		});
-	};
-});
+// app.controller('graphController', function($scope, $http) {
+// 	$scope.loadData = function() {
+// 		$http({
+// 			method: "GET",
+// 			url: "/graph/",
+// 		}).then(function(response) {
+// 			$scope.arr = response.data;
+// 			for(x in $scope.arr)
+// 				console.log("Question: " + $scope.arr[x].question);
+// 		});
+// 	};
+// });
