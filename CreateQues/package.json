@@ -9,7 +9,8 @@
   "dependencies": {
   	"express": "~4.6.1",
   	"body-parser": "~1.16.0",
-  	"mongoose":"~4.8.1"
+  	"mongoose":"~4.8.1",
+    "angular-cookies":"*"
   },
   "author": "",
   "license": "BSD-2-Clause"

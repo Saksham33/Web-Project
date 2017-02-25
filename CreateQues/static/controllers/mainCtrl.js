@@ -1,6 +1,6 @@
-var app = angular.module("myApp", []);
+var app = angular.module("myApp", ['ngCookies']);
 
-app.controller("loginCtrl", function($scope, $http, $window) {
+app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 	
 	// Login
 	$scope.validate = function() {
@@ -22,8 +22,10 @@ app.controller("loginCtrl", function($scope, $http, $window) {
 				$("#invalidLogin").css("display", "block");
 				return;
 			}
-			else
+			else {
+				$cookies.put('myUname', $scope.uname1);
 				$window.location.href = './ip.html';
+			}
 		});
 	};
 
@@ -74,6 +76,12 @@ app.controller("loginCtrl", function($scope, $http, $window) {
 		});
 	};
 });
+
+// Main page (ip.html) controller
+app.controller("mainPageCtrl", function($scope, $cookies) {
+	$scope.myText = $cookies.get('myUname');
+});
+
 
 // MCQ page ctrl
 app.controller("QuesCtrl", function($scope, $http) {
