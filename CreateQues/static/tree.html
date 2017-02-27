@@ -4,7 +4,7 @@
 			<div>The number of leaf nodes in a rooted tree of n nodes, with each node having 0 or 3 children are :</div>
 			<div data-toggle="buttons">
 				<label class="btn active">
-					<input type="radio" name="mcq1" required>
+					<input type="radio" name="mcq0" value="n/2" required>
 					<i class='fa fa-circle-o fa-x'></i>
 					<i class='fa fa-dot-circle-o fa-x'></i>
 					&nbsp; &nbsp;
@@ -13,7 +13,7 @@
 			</div>
 			<div data-toggle="buttons">
 				<label class="btn active">
-					<input type="radio" name="mcq1" required>
+					<input type="radio" name="mcq0" value="(n-1)/3" required>
 					<i class='fa fa-circle-o fa-x'></i>
 					<i class='fa fa-dot-circle-o fa-x'></i>
 					&nbsp; &nbsp;
@@ -22,7 +22,7 @@
 			</div>
 			<div data-toggle="buttons">
 				<label class="btn active">
-					<input type="radio" name="mcq1" required>
+					<input type="radio" name="mcq0" value="(n-1)/2" required>
 					<i class='fa fa-circle-o fa-x'></i>
 					<i class='fa fa-dot-circle-o fa-x'></i>
 					&nbsp; &nbsp;
@@ -31,7 +31,7 @@
 			</div>
 			<div data-toggle="buttons">
 				<label class="btn active">
-					<input type="radio" name="mcq1" required>
+					<input type="radio" name="mcq0" value="(2n+1)/3" required>
 					<i class='fa fa-circle-o fa-x'></i>
 					<i class='fa fa-dot-circle-o fa-x'></i>
 					&nbsp; &nbsp;
@@ -39,53 +39,14 @@
 				</label>
 			</div>
 		</li>
-		<li>
-			<div>In full binary search tree every internal node has exactly two children. If there are 100 leaf nodes in the tree, how many internal nodes are there in the tree? </div>
-			<div data-toggle="buttons">
-				<label class="btn active">
-					<input type="radio" name="mcq2" required>
-					<i class='fa fa-circle-o fa-x'></i>
-					<i class='fa fa-dot-circle-o fa-x'></i>
-					&nbsp; &nbsp;
-					<span style="font-size: 18px;">25</span>
-				</label>
-			</div>
-			<div data-toggle="buttons">
-				<label class="btn active">
-					<input type="radio" name="mcq2" required>
-					<i class='fa fa-circle-o fa-x'></i>
-					<i class='fa fa-dot-circle-o fa-x'></i>
-					&nbsp; &nbsp;
-					<span style="font-size: 18px;">49</span>
-				</label>
-			</div>
-			<div data-toggle="buttons">
-				<label class="btn active">
-					<input type="radio" name="mcq2" required>
-					<i class='fa fa-circle-o fa-x'></i>
-					<i class='fa fa-dot-circle-o fa-x'></i>
-					&nbsp; &nbsp;
-					<span style="font-size: 18px;">99</span>
-				</label>
-			</div>
-			<div data-toggle="buttons">
-				<label class="btn active">
-					<input type="radio" name="mcq2" required>
-					<i class='fa fa-circle-o fa-x'></i>
-					<i class='fa fa-dot-circle-o fa-x'></i>
-					&nbsp; &nbsp;
-					<span style="font-size: 18px;">101</span>
-				</label>
-			</div>
-		</li>
 
 		<!-- Adding data from server -->
-		<li ng-repeat="x in arr">
+		<li ng-repeat="x in arr" ng-init="radioName=getName()">
 			<div>{{x.question}}</div>
 			<div ng-repeat="op in x.options">
 				<div data-toggle="buttons">
 					<label class="btn active">
-						<input type="radio" name="mcq" required>
+						<input type="radio" name={{radioName}} value={{op}} required>
 						<i class='fa fa-circle-o fa-x'></i>
 						<i class='fa fa-dot-circle-o fa-x'></i>
 						&nbsp; &nbsp;
@@ -95,4 +56,5 @@
 			</div>
 		</li>
 	</ol>
+	<input type="button" ng-click="checkAns()" value="Check now">
 </div>

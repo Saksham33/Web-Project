@@ -4,7 +4,7 @@
 			<div>The time complexity of computing the transitive closure of a binary relation on a set of n elements is known to be :</div>
 			<div data-toggle="buttons">
 				<label class="btn active">
-					<input type="radio" name="mcq1" required>
+					<input type="radio" name="mcq0" value="O(n)" required>
 					<i class='fa fa-circle-o fa-x'></i>
 					<i class='fa fa-dot-circle-o fa-x'></i>
 					&nbsp; &nbsp;
@@ -13,7 +13,7 @@
 			</div>
 			<div data-toggle="buttons">
 				<label class="btn active">
-					<input type="radio" name="mcq1" required>
+					<input type="radio" name="mcq0" value="O(nlogn)" required>
 					<i class='fa fa-circle-o fa-x'></i>
 					<i class='fa fa-dot-circle-o fa-x'></i>
 					&nbsp; &nbsp;
@@ -22,7 +22,7 @@
 			</div>
 			<div data-toggle="buttons">
 				<label class="btn active">
-					<input type="radio" name="mcq1" required>
+					<input type="radio" name="mcq0" value="O(n^(3/2))" required>
 					<i class='fa fa-circle-o fa-x'></i>
 					<i class='fa fa-dot-circle-o fa-x'></i>
 					&nbsp; &nbsp;
@@ -31,7 +31,7 @@
 			</div>
 			<div data-toggle="buttons">
 				<label class="btn active">
-					<input type="radio" name="mcq1" required>
+					<input type="radio" name="mcq0" value="O(n^3)" required>
 					<i class='fa fa-circle-o fa-x'></i>
 					<i class='fa fa-dot-circle-o fa-x'></i>
 					&nbsp; &nbsp;
@@ -39,53 +39,14 @@
 				</label>
 			</div>
 		</li>
-		<li>
-			<div>What is the maximum number of edges in an acyclic undirected graph with n vertices?</div>
-			<div data-toggle="buttons">
-				<label class="btn active">
-					<input type="radio" name="mcq2" required>
-					<i class='fa fa-circle-o fa-x'></i>
-					<i class='fa fa-dot-circle-o fa-x'></i>
-					&nbsp; &nbsp;
-					<span style="font-size: 18px;">n-1</span>
-				</label>
-			</div>
-			<div data-toggle="buttons">
-				<label class="btn active">
-					<input type="radio" name="mcq2" required>
-					<i class='fa fa-circle-o fa-x'></i>
-					<i class='fa fa-dot-circle-o fa-x'></i>
-					&nbsp; &nbsp;
-					<span style="font-size: 18px;">n</span>
-				</label>
-			</div>
-			<div data-toggle="buttons">
-				<label class="btn active">
-					<input type="radio" name="mcq2" required>
-					<i class='fa fa-circle-o fa-x'></i>
-					<i class='fa fa-dot-circle-o fa-x'></i>
-					&nbsp; &nbsp;
-					<span style="font-size: 18px;">n+1</span>
-				</label>
-			</div>
-			<div data-toggle="buttons">
-				<label class="btn active">
-					<input type="radio" name="mcq2" required>
-					<i class='fa fa-circle-o fa-x'></i>
-					<i class='fa fa-dot-circle-o fa-x'></i>
-					&nbsp; &nbsp;
-					<span style="font-size: 18px;">2n-1</span>
-				</label>
-			</div>
-		</li>
 
 		<!-- Adding data from server -->
-		<li ng-repeat="x in arr">
+		<li ng-repeat="x in arr" ng-init="radioName=getName()">
 			<div>{{x.question}}</div>
 			<div ng-repeat="op in x.options">
 				<div data-toggle="buttons">
 					<label class="btn active">
-						<input type="radio" name="mcq" required>
+						<input type="radio" name={{radioName}} value={{op}} required>
 						<i class='fa fa-circle-o fa-x'></i>
 						<i class='fa fa-dot-circle-o fa-x'></i>
 						&nbsp; &nbsp;
@@ -95,3 +56,5 @@
 			</div>
 		</li>
 	</ol>
+	<input type="button" ng-click="checkAns()" value="Check now">
+</div>
