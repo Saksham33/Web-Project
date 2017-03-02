@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quiz Page</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/quiz.css">
+        <link href="css/pe-icon-7-stroke.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/ct-navbar.css">
+        <link rel="stylesheet" type="text/css" href="css/radio_button.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js""></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="js/ct-navbar.js"></script>
+        <script src="js/quiz.js"></script>
+        <script src="js/angular.js"></script>            
+    </head>
+    <body style="font-family: 'Quicksand', sans-serif;"  ng-app="myRoute" ng-controller="setActive">
+    <div id="navbar-full"  style="border: 1px solid black;">
+        <div id="navbar">
+            <nav class="navbar navbar-fixed-top transparent" role="navigation" style="border-style: solid; border-color: black; margin-bottom: 0cm; height: 100px;">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand navbar-brand-logo navbar" href="#">
+                            <div class="logo">
+                                <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
+                            </div>
+                            <div class="brand" style="vertical-align: center; color: black;"> {{myText}} </div>
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown" id="padd">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" style="color: black;">
+                                    <i class="pe-7s-user"></i>
+                                    <p>Account</p>
+                                </a>
+                                <ul class="dropdown-menu" style="text-align: center;">
+                                    <li><a href="" ng-click="delAccount()">Delete Account</a></li>
+                                    <li><a href="#">Change Password</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="" ng-click="logout()">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="containers">
+        <div class="row">
+            <div class="wrapper">
+                <div class="side-bar">
+                    <ul>
+                        <li class="menu-head" style="text-align: center; font-size: 17px;">
+                            Quiz Topics <a class="push_menu"><span class="glyphicon glyphicon-align-justify pull-right"></span></a>
+                        </li>
+                        <div class="menu">
+                            <li>
+                                <a ng-href="#/Stacks" ng-class="{active: check == '/Stacks'}">Stacks<span class="glyphicon glyphicon-dashboard pull-right"></span></a>
+                            </li>
+                            <li>
+                                <a ng-href="#/Queues" ng-class="{active: check == '/Queues'}">Queues<span class="glyphicon glyphicon-heart pull-right"></span></a>
+                            </li>
+                            <li>
+                                <a ng-href="#/Trees" ng-class="{active: check == '/Trees'}">Trees<span class="glyphicon glyphicon-star pull-right"></span></a>
+                            </li>
+                            <li>
+                                <a ng-href="#/Graphs" ng-class="{active: check == '/Graphs'}">Graphs<span class="glyphicon glyphicon-cog pull-right"></span></a>
+                            </li>
+                        </div>
+                    </ul>
+                </div>   
+                <div class="content">
+                    <div class="col-md-12" style="padding-top: 15px;">
+                        <div ng-view></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

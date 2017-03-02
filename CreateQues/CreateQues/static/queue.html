@@ -1,0 +1,60 @@
+<div ng-controller="quesController" ng-init="loadData('/queue/')">
+	<ol type="1" style="font-size: 20px;">
+		<li>
+			<div>A linear list of elements in which deletion can be done from one end (front) and insertion can take place only at the other end (rear) is known as a ?</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="Stack" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">Stack</span>
+				</label>
+			</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="Queue" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">Queue</span>
+				</label>
+			</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="Tree" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">Tree</span>
+				</label>
+			</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="Linked list" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">Linked list</span>
+				</label>
+			</div>
+		</li>
+		
+		<!-- Adding data from server -->
+		<li ng-repeat="x in arr" ng-init="radioName=getName()">
+			<div>{{x.question}}</div>
+			<div ng-repeat="op in x.options">
+				<div data-toggle="buttons">
+					<label class="btn active">
+						<input type="radio" name={{radioName}} value={{op}} required>
+						<i class='fa fa-circle-o fa-x'></i>
+						<i class='fa fa-dot-circle-o fa-x'></i>
+						&nbsp; &nbsp;
+						<span style="font-size: 18px;">{{op}}</span>
+					</label>
+				</div>
+			</div>
+		</li>
+	</ol>
+	<input type="button" ng-click="checkAns()" value="Check now">
+</div>

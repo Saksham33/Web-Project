@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Main Page</title>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+		<link href="css/pe-icon-7-stroke.css" rel="stylesheet">
+		<link href="css/ct-navbar.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js""></script>
+    	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.js"></script>
+    	<script type="text/javascript" src="controllers/mainCtrl.js"></script>
+    	
+
+		<script src="js/ct-navbar.js"></script>
+		<script src="js/main.js"></script>
+	</head>
+	<body ng-app="myApp" ng-controller="mainPageCtrl">
+		<div id="navbar-full">
+    		<div id="navbar">
+    			<nav class="navbar navbar-ct-blue navbar-transparent" role="navigation">	
+    				<div class="container">
+    					<div class="navbar-header">
+    						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				                <span class="sr-only">Toggle navigation</span>
+				                <span class="icon-bar"></span>
+				                <span class="icon-bar"></span>
+				                <span class="icon-bar"></span>
+              				</button>
+              				<a class="navbar-brand navbar-brand-logo navbar" href="#">
+                    			<div class="logo">
+                    				<img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
+			                    </div>
+			                    <div class="brand" style="vertical-align: center;"> {{myText}} </div>
+              				</a>
+              			</div>
+              			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              				<ul class="nav navbar-nav navbar-right">
+              					<!-- <li>
+                        			<a href="javascript:void(0);" data-toggle="search" class="hidden-xs">
+                            			<i class="pe-7s-search"></i>
+                            			<p>Search</p>
+                        			</a>
+                    			</li>
+                    			<li>
+                        			<a href="#">
+			                            <i class="pe-7s-mail"><span class="label">23</span></i>
+			                            <p>Messages</p>
+			                        </a>
+                    			</li> -->
+                    			<li class="dropdown hidden-xs" style="margin-top: 12px;">
+                    				<input type="checkbox" id="toggle">
+                    				<label class="butt" for="toggle" id="l1"></label>
+                					<ul class="dropdown-menu" style="text-align: center;">
+                						<li><a href="MCQ.html">Create Question</a></li>
+                					</ul>
+                    			</li>
+                    			<li class="dropdown" id="padd">
+                          			<a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                		<i class="pe-7s-user"></i>
+                                		<p>Account</p>
+                            		</a>
+                          			<ul class="dropdown-menu" style="text-align: center;">
+                            			<li><a href="" ng-click="delAccount()">Delete Account</a></li>
+			                            <li><a href="">Change Password</a></li>
+			                            <li class="divider"></li>
+			                            <li><a href="" ng-click="logout()">Logout</a></li>
+                          			</ul>
+                    			</li>
+                    			<li class="visible-xs">
+                    				<a href="Challenge.html">Create Question</a>
+                    			</li>
+                    		</ul>
+                    		<!-- <form class="navbar-form navbar-right navbar-search-form" role="search">                  
+                 				<div class="form-group">
+                      				<input type="text" value="" class="form-control" placeholder="Search...">
+                 				</div> 
+              				</form> -->
+              			</div>
+              		</div>
+              	</nav>
+            </div>
+        </div>
+        <div class="container">
+			<div class="panel panel-primary">
+				<div class="panel-heading" style="background-color: #16A5EC;">
+					<h5 style="text-align: center;">
+						<img src="images/quiz-icon.png" style="height: 40px">
+						<b>
+							<span style="font-size: 30px;">Quiz</span>
+							<span class="hidden-xs" style="font-size: 30px;"> Topics</span>
+						</b>
+					</h5>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div class="panel-body">
+					<div style="height: 100px">
+						<a href="Quiz.html#/Stacks" class="btn btn-danger btn-lg" style="width: 49%; height: 100%; float: left;">
+							<span class="fa fa-bars hidden-xs" aria-hidden="true" style="font-size: 30px;">&nbsp;&nbsp;Stacks</span>
+							<span class="fa fa-bars visible-xs" aria-hidden="true" style="font-size: 20px;">&nbsp;&nbsp;Stacks</span>
+						</a>
+						<a href="Quiz.html#/Queues" class="btn btn-warning btn-lg" style="width: 49%; height: 100%; float: right;">
+							<span class="fa fa-bars hidden-xs" aria-hidden="true" style="font-size: 30px;">&nbsp;&nbsp;Queues</span>
+							<span class="fa fa-bars visible-xs" aria-hidden="true" style="font-size: 20px;">&nbsp;&nbsp;Queues</span>
+						</a>
+					</div><br>
+					<div style="height: 100px;">
+						<a href="Quiz.html#/Graphs" class="btn btn-primary btn-lg" style="width: 49%; height: 100%; float: left;">
+							<span class="fa fa-bars hidden-xs" aria-hidden="true" style="font-size: 30px;">&nbsp;&nbsp;Graphs</span>
+							<span class="fa fa-bars visible-xs" aria-hidden="true" style="font-size: 20px;">&nbsp;&nbsp;Graphs</span>
+						</a>
+						<a href="Quiz.html#/Trees" class="btn btn-success btn-lg" style="width: 49%; height: 100%; float: right;">
+							<span class="fa fa-bars hidden-xs" aria-hidden="true" style="font-size: 30px;">&nbsp;&nbsp;Trees</span>
+							<span class="fa fa-bars visible-xs" aria-hidden="true" style="font-size: 20px;">&nbsp;&nbsp;Trees</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

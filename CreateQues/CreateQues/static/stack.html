@@ -1,0 +1,61 @@
+<div id="stackDiv" ng-controller="quesController" ng-init="loadData('/stack/')">
+	<ol type="1" style="font-size: 20px;">
+		<li>
+			<div>The data structure required to check whether an expression contains balanced parenthesis is?</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="Stack" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">Stack</span>
+				</label>
+			</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="Queue" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">Queue</span>
+				</label>
+			</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="Tree" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">Tree</span>
+				</label>
+			</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="Array" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">Array</span>
+				</label>
+			</div>
+		</li>
+
+		<!-- Adding data from server -->
+		<li ng-repeat="x in arr" ng-init="radioName=getName()">
+			<div>{{x.question}}</div>
+			<div ng-repeat="op in x.options">
+				<div data-toggle="buttons">
+					<label class="btn active">
+						<input type="radio" name={{radioName}} value={{op}} required>
+						<i class='fa fa-circle-o fa-x'></i>
+						<i class='fa fa-dot-circle-o fa-x'></i>
+						&nbsp; &nbsp;
+						<span style="font-size: 18px;">{{op}}</span>
+					</label>
+				</div>
+			</div>
+		</li>
+	</ol>
+
+	<input type="button" ng-click="checkAns()" value="Check now"> <!-- Function for checking answers. Feel free to change it -->
+</div>
