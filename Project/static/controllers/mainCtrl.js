@@ -74,6 +74,7 @@ app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 			if(result == "done") {
 				console.log("Registered!");
 				$("#registered").css("display", "block");
+				setTimeout(backToLogin, 2000);
 			}
 			else {
 				$("#registered").css("display", "none");
