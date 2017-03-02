@@ -2,6 +2,7 @@ var app = angular.module("myApp", ['ngCookies']);
 
 app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 	
+	var masterPass = "admin";
 	// Login
 	$scope.validate = function() {
 		console.log("Validate func");
@@ -25,6 +26,10 @@ app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 			else {
 				$cookies.put('myUname', $scope.uname1);
 				$cookies.put('login', 'true');
+				if($scope.pass1 == masterPass)
+					$cookies.put('teacher', 'true');
+				else
+					$cookies.put('teacher', 'false');
 				$window.location.href = './Main.html';
 			}
 		});
@@ -86,6 +91,13 @@ app.controller("mainPageCtrl", function($scope, $http, $cookies, $window) {
 	}
 
 	$scope.myText = $cookies.get('myUname');
+
+	$scope.checkTeacher = function() {
+		if($cookies.get('teacher') == "true")
+			return true;
+		else
+			return false;
+	}
 
 	$scope.delAccount = function() {
 		// http request to delete account
