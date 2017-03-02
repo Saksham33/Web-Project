@@ -1,7 +1,7 @@
 <div ng-controller="quesController" ng-init="loadData('/queue/')">
 <h2 style="margin-top: 0px; padding-left: 20px; padding-top: 10px">Queues</h2><br>
 	<ol type="1" style="font-size: 20px;">
-		<li>
+		<!-- <li>
 			<div>A linear list of elements in which deletion can be done from one end (front) and insertion can take place only at the other end (rear) is known as a ?</div>
 			<div data-toggle="buttons">
 				<label class="btn active">
@@ -39,12 +39,12 @@
 					<span style="font-size: 18px;">Linked list</span>
 				</label>
 			</div>
-		</li>
+		</li> -->
 		
 		<!-- Adding data from server -->
 		<li ng-repeat="x in arr" ng-init="radioName=getName()">
 			<div>{{x.question}}</div>
-			<div ng-repeat="op in x.options">
+			<div ng-repeat="op in x.options" ng-init="myClass=getClass(op, x.answer)">
 				<div data-toggle="buttons">
 					<label class="btn active">
 						<input type="radio" name={{radioName}} value={{op}} required>
@@ -53,6 +53,7 @@
 						&nbsp; &nbsp;
 						<span style="font-size: 18px;">{{op}}</span>
 					</label>
+					<span class={{myClass}} style="display: none;"><i class="pe-7s-check" style="font-size: 30px; color: #029f5b;"></i></span>
 				</div>
 			</div>
 		</li>

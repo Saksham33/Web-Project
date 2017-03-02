@@ -94,13 +94,22 @@ app.controller('quesController', function($scope, $http) {
 	// Give names to dynamically added radio buttons
 	var index = 0;
 	$scope.getName = function() {
-		index += 1;
 		var radName = 'mcq'+index;
+		index += 1;
 		return radName;
 	}
 
+	var index1 = 0;
+	$scope.getId = function() {
+		var myId = new Array();
+		myId.push('right'+index1);
+		myId.push('wrong'+index1);
+		index1 += 1;
+		return myId;
+	}
+
 	$scope.answers = new Array();
-	$scope.answers.push('Stack'); // Static for stack. To be removed later
+	// $scope.answers.push('Stack'); // Static for stack. To be removed later
 
 	$scope.loadData = function(myUrl) {
 		$http({
@@ -119,9 +128,9 @@ app.controller('quesController', function($scope, $http) {
 	// Check which buttons are selected
 	$scope.checkAns = function() {
 		var checkedAns = new Array();
-		for(i = 0; i <= index; i++) {
+		for(i = 0; i < index; i++) {
 			var x = $("input[name=mcq"+i+"]:radio:checked").val();
-			// console.log("x = " + x);
+			console.log('Selected ' + x);
 			checkedAns.push(x);
 		}
 
@@ -133,6 +142,7 @@ app.controller('quesController', function($scope, $http) {
 				console.log(checkedAns[i]);
 			}
 		}
+		$(".right").css('display', 'inline');
 		if(correct == $scope.answers.length) {
 			swal(
 		  		"Good job!",
@@ -148,5 +158,13 @@ app.controller('quesController', function($scope, $http) {
 			)
 		}
 		console.log("Correct Answers: " + correct);
+	}
+
+	$scope.getClass = function(op1, op2) {
+		// console.log('Op1 & Op2 ' + op1 + " " + op2);
+		if(op1 == op2)
+			return "right";
+		else
+			return "right1";
 	}
 });
