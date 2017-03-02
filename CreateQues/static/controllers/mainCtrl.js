@@ -24,6 +24,7 @@ app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 			}
 			else {
 				$cookies.put('myUname', $scope.uname1);
+				$cookies.put('login', 'true');
 				$window.location.href = './Main.html';
 			}
 		});
@@ -78,13 +79,46 @@ app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 });
 
 // Main page controller
-app.controller("mainPageCtrl", function($scope, $cookies) {
+app.controller("mainPageCtrl", function($scope, $http, $cookies, $window) {
+	if($cookies.get('login') == 'false') {
+		alert('Please login to continue');
+		$window.location.href='./index.html';
+	}
+
 	$scope.myText = $cookies.get('myUname');
+
+	$scope.delAccount = function() {
+		// http request to delete account
+		var x = confirm("Are you sure you want to delete your account?");
+		if(x == true) {
+			$http({
+				method: "POST",
+				url: "/delAccount/",
+				data: {
+					userName: $cookies.get('myUname'),
+				}
+			}).then(function(response) {
+				if(response.data == "done") {
+					console.log("Response: " + response.data);
+					$window.location.href='./index.html';
+				}
+			});
+		}
+	}
+
+	$scope.logout = function() {
+		$cookies.put('login', 'false');
+	 	$window.location.href='./index.html';
+	}
 });
 
 
 // MCQ page ctrl
-app.controller("QuesCtrl", function($scope, $http) {
+app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
+	if($cookies.get('login') == 'false') {
+		alert('Please login to continue');
+		$window.location.href='./index.html';
+	}
 
 	$scope.setTopic = "Select Topic";
 	$scope.selectTop = function(text) {

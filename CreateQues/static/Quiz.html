@@ -41,15 +41,15 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown" id="padd">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: black;">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" style="color: black;">
                                     <i class="pe-7s-user"></i>
                                     <p>Account</p>
                                 </a>
                                 <ul class="dropdown-menu" style="text-align: center;">
-                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="" ng-click="delAccount()">Delete Account</a></li>
                                     <li><a href="#">Change Password</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Logout</a></li>
+                                    <li><a href="" ng-click="logout()">Logout</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -58,7 +58,7 @@
             </nav>
         </div>
     </div>
-    <div class="containers">   <!-- Controller here earlier -->
+    <div class="containers">
         <div class="row">
             <div class="wrapper">
                 <div class="side-bar">

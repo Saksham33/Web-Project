@@ -13,7 +13,9 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js""></script>
+    	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.js"></script>
     	<script type="text/javascript" src="controllers/mainCtrl.js"></script>
+    	
 
 		<script src="js/ct-navbar.js"></script>
 		<script src="js/main.js"></script>
@@ -59,15 +61,15 @@
                 					</ul>
                     			</li>
                     			<li class="dropdown" id="padd">
-                          			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          			<a href="" class="dropdown-toggle" data-toggle="dropdown">
                                 		<i class="pe-7s-user"></i>
                                 		<p>Account</p>
                             		</a>
                           			<ul class="dropdown-menu" style="text-align: center;">
-                            			<li><a href="#">Profile</a></li>
-			                            <li><a href="#">Change Password</a></li>
+                            			<li><a href="" ng-click="delAccount()">Delete Account</a></li>
+			                            <li><a href="">Change Password</a></li>
 			                            <li class="divider"></li>
-			                            <li><a href="#">Logout</a></li>
+			                            <li><a href="" ng-click="logout()">Logout</a></li>
                           			</ul>
                     			</li>
                     			<li class="visible-xs">

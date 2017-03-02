@@ -18,9 +18,38 @@ app.config(function($routeProvider) {
 	});
 });
 
-app.controller("setActive", function($scope, $cookies) {
+app.controller("setActive", function($scope, $cookies, $window, $http) {
+	if($cookies.get('login') == 'false') {
+		alert('Please login to continue');
+		$window.location.href='./index.html';
+	}
+
 	$scope.check = window.location.hash.substr(1);
 	$scope.myText = $cookies.get('myUname');
+
+	$scope.delAccount = function() {
+		// http request to delete account
+		var x = confirm("Are you sure you want to delete your account?");
+		if(x == true) {
+			$http({
+				method: "POST",
+				url: "/delAccount/",
+				data: {
+					userName: $cookies.get('myUname'),
+				}
+			}).then(function(response) {
+				if(response.data == "done") {
+					console.log("Response: " + response.data);
+					$window.location.href='./index.html';
+				}
+			});
+		}
+	}
+
+	$scope.logout = function() {
+		$cookies.put('login', 'false');
+		$window.location.href='./index.html';
+	}
 });
 
 // Controller to display questions from backend

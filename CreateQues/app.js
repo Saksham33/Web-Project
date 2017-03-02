@@ -62,6 +62,19 @@ app.post('/register', function(req, res) {
 	});
 });
 
+// Delete Account
+app.post('/delAccount/', function(req, res) {
+	var uname = req.body.userName;
+	Student.delStudent(uname, function(err, student) {
+		if(err) {
+			throw err;
+		}
+		else {
+			res.send("done");
+		}
+	});
+});
+
 
 // MCQs
 app.post('/addQues/', function(req, res) {

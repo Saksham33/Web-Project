@@ -32,6 +32,11 @@ module.exports.findEmail = function(email, callback) {
 	Student.findOne(query, callback);
 }
 
+module.exports.delStudent = function(name, callback) {
+	var query = {name: name};
+	Student.remove(query, callback);
+}
+
 // module.exports.getStudent = function(callback, limit){	// callback is function from app.js, limit is second parameter(not passed here)
 // 	Student.find(callback).limit(limit);
 // }
