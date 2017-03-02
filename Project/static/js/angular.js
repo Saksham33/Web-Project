@@ -133,6 +133,20 @@ app.controller('quesController', function($scope, $http) {
 				console.log(checkedAns[i]);
 			}
 		}
+		if(correct == $scope.answers.length) {
+			swal(
+		  		"Good job!",
+		  		"You've got all the answers correct!",
+		  		"success"
+			)
+		}
+		else {
+			swal(
+		  		"Try Again!",
+		  		"You've got "+correct+" answers correct!",
+		  		"error"
+			)
+		}
 		console.log("Correct Answers: " + correct);
 	}
 });
