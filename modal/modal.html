@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="modal.css">
+  <script src="jquery.js"></script>
+  <script src="boot.js"></script>
+  <title>Modal</title>
+</head>
+<body >
+
+<div class="container">
+	<div class="row">
+    
+    
+	<div id="myModal" class="modal fade in">
+        <div class="modal-dialog" style="width:350px">
+            <div class="modal-content">
+ 
+                <div class="modal-header">
+                    <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                    <h4 class="modal-title">Delete Account</h4>
+                </div>
+                <div class="modal-body" style="padding-left: 11px">
+                    <label style="margin-right: 65px">Password</label><input type="Password" name="1" id="1"><br/><br/>
+                    <label style="margin-right: 7px">Confirm Password</label><input type="Password" name="2" id="2">
+                    
+                </div>
+                <div class="modal-footer" style="text-align: center;padding-bottom:5px;padding-top: 5px">
+                    <div class="btn-group" style="margin :1px">
+                        <button class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                        <button class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> Save</button>
+                    </div>
+                </div>
+ 
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dalog -->
+    </div><!-- /.modal -->
+    
+<a data-toggle="modal" href="#myModal" class="btn btn-primary">delete account</a>
+
+
+	</div>
+</div>
+</body>
+</html>
