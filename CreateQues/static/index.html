@@ -5,7 +5,9 @@
     <title>Login and Register Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/styling.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -15,9 +17,27 @@
     <script type="text/javascript" src="controllers/mainCtrl.js"></script>
 
 </head>
-<body ng-app="myApp">
+<body ng-app="myApp" style="padding-top: 0px; font-family: 'Quicksand', sans-serif;">
+	<div class="container">
+		<div class="row" style="height: 220px;">
+			<svg viewBox="0 0 1020 300">
+    			<symbol id="s-text">
+					<text text-anchor="middle" x="500" y="150">Codediction</text>
+				</symbol>
+				<g class = "g-ants">
+					<use xlink:href="#s-text" class="text-copy"></use>
+					<use xlink:href="#s-text" class="text-copy"></use>
+					<use xlink:href="#s-text" class="text-copy"></use>
+					<use xlink:href="#s-text" class="text-copy"></use>
+					<use xlink:href="#s-text" class="text-copy"></use>
+					<use xlink:href="#s-text" class="text-copy"></use>
+					<use xlink:href="#s-text" class="text-copy"></use>
+				</g>
+			</svg>
+		</div>
+	</div>
 	<div class="container" ng-controller="loginCtrl">
-		<h2 align="center">Welcome {{uname1}}</h2>
+		<h2 align="center" style="color: white;">Welcome <i style="color: #029f5b;">{{uname1}}</i> !</h2>
 		<br><br>
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">
