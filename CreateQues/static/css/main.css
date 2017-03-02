@@ -61,7 +61,7 @@ body {
 }
 
 #toggle:checked ~ .butt {
-  transform: rotate(135deg);
+  transform: rotate(494deg);
   box-shadow: 0 0 0 0 transparent;
 }
 

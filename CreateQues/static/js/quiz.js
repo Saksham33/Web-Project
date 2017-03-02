@@ -7,4 +7,13 @@ $(document).ready(function(){
         $("div.menu > li > a").removeClass("active");
         $(this).addClass("active");
     });
+
+     $(window).resize(function() {
+    	if($(window).width() < 760) {
+    		$(".wrapper").addClass("active");
+    	}
+    	else {
+    		$(".wrapper").removeClass("active");
+    	}
+    });
 });
