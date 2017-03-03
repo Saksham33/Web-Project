@@ -131,7 +131,9 @@ app.controller('quesController', function($scope, $http) {
 		for(i = 0; i < index; i++) {
 			var x = $("input[name=mcq"+i+"]:radio:checked").val();
 			console.log('Selected ' + x);
-			checkedAns.push(x);
+			if(x != null) {
+				checkedAns.push(x);
+			}
 		}
 
 		// Count no of correct answers
@@ -142,21 +144,31 @@ app.controller('quesController', function($scope, $http) {
 				console.log(checkedAns[i]);
 			}
 		}
-		$(".right").css('display', 'inline');
-		if(correct == $scope.answers.length) {
+		if(checkedAns.length != $scope.answers.length) {
 			swal(
-		  		"Good job!",
-		  		"You've got all the answers correct!",
-		  		"success"
+		  		"Check Again!",
+		  		"Please answer all the questions!",
+		  		"warning"
 			)
+			return;
 		}
 		else {
-			swal(
-		  		"Try Again!",
-		  		"You've got "+correct+" answers correct!",
-		  		"error"
-			)
+			if(correct == $scope.answers.length) {
+				swal(
+			  		"Good job!",
+			  		"You've got all the answers correct!",
+			  		"success"
+				)
+			}
+			else {
+				swal(
+			  		"Try Again!",
+			  		"You've got "+correct+" answers correct!",
+			  		"error"
+				)
+			}
 		}
+		$(".right").css('display', 'inline');
 		console.log("Correct Answers: " + correct);
 	}
 

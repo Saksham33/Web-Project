@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
 body { 
 	background: url(https://dncache-mauganscorp.netdna-ssl.com/cropped-wallpapers/303/303939-1366x768-[DesktopNexus.com].jpg?st=Oh9BnkFxCHGJQigthsDzgg&e=1487603482) no-repeat center center fixed; 
     -webkit-background-size: cover;
@@ -5,6 +7,30 @@ body {
     -o-background-size: cover;
   	background-size: cover;
   	font-family: 'Quicksand', sans-serif;
+}
+
+/*body{ font-family:"Arial"; color:#fff;}   //Making the background image blur
+.page-bg{
+  background: url(https://dncache-mauganscorp.netdna-ssl.com/cropped-wallpapers/303/303939-1366x768-[DesktopNexus.com].jpg?st=Oh9BnkFxCHGJQigthsDzgg&e=1487603482) no-repeat center center fixed; 
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  z-index:-1;
+}*/
+
+.background-image {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
 }
 
 .transparency {
@@ -69,4 +95,67 @@ body {
 	#padd {
 		padding-left: 50px;
 	}
+}
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+html, body{
+  height: 100%;
+/*  font-weight: 800;*/
+}
+
+svg {
+    display: block;
+    font: 10.5em 'Montserrat';
+    width: 400px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.text-copy {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: 6% 29%;
+    stroke-width: 5px;
+    stroke-dashoffset: 0%;
+    animation: stroke-offset 5.5s infinite linear;
+}
+
+.text-copy:nth-child(1){
+    stroke: #4D163D;
+  animation-delay: -1;
+}
+
+.text-copy:nth-child(2){
+  stroke: #840037;
+  animation-delay: -2s;
+}
+
+.text-copy:nth-child(3){
+  stroke: #BD0034;
+  animation-delay: -3s;
+}
+
+.text-copy:nth-child(4){
+  stroke: pink;
+  animation-delay: -4s;
+}
+
+.text-copy:nth-child(5){
+  stroke: #FDB731;
+  animation-delay: -5s;
+}
+
+.text-copy:nth-child(6){
+  stroke: yellowgreen;
+  animation-delay: -6s;
+}
+
+.text-copy:nth-child(7){
+  stroke: skyblue;
+  animation-delay: -7s;
+}
+
+@keyframes stroke-offset{
+  100% {stroke-dashoffset: -35%;}
 }
