@@ -1,5 +1,10 @@
 <div id="stackDiv" ng-controller="quesController" ng-init="loadData('/stack/')">
-	<h2 style="margin-top: 0px; padding-left: 20px; padding-top: 10px">Stacks</h2><br>
+	<div>
+		<span><button style="width: 12em; float: right;" type="button" class="btn btn-success" ng-show="checkTeacher()" ng-click="showChecks()">Delete Questions</button></span>
+		<h2 style="margin-top: 0px; padding-left: 20px; padding-top: 10px;">Stacks</h2>
+		
+		<br>
+	</div>
 	<ol type="1" style="font-size: 20px;">
 		<!-- <li>
 			<div>The data structure required to check whether an expression contains balanced parenthesis is?</div>
@@ -44,8 +49,10 @@
 		</li> -->
 
 		<!-- Adding data from server -->
-		<li ng-repeat="x in arr" ng-init="radioName=getName();">
-			<div>{{x.question}}</div>
+		<li ng-repeat="x in arr" ng-init="radioName=getName(); checkClass=getCheckClass(); spanClass=getSpanClass()">
+			<div>
+				<span class={{spanClass}} style="display: none;"><input type="checkbox" class={{checkClass}} value={{x.question}}> </span>{{x.question}}
+			</div>
 			<div ng-repeat="op in x.options" ng-init="myClass=getClass(op, x.answer)">
 				<div data-toggle="buttons">
 					<label class="btn active">
@@ -58,10 +65,12 @@
 					<span class={{myClass}} style="display: none;"><i class="pe-7s-check" style="font-size: 30px; color: #029f5b;"></i></span>
 					<span><i class="pe-7s-close" style="font-size: 30px; color: red; display: none;"></i></span>
 				</div>
-			</div>
+			</div><br>
 		</li>
 	</ol>
 	<div id="footer">
-        <button style="width: 7em;" type="button" class="btn btn-success" ng-click="checkAns()">Check now!</button>
+        <button style="width: 7em;" type="button" class="btn btn-success myCheckBtn" ng-click="checkAns()">Check now!</button>
+        <button style="width: 9em; display: none" type="button" class="btn btn-success myDelBtn1" ng-click="deleteQues()">Confirm Delete</button>
+        <button style="width: 9em; display: none" type="button" class="btn btn-danger myDelBtn2" ng-click="cancelDel()">Cancel</button>
     </div>
 </div>

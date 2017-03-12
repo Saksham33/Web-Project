@@ -128,6 +128,19 @@ app.post('/addQues/', function(req, res) {
 	});
 });
 
+// Delete Questions
+app.post('/delQues/', function(req, res) {
+	var quesArr = req.body.quesArr;
+	for(i in quesArr) {
+		MCQ.delQuestion(quesArr[i], function(err, resp) {
+			if(err) {
+				throw err;
+			}
+		});
+	}
+	res.send("Done");
+});
+
 app.get('/stack/', function(req, res) {
 	var topic = "Stack";
 	MCQ.getStackQues(topic, function(err, ques) {

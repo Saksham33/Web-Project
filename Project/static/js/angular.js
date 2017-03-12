@@ -89,7 +89,7 @@ app.controller("setActive", function($scope, $cookies, $window, $http) {
 });
 
 // Controller to display questions from backend
-app.controller('quesController', function($scope, $http) {
+app.controller('quesController', function($scope, $http, $cookies, $route) {
 
 	// Give names to dynamically added radio buttons
 	var index = 0;
@@ -100,12 +100,24 @@ app.controller('quesController', function($scope, $http) {
 	}
 
 	var index1 = 0;
-	$scope.getId = function() {
-		var myId = new Array();
-		myId.push('right'+index1);
-		myId.push('wrong'+index1);
+	$scope.getCheckClass = function() {
+		var checkClass = 'mycheck'+index1;
 		index1 += 1;
-		return myId;
+		return checkClass;
+	}
+
+	var index2 = 0;
+	$scope.getSpanClass = function() {
+		var spanClass = 'myspan'+index2;
+		index2 += 1;
+		return spanClass;
+	}
+
+	$scope.checkTeacher = function() {
+		if($cookies.get('teacher') == "true")
+			return true;
+		else
+			return false;
 	}
 
 	$scope.answers = new Array();
@@ -178,5 +190,54 @@ app.controller('quesController', function($scope, $http) {
 			return "right";
 		else
 			return "right1";
+	}
+
+	$scope.showChecks = function() {
+		$('.myCheckBtn').css('display', 'none');
+		$('.myDelBtn1').css('display', 'inline');
+		$('.myDelBtn2').css('display', 'inline');
+
+		for(i = 0; i < index2; i++) {
+			$(".myspan"+i).css('display', 'inline');
+		}
+	}
+
+	$scope.cancelDel = function() {
+		$('.myDelBtn1').css('display', 'none');
+		$('.myDelBtn2').css('display', 'none');
+		$('.myCheckBtn').css('display', 'inline');
+
+		for(i = 0; i < index2; i++) {
+			$(".myspan"+i).css('display', 'none');
+		}
+	}
+
+	$scope.deleteQues = function() {
+		var checkedCheckbox = new Array();
+		for(i = 0; i < index1; i++) {
+			if($('.mycheck'+i+'').is(':checked')) {
+				checkedCheckbox.push($('.mycheck'+i+'').val());
+			}
+		}
+		
+		// for(i = 0; i < checkedCheckbox.length; i++) {
+		// 	console.log(checkedCheckbox[i]);
+		// }
+
+		if(checkedCheckbox.length == 0) {
+			alert("Please select atleast one question.");
+			return;
+		}
+
+		$http({
+			method: "POST",
+			url: '/delQues/',
+			data: {
+				quesArr: checkedCheckbox,
+			}
+		}).then(function(response) {
+			console.log(response.data);
+			$route.reload();
+		});
 	}
 });

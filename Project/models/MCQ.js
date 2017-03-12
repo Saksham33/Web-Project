@@ -25,3 +25,8 @@ module.exports.getStackQues = function(topic, callback) {
 	var query = {topic: topic};
 	MCQ.find(query, callback);
 }
+
+module.exports.delQuestion = function(question, callback) {
+	var query = {question: question};
+	MCQ.remove(query, callback);
+}
