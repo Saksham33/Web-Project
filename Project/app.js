@@ -141,9 +141,10 @@ app.post('/delQues/', function(req, res) {
 	res.send("Done");
 });
 
-app.get('/stack/', function(req, res) {
-	var topic = "Stack";
-	MCQ.getStackQues(topic, function(err, ques) {
+// Get questions from db
+app.post('/getQues/', function(req, res) {
+	var topic = req.body.topics;
+	MCQ.getQuestions(topic, function(err, ques) {
 		if(err) {
 			throw err;
 		}
@@ -151,35 +152,45 @@ app.get('/stack/', function(req, res) {
 	});
 });
 
-app.get('/queue/', function(req, res) {
-	var topic = "Queue";
-	MCQ.getStackQues(topic, function(err, ques) {
-		if(err) {
-			throw err;
-		}
-		res.send(ques);
-	});
-});
+// app.get('/stack/', function(req, res) {
+// 	var topic = "Stack";
+// 	MCQ.getStackQues(topic, function(err, ques) {
+// 		if(err) {
+// 			throw err;
+// 		}
+// 		res.send(ques);
+// 	});
+// });
 
-app.get('/tree/', function(req, res) {
-	var topic = "Trees";
-	MCQ.getStackQues(topic, function(err, ques) {
-		if(err) {
-			throw err;
-		}
-		res.send(ques);
-	});
-});
+// app.get('/queue/', function(req, res) {
+// 	var topic = "Queue";
+// 	MCQ.getStackQues(topic, function(err, ques) {
+// 		if(err) {
+// 			throw err;
+// 		}
+// 		res.send(ques);
+// 	});
+// });
 
-app.get('/graph/', function(req, res) {
-	var topic = "Graph";
-	MCQ.getStackQues(topic, function(err, ques) {
-		if(err) {
-			throw err;
-		}
-		res.send(ques);
-	});
-});
+// app.get('/tree/', function(req, res) {
+// 	var topic = "Trees";
+// 	MCQ.getStackQues(topic, function(err, ques) {
+// 		if(err) {
+// 			throw err;
+// 		}
+// 		res.send(ques);
+// 	});
+// });
+
+// app.get('/graph/', function(req, res) {
+// 	var topic = "Graph";
+// 	MCQ.getStackQues(topic, function(err, ques) {
+// 		if(err) {
+// 			throw err;
+// 		}
+// 		res.send(ques);
+// 	});
+// });
 
 // app.get('/',function(req, res){
 // 	res.send('hello world db path =  '+config.connectionString+ ' ' );

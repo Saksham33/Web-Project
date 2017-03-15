@@ -3,28 +3,28 @@ var app = angular.module("myRoute", ['ngRoute', 'ngCookies']);
 app.config(function($routeProvider) {
 	$routeProvider
 	.when("/Stacks", {
-		templateUrl: "stack.html",
+		templateUrl: "templ.html",
 	})
 	.when("/Queues", {
-		templateUrl: "queue.html",
+		templateUrl: "templ.html",
 	})
 	.when("/Trees", {
-		templateUrl: "tree.html",
+		templateUrl: "templ.html",
 	})
 	.when("/Graphs", {
-		templateUrl: "graph.html",
+		templateUrl: "templ.html",
 	})
 	.otherwise("/", {
 	});
 });
 
-app.controller("setActive", function($scope, $cookies, $window, $http) {
+app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 	if($cookies.get('login') == 'false') {
 		alert('Please login to continue');
 		$window.location.href='./index.html';
 	}
 
-	$scope.check = window.location.hash.substr(1);
+	$scope.check = window.location.hash.substr(2);
 	$scope.myText = $cookies.get('myUname');
 
 	$scope.delAccount = function() {
@@ -86,10 +86,6 @@ app.controller("setActive", function($scope, $cookies, $window, $http) {
 		$cookies.put('login', 'false');
 		$window.location.href='./index.html';
 	}
-});
-
-// Controller to display questions from backend
-app.controller('quesController', function($scope, $http, $cookies, $route) {
 
 	// Give names to dynamically added radio buttons
 	var index = 0;
@@ -125,8 +121,11 @@ app.controller('quesController', function($scope, $http, $cookies, $route) {
 
 	$scope.loadData = function(myUrl) {
 		$http({
-			method: "GET",
-			url: myUrl,	// url: "/stack/"
+			method: "POST",
+			url: '/getQues/',
+			data: {
+				topics: myUrl
+			}
 		}).then(function(response) {
 			$scope.arr = response.data;
 			for(x in $scope.arr) {
@@ -196,6 +195,7 @@ app.controller('quesController', function($scope, $http, $cookies, $route) {
 		$('.myCheckBtn').css('display', 'none');
 		$('.myDelBtn1').css('display', 'inline');
 		$('.myDelBtn2').css('display', 'inline');
+		$('.mainDelBtn').css('display', 'none');
 
 		for(i = 0; i < index2; i++) {
 			$(".myspan"+i).css('display', 'inline');
@@ -206,6 +206,7 @@ app.controller('quesController', function($scope, $http, $cookies, $route) {
 		$('.myDelBtn1').css('display', 'none');
 		$('.myDelBtn2').css('display', 'none');
 		$('.myCheckBtn').css('display', 'inline');
+		$('.mainDelBtn').css('display', 'inline');
 
 		for(i = 0; i < index2; i++) {
 			$(".myspan"+i).css('display', 'none');
@@ -219,10 +220,6 @@ app.controller('quesController', function($scope, $http, $cookies, $route) {
 				checkedCheckbox.push($('.mycheck'+i+'').val());
 			}
 		}
-		
-		// for(i = 0; i < checkedCheckbox.length; i++) {
-		// 	console.log(checkedCheckbox[i]);
-		// }
 
 		if(checkedCheckbox.length == 0) {
 			alert("Please select atleast one question.");

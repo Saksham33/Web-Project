@@ -21,7 +21,7 @@ module.exports.addQues = function(question, answer, options, topic, callback) {
 	MCQ.create(query, callback);
 }
 
-module.exports.getStackQues = function(topic, callback) {
+module.exports.getQuestions = function(topic, callback) {
 	var query = {topic: topic};
 	MCQ.find(query, callback);
 }
