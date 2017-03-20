@@ -1,0 +1,64 @@
+<div ng-controller="quesController" ng-init="loadData('/graph/')">
+	<h2 style="margin-top: 0px; padding-left: 20px; padding-top: 10px">Graphs</h2><br>
+	<ol type="1" style="font-size: 20px;">
+		<!-- <li>
+			<div>The time complexity of computing the transitive closure of a binary relation on a set of n elements is known to be :</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="O(n)" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">O(n)</span>
+				</label>
+			</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="O(nlogn)" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">O(nlogn)</span>
+				</label>
+			</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="O(n^(3/2))" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">O(n^(3/2))</span>
+				</label>
+			</div>
+			<div data-toggle="buttons">
+				<label class="btn active">
+					<input type="radio" name="mcq0" value="O(n^3)" required>
+					<i class='fa fa-circle-o fa-x'></i>
+					<i class='fa fa-dot-circle-o fa-x'></i>
+					&nbsp; &nbsp;
+					<span style="font-size: 18px;">O(n^3)</span>
+				</label>
+			</div>
+		</li> -->
+
+		<!-- Adding data from server -->
+		<li ng-repeat="x in arr" ng-init="radioName=getName()">
+			<div>{{x.question}}</div>
+			<div ng-repeat="op in x.options" ng-init="myClass=getClass(op, x.answer)">
+				<div data-toggle="buttons">
+					<label class="btn active">
+						<input type="radio" name={{radioName}} value={{op}} required>
+						<i class='fa fa-circle-o fa-x'></i>
+						<i class='fa fa-dot-circle-o fa-x'></i>
+						&nbsp; &nbsp;
+						<span style="font-size: 18px;">{{op}}</span>
+					</label>
+					<span class={{myClass}} style="display: none;"><i class="pe-7s-check" style="font-size: 30px; color: #029f5b;"></i></span>
+				</div>
+			</div>
+		</li>
+	</ol>
+	<div id="footer">
+        <button style="width: 7em;" type="button" class="btn btn-success" ng-click="checkAns()">Check now!</button>
+    </div>
+</div>
