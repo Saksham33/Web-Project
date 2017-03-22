@@ -3,28 +3,28 @@ var app = angular.module("myRoute", ['ngRoute', 'ngCookies']);
 app.config(function($routeProvider) {
 	$routeProvider
 	.when("/Stacks", {
-		templateUrl: "stack.html",
+		templateUrl: "templ.html",
 	})
 	.when("/Queues", {
-		templateUrl: "queue.html",
+		templateUrl: "templ.html",
 	})
 	.when("/Trees", {
-		templateUrl: "tree.html",
+		templateUrl: "templ.html",
 	})
 	.when("/Graphs", {
-		templateUrl: "graph.html",
+		templateUrl: "templ.html",
 	})
 	.otherwise("/", {
 	});
 });
 
-app.controller("setActive", function($scope, $cookies, $window, $http) {
+app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 	if($cookies.get('login') == 'false') {
 		alert('Please login to continue');
 		$window.location.href='./index.html';
 	}
 
-	$scope.check = window.location.hash.substr(1);
+	$scope.check = window.location.hash.substr(2);
 	$scope.myText = $cookies.get('myUname');
 
 	$scope.delAccount = function() {
@@ -86,12 +86,8 @@ app.controller("setActive", function($scope, $cookies, $window, $http) {
 		$cookies.put('login', 'false');
 		$window.location.href='./index.html';
 	}
-});
 
-// Controller to display questions from backend
-app.controller('quesController', function($scope, $http) {
-
-	// Give names to dynamically added radio buttons
+	// Give names to dynamically added radio buttons. Deleted quesController
 	var index = 0;
 	$scope.getName = function() {
 		var radName = 'mcq'+index;
@@ -100,12 +96,24 @@ app.controller('quesController', function($scope, $http) {
 	}
 
 	var index1 = 0;
-	$scope.getId = function() {
-		var myId = new Array();
-		myId.push('right'+index1);
-		myId.push('wrong'+index1);
+	$scope.getCheckClass = function() {
+		var checkClass = 'mycheck'+index1;
 		index1 += 1;
-		return myId;
+		return checkClass;
+	}
+
+	var index2 = 0;
+	$scope.getSpanClass = function() {
+		var spanClass = 'myspan'+index2;
+		index2 += 1;
+		return spanClass;
+	}
+
+	$scope.checkTeacher = function() {
+		if($cookies.get('teacher') == "true")
+			return true;
+		else
+			return false;
 	}
 
 	$scope.answers = new Array();
@@ -113,8 +121,11 @@ app.controller('quesController', function($scope, $http) {
 
 	$scope.loadData = function(myUrl) {
 		$http({
-			method: "GET",
-			url: myUrl,	// url: "/stack/"
+			method: "POST",
+			url: '/getQues/',
+			data: {
+				topics: myUrl
+			}
 		}).then(function(response) {
 			$scope.arr = response.data;
 			for(x in $scope.arr) {
@@ -178,5 +189,52 @@ app.controller('quesController', function($scope, $http) {
 			return "right";
 		else
 			return "right1";
+	}
+
+	$scope.showChecks = function() {
+		$('.myCheckBtn').css('display', 'none');
+		$('.myDelBtn1').css('display', 'inline');
+		$('.myDelBtn2').css('display', 'inline');
+		$('.mainDelBtn').css('display', 'none');
+
+		for(i = 0; i < index2; i++) {
+			$(".myspan"+i).css('display', 'inline');
+		}
+	}
+
+	$scope.cancelDel = function() {
+		$('.myDelBtn1').css('display', 'none');
+		$('.myDelBtn2').css('display', 'none');
+		$('.myCheckBtn').css('display', 'inline');
+		$('.mainDelBtn').css('display', 'inline');
+
+		for(i = 0; i < index2; i++) {
+			$(".myspan"+i).css('display', 'none');
+		}
+	}
+
+	$scope.deleteQues = function() {
+		var checkedCheckbox = new Array();
+		for(i = 0; i < index1; i++) {
+			if($('.mycheck'+i+'').is(':checked')) {
+				checkedCheckbox.push($('.mycheck'+i+'').val());
+			}
+		}
+
+		if(checkedCheckbox.length == 0) {
+			alert("Please select atleast one question.");
+			return;
+		}
+
+		$http({
+			method: "POST",
+			url: '/delQues/',
+			data: {
+				quesArr: checkedCheckbox,
+			}
+		}).then(function(response) {
+			console.log(response.data);
+			$route.reload();
+		});
 	}
 });
