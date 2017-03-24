@@ -176,8 +176,18 @@ svg {
 
 a:hover {
   color: white;
-  font-size: bolder;
   text-decoration: none;
+}
+
+.attract:hover {
+  color: white;
+  font-size: 40px;
+  font-weight: bolder;
+  text-decoration: none;
+  -webkit-transition: all 0.2s; // Chrome
+    -moz-transition: all 0.2s; // Mozilla
+    -o-transition: all 0.2s; // Opera
+    transition: all 0.2s;
 }
 
 .quiz {

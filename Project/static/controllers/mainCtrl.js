@@ -295,6 +295,7 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		else {
 			$("#passMismatch").css('display', 'block');
 		}
+		// window.location.href = "./Quiz.html#/check"
 	}
 
 	$scope.changePass = function() {

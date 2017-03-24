@@ -55,6 +55,7 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 		else {
 			$("#passMismatch").css('display', 'block');
 		}
+		window.location.href = "./Quiz.html#/check"
 	}
 
 	$scope.changePass = function() {
@@ -82,11 +83,20 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 		});
 	}
 
+    $scope.closePopup = function() {
+    	window.location.href = "./Quiz.html#/" + $scope.check;
+    }
+
 	$scope.logout = function() {
 		$cookies.put('login', 'false');
 		$window.location.href='./index.html';
 	}
 
+	$scope.setCheck = function(value) {
+    	$scope.check = value;
+    	// console.log($scope.check);
+    }
+    
 	// Give names to dynamically added radio buttons. Deleted quesController
 	var index = 0;
 	$scope.getName = function() {

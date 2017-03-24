@@ -31,7 +31,7 @@
                 <div class="modal-dialog" style="width:350px">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="btn btn-default" ng-click="closePopup()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
                             <h4 class="modal-title">Delete Account</h4>
                         </div>
                         <div class="modal-body" style="padding-left: 11px">
@@ -42,7 +42,7 @@
                         </div><br>
                         <div class="modal-footer" style="text-align: center;padding-bottom:5px;padding-top: 5px">
                             <div class="btn-group" style="margin :1px">
-                                <button class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                <button class="btn btn-danger" ng-click="closePopup()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
                                 <button class="btn btn-primary" ng-click="delAccount()"><span class="glyphicon glyphicon-check"></span> Confirm</button>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                 <div class="modal-dialog" style="width:400px">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="btn btn-default" ng-click="closePopup()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
                             <h4 class="modal-title">Change Password</h4>
                         </div>
                         <div class="modal-body" style="padding-left: 11px">
@@ -69,7 +69,7 @@
                         </div><br>
                         <div class="modal-footer" style="text-align: center;padding-bottom:5px;padding-top: 5px">
                             <div class="btn-group" style="margin :1px">
-                                <button class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                <button class="btn btn-danger" ng-click="closePopup()" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
                                 <button class="btn btn-primary" ng-click="changePass()"><span class="glyphicon glyphicon-check"></span> Confirm</button>
                             </div>
                         </div>
@@ -134,23 +134,23 @@
                             </li>
                             <div class="menu">
                                 <li>
-                                    <a ng-href="#/Stacks" ng-class="{active: check == 'Stacks'}">Stacks<span class="glyphicon glyphicon-dashboard pull-right"></span></a>
+                                    <a ng-href="#/Stacks" ng-class="{active: check == 'Stacks'}" ng-click="setCheck('Stacks')">Stacks<span class="glyphicon glyphicon-dashboard pull-right"></span></a>
                                 </li>
                                 <li>
-                                    <a ng-href="#/Queues" ng-class="{active: check == 'Queues'}">Queues<span class="glyphicon glyphicon-heart pull-right"></span></a>
+                                    <a ng-href="#/Queues" ng-class="{active: check == 'Queues'}" ng-click="setCheck('Queues')">Queues<span class="glyphicon glyphicon-heart pull-right"></span></a>
                                 </li>
                                 <li>
-                                    <a ng-href="#/Trees" ng-class="{active: check == 'Trees'}">Trees<span class="glyphicon glyphicon-star pull-right"></span></a>
+                                    <a ng-href="#/Trees" ng-class="{active: check == 'Trees'}" ng-click="setCheck('Trees')">Trees<span class="glyphicon glyphicon-star pull-right"></span></a>
                                 </li>
                                 <li>
-                                    <a ng-href="#/Graphs" ng-class="{active: check == 'Graphs'}">Graphs<span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                    <a ng-href="#/Graphs" ng-class="{active: check == 'Graphs'}" ng-click="setCheck('Graphs')">Graphs<span class="glyphicon glyphicon-cog pull-right"></span></a>
                                 </li>
                             </div>
                         </ul>
                     </div>
                     <div class="content">
                         <div class="col-md-12">
-                            <div ng-view style="background-color: white;"></div>
+                            <div ng-view style="background-color: white; height: 557px;"></div>
                         </div>
                     </div>
                 </div>
