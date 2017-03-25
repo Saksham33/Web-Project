@@ -41,4 +41,12 @@ $(document).ready(function() {
 			$(arr[index]).attr("ng-hide", "false");
 		}, index*400);
 	});
+
+
+	$('.hover').hover(function(){
+			$(this).addClass('flip');
+		}, function(){
+			$(this).removeClass('flip');
+		}
+	);
 });
