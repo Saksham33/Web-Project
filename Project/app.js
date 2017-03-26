@@ -10,6 +10,7 @@ app.use(express.static(__dirname + '/static/'));
 
 Student = require('./models/Student');	// Student.js file for login info in login db
 MCQ = require('./models/MCQ');			// MCQ.js file for mcqs in login db
+McqTests = require('./models/McqTests');  // McqTests.js files which contains names of all tests
 
 mongoose.connect(config.connectionString);	// config file where mongodb connection path is present
 var db = mongoose.connection;
@@ -118,12 +119,23 @@ app.post('/addQues/', function(req, res) {
 	var options = req.body.options;
 	var ans = req.body.answer;
 	var topic = req.body.topic;
+	var test = req.body.test;
 
 	MCQ.addQues(ques, ans, options, topic, function(err, resp) {
 		if(err) {
 			throw err;
 		}
 		console.log("Added the question");
+		console.log("Test " + test);
+
+		// Add test name to question
+		if(test != null) {
+			MCQ.addTest(ques, test, function(err, resp) {
+				if(err) {
+					throw err;
+				}
+			});
+		}
 		res.send("YES");
 	});
 });
@@ -149,6 +161,73 @@ app.post('/getQues/', function(req, res) {
 			throw err;
 		}
 		res.send(ques);
+	});
+});
+
+// Get all questions to show on sidebar
+app.post('/sidebarQues/', function(req, res) {
+	MCQ.getSidebar(function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send(ques);
+	});
+});
+
+// Show test questions
+app.post('/testQues/', function(req, res) {
+	var quesArr = req.body.questions;
+	var test = req.body.test;
+	for(i in quesArr) {
+		MCQ.addTest(quesArr[i], test, function(err, ques) {
+			if(err) {
+				throw err;
+			}
+		});
+	}
+	MCQ.getTestQues(test, function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send(ques);
+	});
+});
+
+// Delete test questions
+app.post('/delTestQues/', function(req, res) {
+	var ques = req.body.ques;
+	var test = req.body.test;
+
+	MCQ.delTestQuestions(ques, test, function(err, ques) {
+		if(err) {
+			throw err;
+		}
+		res.send("Done");
+	});
+});
+
+// Add test name to test collection
+app.post('/addNewTest/', function(req, res) {
+	var test = req.body.test;
+
+	McqTests.findTest(test, function(err, myTest) {
+		if(err) {
+			throw err;
+		}
+		if(myTest.length == 0) {
+			console.log("Not found");
+			McqTests.addNewTest(test, function(err, myTest1) {
+				if(err) {
+					throw err;
+				}
+				console.log("Added");
+				res.send("Done");
+			});
+		}
+		else {
+			console.log("Found");
+			console.log(myTest);
+		}
 	});
 });
 

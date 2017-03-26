@@ -18,11 +18,13 @@
     	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js""></script>
     	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.js"></script>
     	
-    	<script type="text/javascript" src="controllers/mainCtrl.js"></script>
+    	<!-- <script type="text/javascript" src="controllers/mainCtrl.js"></script> -->
+    	<script type="text/javascript" src="js/angular.js"></script>
 		<script src="js/ct-navbar.js"></script>
 		<script src="js/main.js"></script>
 	</head>
-	<body ng-app="myApp" ng-controller="mainPageCtrl" style="background: url(images/img4.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; font-family: 'Quicksand', sans-serif;">
+	<!-- mainPageCtrl myApp-->
+	<body ng-app="myRoute" ng-controller="setActive" style="background: url(images/img4.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; font-family: 'Quicksand', sans-serif;">
 		<!-- <div class="page-bg"></div> -->
 		<!-- Delete Account Modal -->
 		<div class="container">
@@ -224,7 +226,7 @@
 			</div>
 		</div>
 		<div class="row" style="width: 100%; margin-top: 50px; margin-left: 0px;">
-			<a href="#test">
+			<a href={{"#"+"Test1"}}>
 				<div class="wrapper">
 					<div class="col_third" style="height: 0px; width: 0px;">
 	        			<div class="hover panel" style="height: 0px; width: 0px; border: 0px;">

@@ -24,6 +24,7 @@ $(document).ready(function(){
             $("#bs-example-navbar-collapse-1").attr("aria-expanded", "false");
             $("#checkButt").addClass("collapsed");
         }
+        $("#newId").css('height', $(window).height() - 105);
     });
 
     $("#checkButt").click(function() {
@@ -55,4 +56,6 @@ $(document).ready(function(){
     if($(window).width() < 760) {
         $(".wrapper").addClass("active");
     }
+
+    $("#newId").css('height', $(window).height() - 105);
 });

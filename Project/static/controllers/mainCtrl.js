@@ -85,81 +85,81 @@ app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 });
 
 // Main page controller
-app.controller("mainPageCtrl", function($scope, $http, $cookies, $window) {
-	if($cookies.get('login') == 'false') {
-		alert('Please login to continue');
-		$window.location.href='./index.html';
-	}
+// app.controller("mainPageCtrl", function($scope, $http, $cookies, $window) {
+// 	if($cookies.get('login') == 'false') {
+// 		alert('Please login to continue');
+// 		$window.location.href='./index.html';
+// 	}
 
-	$scope.myText = $cookies.get('myUname');
+// 	$scope.myText = $cookies.get('myUname');
 
-	$scope.checkTeacher = function() {
-		if($cookies.get('teacher') == "true")
-			return true;
-		else
-			return false;
-	}
+// 	$scope.checkTeacher = function() {
+// 		if($cookies.get('teacher') == "true")
+// 			return true;
+// 		else
+// 			return false;
+// 	}
 
-	$scope.delAccount = function() {
-		// http request to delete account
-		$("#passMismatch").css('display', 'none');
-		$("#invPass").css('display', 'none');
+// 	$scope.delAccount = function() {
+// 		// http request to delete account
+// 		$("#passMismatch").css('display', 'none');
+// 		$("#invPass").css('display', 'none');
 
-		var pass1 = $scope.delPass1;
-		var pass2 = $scope.delPass2;
+// 		var pass1 = $scope.delPass1;
+// 		var pass2 = $scope.delPass2;
 
-		if(pass1 == pass2) {
-			$http({
-				method: "POST",
-				url: "/delAccount/",
-				data: {
-					userName: $cookies.get('myUname'),
-					password: pass1,
-				}
-			}).then(function(response) {
-				if(response.data == "yes") {
-					$window.location.href='./index.html';
-				}
-				else {
-					$("#invPass").css('display', 'block');
-				}
-			});
-		}
-		else {
-			$("#passMismatch").css('display', 'block');
-		}
-	}
+// 		if(pass1 == pass2) {
+// 			$http({
+// 				method: "POST",
+// 				url: "/delAccount/",
+// 				data: {
+// 					userName: $cookies.get('myUname'),
+// 					password: pass1,
+// 				}
+// 			}).then(function(response) {
+// 				if(response.data == "yes") {
+// 					$window.location.href='./index.html';
+// 				}
+// 				else {
+// 					$("#invPass").css('display', 'block');
+// 				}
+// 			});
+// 		}
+// 		else {
+// 			$("#passMismatch").css('display', 'block');
+// 		}
+// 	}
 
-	$scope.changePass = function() {
-		$("#passMismatch2").css('display', 'none');
-		$("#passMatch").css('display', 'none');
+// 	$scope.changePass = function() {
+// 		$("#passMismatch2").css('display', 'none');
+// 		$("#passMatch").css('display', 'none');
 
-		var oldPass = $scope.changePass1;
-		var newPass = $scope.changePass2;
+// 		var oldPass = $scope.changePass1;
+// 		var newPass = $scope.changePass2;
 
-		$http({
-			method: "POST",
-			url: "/changePass/",
-			data: {
-				userName: $cookies.get('myUname'),
-				currPass: oldPass,
-				nextPass: newPass,
-			}
-		}).then(function(response) {
-			if(response.data == "no") {
-				$("#passMismatch2").css('display', 'block');
-			}
-			else {
-				$("#passMatch").css('display', 'block');
-			}
-		});
-	}
+// 		$http({
+// 			method: "POST",
+// 			url: "/changePass/",
+// 			data: {
+// 				userName: $cookies.get('myUname'),
+// 				currPass: oldPass,
+// 				nextPass: newPass,
+// 			}
+// 		}).then(function(response) {
+// 			if(response.data == "no") {
+// 				$("#passMismatch2").css('display', 'block');
+// 			}
+// 			else {
+// 				$("#passMatch").css('display', 'block');
+// 			}
+// 		});
+// 	}
 
-	$scope.logout = function() {
-		$cookies.put('login', 'false');
-	 	$window.location.href='./index.html';
-	}
-});
+// 	$scope.logout = function() {
+// 		$cookies.put('login', 'false');
+// 	 	$window.location.href='./index.html';
+// 	}
+// });
 
 
 // MCQ page ctrl
@@ -173,16 +173,32 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 	$scope.selectTop = function(text) {
 		$scope.setTopic = text;
 	};
+
 	$scope.addQuestion = function() {
 		console.log("Add ques function");
+
+		// Clear every error message first
+		$("#emptyQues").css('display','none');
+		$("#emptyOptions").css('display', 'none');
+		$("#emptyAnswer").css('display', 'none');
+		$("#emptyTopic").css('display', 'none');
+
+		var testPage = false;
+		// Test part won't exist for create question page but it will be there for create test page.
+		if($("#emptyTest").length != 0) {
+			testPage = true;
+			$("#emptyTest").css('display', 'none');
+			var myTest = $("#tName").val().trim();
+			if(myTest == "") {
+				$("#emptyTest").css('display', 'inline');
+				return;
+			}
+		}	
 
 		var question = $("#t1").val().trim();
 		if(question == "") {
 			$("#emptyQues").css('display','inline');
 			return;
-		}
-		else {
-			$("#emptyQues").css('display','none');
 		}
 
 		var optionsArray = new Array();
@@ -195,30 +211,30 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 			$("#emptyOptions").css('display', 'block');
 			return;
 		}
-		else {
-			$("#emptyOptions").css('display', 'none');
-		}
 
 		if(answer == null) {
 			$("#emptyAnswer").css('display', 'block');
 			return;
 		}
-		else {
-			$("#emptyAnswer").css('display', 'none');
-		}
+
 		if($scope.setTopic == "Select Topic") {
 			$("#emptyTopic").css('display', 'block');
 			return;
 		}
-		else {
-			$("#emptyTopic").css('display', 'none');	
-		}
+
 		console.log(question);
 		console.log(optionsArray);
 		console.log(answer);
 		console.log($scope.setTopic);
 
 		// http request
+		var testName;
+		if(testPage == true) {
+			testName = $("#tName").val().trim();
+		}
+		else {
+			testName = null;
+		}
 		$http({
 			method: "POST",
 			url: "/addQues/",
@@ -227,6 +243,7 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 				answer: answer,
 				options: optionsArray,
 				topic: $scope.setTopic,
+				test : testName,
 			}
 		}).then(function(response) {
 			console.log("Response: " + response);
@@ -251,7 +268,89 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		    	}
 		  	}
 		)
+
+		if(testPage == true) {
+			$scope.showTestQues();
+		}
 	};
+
+	// Add new test to test collection
+	$scope.addNewTest = function() {
+		var myTest = $("#tName").val().trim();
+		$http({
+			method: "POST",
+			url: "/addNewTest",
+			data: {
+				test: myTest
+			}
+		}).then(function(response) {
+			$window.location.href="./Main.html";
+		});
+	}
+
+	// Show all questions in sidebar
+	$scope.sidebarQues = function() {
+		$http({
+			method: "POST",
+			url: "/sidebarQues"
+		}).then(function(response) {
+			$scope.sideArr = response.data;
+			// for(x in $scope.sideArr)
+			// 	console.log($scope.sideArr[x].question);
+		});
+	}
+
+	// Give names to checkboxes
+	var index = 0;
+	$scope.getName = function() {
+		var chName = 'mcq'+index;
+		index += 1;
+		return chName;
+	}
+
+	// Show all selected questions for test
+	$scope.showTestQues = function()
+	{
+		var sideSelectArr = new Array();
+		for(i = 0; i < index; i++) {
+			var x = $("input[name=mcq"+i+"]:checkbox:checked").val();
+			if(x)
+				sideSelectArr.push(x);
+		}
+		var testName = $("#tName").val().trim();
+		$http({
+			method: "POST",
+			url: "/testQues",
+			data: {
+				questions: sideSelectArr,
+				test: testName,
+			}
+		}).then(function(response) {
+			$scope.testQuesArr = response.data;
+			// for(x in $scope.testQuesArr)
+			//  	console.log($scope.testQuesArr[x].question);
+		});
+	}
+
+	// Remove questions from current test
+	removeTestQues = function(x) {
+		var myQues = $(x).parent().find('span').text();
+		var myTest = $("#tName").val().trim();
+		console.log(myQues);
+
+		$http({
+			method: "POST",
+			url: "/delTestQues",
+			data: {
+				ques: myQues,
+				test: myTest
+			}
+		}).then(function(response) {
+			console.log(response.data);
+		});
+
+		$(x).parent().remove();
+	}
 
 	if($cookies.get('login') == 'false') {
 		alert('Please login to continue');
@@ -327,62 +426,4 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		$cookies.put('login', 'false');
 	 	$window.location.href='./index.html';
 	}
-
-
 });
-
-// Stack controller
-// app.controller('stackController', function($scope, $http) {
-// 	$scope.loadData = function() {
-// 		$http({
-// 			method: "GET",
-// 			url: "/stack/",
-// 		}).then(function(response) {
-// 			$scope.arr = response.data;
-// 			for(x in $scope.arr)
-// 				console.log("Question: " + $scope.arr[x].question);
-// 		});
-// 	};
-// });
-
-// Queue controller
-// app.controller('queueController', function($scope, $http) {
-// 	$scope.loadData = function() {
-// 		$http({
-// 			method: "GET",
-// 			url: "/queue/",
-// 		}).then(function(response) {
-// 			$scope.arr = response.data;
-// 			for(x in $scope.arr)
-// 				console.log("Question: " + $scope.arr[x].question);
-// 		});
-// 	};
-// });
-
-// Tree controller
-// app.controller('treeController', function($scope, $http) {
-// 	$scope.loadData = function() {
-// 		$http({
-// 			method: "GET",
-// 			url: "/tree/",
-// 		}).then(function(response) {
-// 			$scope.arr = response.data;
-// 			for(x in $scope.arr)
-// 				console.log("Question: " + $scope.arr[x].question);
-// 		});
-// 	};
-// });
-
-// Graph controller
-// app.controller('graphController', function($scope, $http) {
-// 	$scope.loadData = function() {
-// 		$http({
-// 			method: "GET",
-// 			url: "/graph/",
-// 		}).then(function(response) {
-// 			$scope.arr = response.data;
-// 			for(x in $scope.arr)
-// 				console.log("Question: " + $scope.arr[x].question);
-// 		});
-// 	};
-// });

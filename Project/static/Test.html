@@ -127,14 +127,15 @@
 	        </div>
 	    </div>
 	    <div style="margin-top: 100px;" class="containers">
-	    	<div>
+	    	<div ng-init="sidebarQues()">
 				<div id="sidebar-wrapper">
   					<ul class="sidebar-nav">
+  						<a id="checkSidebar" ng-click="showTestQues()" href="" class="btn btn-success btn-lg"><i class="fa fa-check" aria-hidden="true"></i></a>
 		    			<a id="menu-close" href="#" class="btn btn-default btn-lg pull-right toggle"><i class="glyphicon glyphicon-remove"></i></a>
 			    		<li class="sidebar-brand">
-			      			<a href="#">Questions</a>
+			      			<a href="#">All Questions</a>
 			    		</li>
-					    <li>
+					    <!-- <li>
 					      <input type="checkbox" name="ques" value="Question 1">&nbsp;&nbsp;<span style="color: white;">Ques1</span>
 					    </li>
 					    <li>
@@ -142,20 +143,23 @@
 					    </li>
 					    <li>
 					      <input type="checkbox" name="ques" value="Question 3">&nbsp;&nbsp;<span style="color: white;">Ques3</span>
+					    </li> -->
+					    <li ng-repeat="x in sideArr" ng-init="checkName=getName()">
+					    	<input type="checkbox" name={{checkName}} value={{x.question}}>&nbsp;&nbsp;<span style="color: white;">{{x.question}}</span>
 					    </li>
 		  			</ul>
 				</div>
 			</div>
-			<a id="menu-toggle" href="#" class="btn btn-primary btn-lg toggle"><i class="fa fa-align-justify" aria-hidden="true"></i></a>
-			<a id="menu-toggle" href="#" class="btn btn-success btn-lg toggle"><i class="fa fa-check" aria-hidden="true"></i></a>
+			<a id="menu-toggle" href="" class="btn btn-primary btn-lg toggle"><i class="fa fa-align-justify" aria-hidden="true"></i></a>
+			<a id="menu-toggle" ng-click="addNewTest()" href="" class="btn btn-success btn-lg toggle"><i class="fa fa-check" aria-hidden="true"></i></a>
 			<form class="container" method="post" id="mcq_form">
 				<div>
 					<p style="font-size: 40px;">Create Test</p>			
 				</div>
 				<div class="form-group">
 					<div>
-						<label for="test">Test Name</label><label id="emptyQues" style="color: red; float: right; display: none">Please enter the test name</label>
-						<input class="form-control" type="text" placeholder="Eg: Weekly Challenge" style="width: 300px;"><br>
+						<label for="test">Test Name &nbsp;&nbsp;</label><label id="emptyTest" style="color: red; display: none">Please enter the test name</label>
+						<input id="tName" class="form-control" type="text" placeholder="Eg: Weekly Challenge" style="width: 300px;" ng-model="testName"><br>
 					</div>
 					<div>
 	   					<label for="statement">Problem Statement</label><label id="emptyQues" style="color: red; float: right; display: none">Please enter a question</label>
@@ -184,13 +188,13 @@
 	   					<button id="b2" style="width: 7em;" type="button" class="btn btn-success" ng-click="addQuestion()">Create</button>
 	   				</div>
 				</div>
-			</form>
+			</form><br>
 			<div class="container">
 				<div>
-					<span style="font-size: 30px;">- Question 1</span>&nbsp; &nbsp; &nbsp;<button class='btn btn-danger btn-xs' style="margin-top: -10px; vertical-align: middle;" onclick='del(this)'><div class='glyphicon glyphicon-remove'></div> Remove</button>
+					<p style="font-size: 30px;">Selected Questions:</p>			
 				</div>
-				<div>
-					<span style="font-size: 30px;">- Question 2</span>&nbsp; &nbsp; &nbsp;<button class='btn btn-danger btn-xs' style="margin-top: -10px; vertical-align: middle;" onclick='del(this)'><div class='glyphicon glyphicon-remove'></div> Remove</button>
+				<div ng-repeat="x in testQuesArr">
+					<span style="font-size: 20px;">{{x.question}}</span>&nbsp; &nbsp; &nbsp;<button class='btn btn-danger btn-xs' style="margin-top: -10px; vertical-align: middle;" onclick='removeTestQues(this)'><div class='glyphicon glyphicon-remove'></div> Remove</button><br><br>
 				</div>
 			</div>
 		</div>

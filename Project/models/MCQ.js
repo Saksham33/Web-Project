@@ -11,6 +11,9 @@ var quesSchema = mongoose.Schema({
 	},
 	topic:{
 		type: String
+	},
+	tests:{
+		type: [String]
 	}
 });
 
@@ -29,4 +32,20 @@ module.exports.getQuestions = function(topic, callback) {
 module.exports.delQuestion = function(question, callback) {
 	var query = {question: question};
 	MCQ.remove(query, callback);
+}
+
+module.exports.addTest = function(question, test, callback) {
+	MCQ.update({question: question}, {$push: {tests: test}}, {upsert: true}, callback);
+}
+
+module.exports.getSidebar = function(callback) {
+	MCQ.find({}, "question", callback);
+}
+
+module.exports.getTestQues = function(test, callback) {
+	MCQ.find({tests: test}, "question", callback);
+}
+
+module.exports.delTestQuestions = function(question, test, callback) {
+	MCQ.update({question: question}, {$pull: {tests: test}}, callback);
 }
