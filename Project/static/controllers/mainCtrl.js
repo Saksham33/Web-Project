@@ -427,3 +427,83 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 	 	$window.location.href='./index.html';
 	}
 });
+
+app.controller("testCtrl", function($scope, $http, $cookies, $window) {
+	if($cookies.get('login') == 'false') {
+		alert('Please login to continue');
+		$window.location.href='./index.html';
+	}
+
+	$scope.myText = $cookies.get('myUname');
+
+	$scope.checkTeacher = function() {
+		if($cookies.get('teacher') == "true")
+			return true;
+		else
+			return false;
+	}
+
+	$scope.delAccount = function() {
+		// http request to delete account
+		$("#passMismatch").css('display', 'none');
+		$("#invPass").css('display', 'none');
+
+		var pass1 = $scope.delPass1;
+		var pass2 = $scope.delPass2;
+
+		if(pass1 == pass2) {
+			$http({
+				method: "POST",
+				url: "/delAccount/",
+				data: {
+					userName: $cookies.get('myUname'),
+					password: pass1,
+				}
+			}).then(function(response) {
+				if(response.data == "yes") {
+					$window.location.href='./index.html';
+				}
+				else {
+					$("#invPass").css('display', 'block');
+				}
+			});
+		}
+		else {
+			$("#passMismatch").css('display', 'block');
+		}
+		// window.location.href = "./Quiz.html#/check"
+	}
+
+	$scope.changePass = function() {
+		$("#passMismatch2").css('display', 'none');
+		$("#passMatch").css('display', 'none');
+
+		var oldPass = $scope.changePass1;
+		var newPass = $scope.changePass2;
+
+		$http({
+			method: "POST",
+			url: "/changePass/",
+			data: {
+				userName: $cookies.get('myUname'),
+				currPass: oldPass,
+				nextPass: newPass,
+			}
+		}).then(function(response) {
+			if(response.data == "no") {
+				$("#passMismatch2").css('display', 'block');
+			}
+			else {
+				$("#passMatch").css('display', 'block');
+			}
+		});
+	}
+
+	$scope.logout = function() {
+		$cookies.put('login', 'false');
+	 	$window.location.href='./index.html';
+	}
+
+	$scope.check = window.location.hash.substr(2);
+	console.log($scope.check);
+});
