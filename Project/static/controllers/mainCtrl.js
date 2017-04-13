@@ -317,7 +317,13 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 			if(x)
 				sideSelectArr.push(x);
 		}
+		
 		var testName = $("#tName").val().trim();
+		if(testName.length == 0) {
+			alert("Please enter a test name first!");
+			return;
+		}
+
 		$http({
 			method: "POST",
 			url: "/testQues",
@@ -504,6 +510,6 @@ app.controller("testCtrl", function($scope, $http, $cookies, $window) {
 	 	$window.location.href='./index.html';
 	}
 
-	$scope.check = window.location.hash.substr(2);
+	$scope.check = window.location.hash.substr(1);
 	console.log($scope.check);
 });
