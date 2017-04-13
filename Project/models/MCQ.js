@@ -49,3 +49,7 @@ module.exports.getTestQues = function(test, callback) {
 module.exports.delTestQuestions = function(question, test, callback) {
 	MCQ.update({question: question}, {$pull: {tests: test}}, callback);
 }
+
+module.exports.showTestQues = function(test, callback) {
+	MCQ.find({tests: test}, callback);
+}

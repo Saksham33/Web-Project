@@ -16,15 +16,16 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js""></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/ct-navbar.js"></script>
 		<script type="text/javascript" src="js/append_options.js"></script>
-		<script type="text/javascript" src="controllers/mainCtrl.js"></script>
+		<script type="text/javascript" src="js/angular.js"></script>
 		<script src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
 		<!-- <script src="js/dropdown_effect.js"></script> -->
 	</head>
 	
-	<body ng-app="myApp" ng-controller="testCtrl" style="font-family: 'Quicksand', sans-serif;">
+	<body ng-app="myRoute" ng-controller="setActive" style="font-family: 'Quicksand', sans-serif;">
 		<div class="container">
             <div id="delModal" class="modal fade in">
                 <div class="modal-dialog" style="width:350px">
@@ -123,89 +124,33 @@
 	            </nav>
 	        </div>
 	    </div>
-	    <div style="margin-top: 120px;" class="containers">
+	    <div style="margin-top: 120px;" class="containers" ng-init=loadTest()>
 	    	<div style="padding-left: 20px;">
 	    		<div style="font-size: 20px;">
-	    			<ol type="1">
-		    			<li>
-			    			<div>
-			    				<span>Question 1 is this question</span>
-			    			</div>
-			    			<div style="padding-top: 5px;">
+					<ol type="1" style="font-size: 20px;">
+						<li ng-repeat="x in tArr" ng-init="radioName=getName(); checkClass=getCheckClass(); spanClass=getSpanClass()">
+							<div>
+								<span class={{spanClass}} style="display: none;"><input type="checkbox" class={{checkClass}} value={{x.question}}> </span>{{x.question}}
+							</div>
+							<div ng-repeat="op in x.options" ng-init="myClass=getClass(op, x.answer)">
 								<div data-toggle="buttons">
 									<label class="btn active">
-										<input type="radio" name="mcq1" value="Option1" required>
-										<i class='fa fa-circle-o fa-2x'></i>
-										<i class='fa fa-dot-circle-o fa-2x'></i>&nbsp; &nbsp;
-										<span>Option1</span>
+										<input type="radio" name={{radioName}} value={{op}} required>
+										<i class='fa fa-circle-o fa-x'></i>
+										<i class='fa fa-dot-circle-o fa-x'></i>
+										&nbsp; &nbsp;
+										<span style="font-size: 18px; color: #7AA3CC">{{op}}</span>
 									</label>
-								</div>
-								<div data-toggle="buttons">
-									<label class="btn active">
-										<input type="radio" name="mcq1" value="Option1" required>
-										<i class='fa fa-circle-o fa-2x'></i>
-										<i class='fa fa-dot-circle-o fa-2x'></i>&nbsp; &nbsp;
-										<span>Option2</span>
-									</label>
-								</div>
-								<div data-toggle="buttons">
-									<label class="btn active">
-										<input type="radio" name="mcq1" value="Option1" required>
-										<i class='fa fa-circle-o fa-2x'></i>
-										<i class='fa fa-dot-circle-o fa-2x'></i>&nbsp; &nbsp;
-										<span>Option3</span>
-									</label>
-								</div>
-								<div data-toggle="buttons">
-									<label class="btn active">
-										<input type="radio" name="mcq1" value="Option1" required>
-										<i class='fa fa-circle-o fa-2x'></i>
-										<i class='fa fa-dot-circle-o fa-2x'></i>&nbsp; &nbsp;
-										<span>Option4</span>
-									</label>
-								</div>
-							</div><br>
-						</li>
-						<li>
-			    			<div>
-			    				<span>Question 2 is this question</span>
-			    			</div>
-			    			<div style="padding-top: 5px;">
-								<div data-toggle="buttons">
-									<label class="btn active">
-										<input type="radio" name="mcq2" value="Option1" required>
-										<i class='fa fa-circle-o fa-2x'></i>
-										<i class='fa fa-dot-circle-o fa-2x'></i>&nbsp; &nbsp;
-										<span>Option1</span>
-									</label>
-								</div>
-								<div data-toggle="buttons">
-									<label class="btn active">
-										<input type="radio" name="mcq2" value="Option1" required>
-										<i class='fa fa-circle-o fa-2x'></i>
-										<i class='fa fa-dot-circle-o fa-2x'></i>&nbsp; &nbsp;
-										<span>Option2</span>
-									</label>
-								</div>
-								<div data-toggle="buttons">
-									<label class="btn active">
-										<input type="radio" name="mcq2" value="Option1" required>
-										<i class='fa fa-circle-o fa-2x'></i>
-										<i class='fa fa-dot-circle-o fa-2x'></i>&nbsp; &nbsp;
-										<span>Option3</span>
-									</label>
-								</div>
-								<div data-toggle="buttons">
-									<label class="btn active">
-										<input type="radio" name="mcq2" value="Option1" required>
-										<i class='fa fa-circle-o fa-2x'></i>
-										<i class='fa fa-dot-circle-o fa-2x'></i>&nbsp; &nbsp;
-										<span>Option4</span>
-									</label>
+									<span class={{myClass}} style="display: none;"><i class="pe-7s-check" style="font-size: 30px; color: #029f5b;"></i></span>
+									<span><i class="pe-7s-close" style="font-size: 30px; color: red; display: none;"></i></span>
 								</div>
 							</div><br>
 						</li>
 					</ol>
+
+					<div id="footer">
+				        <button style="width: 7em;" type="button" class="btn btn-success myCheckBtn" ng-click="checkTestAns()">Submit</button>
+				    </div>
 				</div>
 			</div>
 		</div>

@@ -247,4 +247,74 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 			$route.reload();
 		});
 	}
+
+
+	// Test1.html page
+	$scope.loadTest = function() {
+		var tName = $scope.check;  // Get test name from url
+		$scope.tAns = new Array();
+
+		// http request to get questions for a particular test
+		$http({
+			method: "POST",
+			url: '/showTest/',
+			data: {
+				test: tName
+			}
+		}).then(function(response) {
+			$scope.tArr = response.data;
+			for(x in $scope.tArr) {
+				// console.log("Question: " + $scope.tArr[x].question);
+				$scope.tAns.push($scope.tArr[x].answer);
+			}
+			// console.log("Answers: " + $scope.answers);
+		});
+	}
+
+	// Check test answers
+	$scope.checkTestAns = function() {
+		var checkedAns = new Array();
+		for(i = 0; i < index; i++) {
+			var x = $("input[name=mcq"+i+"]:radio:checked").val();
+			console.log('Selected ' + x);
+			if(x != null) {
+				checkedAns.push(x);
+			}
+		}
+
+		// Count no of correct answers
+		var correct = 0;
+		for(i = 0; i < checkedAns.length; i++) {
+			if(checkedAns[i] == $scope.tAns[i]) {
+				correct += 1;
+				console.log(checkedAns[i]);
+			}
+		}
+		if(checkedAns.length != $scope.tAns.length) {
+			swal(
+		  		"Check Again!",
+		  		"Please answer all the questions!",
+		  		"warning"
+			)
+			return;
+		}
+		else {
+			if(correct == $scope.tAns.length) {
+				swal(
+			  		"Good job!",
+			  		"You've got all the answers correct!",
+			  		"success"
+				)
+			}
+			else {
+				swal(
+			  		"Try Again!",
+			  		"You've got "+correct+" answers correct!",
+			  		"error"
+				)
+			}
+		}
+		$(".right").css('display', 'inline');
+		console.log("Correct Answers: " + correct);
+	}
 });
