@@ -351,10 +351,12 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 		return c;
 	}
 
-	$scope.flip = function() {
-		$(".hover").addClass('flip');
+	$scope.flip = function($event) {
+		$($event.currentTarget).addClass("flip");
+		// $event.target.addClass('flip');
 	}
-	$scope.unFlip = function() {
-		$(".hover").removeClass('flip');
+	$scope.unFlip = function($event) {
+		$($event.currentTarget).removeClass("flip");
+		// $event.target.removeClass('flip');
 	}
 });
