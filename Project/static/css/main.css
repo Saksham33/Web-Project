@@ -233,7 +233,7 @@ a:hover {
   color: #666666; 
   text-align: center; 
 }*/
-h2 { color: #ffffff;  }
+h4 { color: #ffffff; margin-top: 0; margin-bottom: 0;}
 
 /*-=-=-=-=-=-=-=-=-=-*/
 /* Column Grids */
@@ -328,20 +328,20 @@ h2 { color: #ffffff;  }
 }
 .box1{
   background-color: #14bcc8;
-  width: 250px;
-  height: 150px;
+  width: 100px;
+  height: 50px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
 .box2{
   background-color: #ff7e70;
-  width: 250px;
-  height: 150px;
+  width: 100px;
+  height: 50px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
