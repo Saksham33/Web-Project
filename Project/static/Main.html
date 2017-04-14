@@ -27,7 +27,7 @@
 	<body ng-app="myRoute" ng-controller="setActive" style="background: url(images/img4.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; font-family: 'Quicksand', sans-serif;">
 		<!-- <div class="page-bg"></div> -->
 		<!-- Delete Account Modal -->
-		<div class="container">
+		<div class="container" ng-init="loadTestNames()">
 			<div id="delModal" class="modal fade in">
 	            <div class="modal-dialog" style="width:350px">
 	                <div class="modal-content">
@@ -225,8 +225,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" style="width: 100%; margin-top: 50px; margin-left: 0px;">
-			<!-- <a href={{"#"+"Test1"}}> -->
+		<!-- <div class="row" style="width: 100%; margin-top: 50px; margin-left: 0px;">
 			<a href="Test1.html#Test1">
 				<div class="wrapper">
 					<div class="col_third" style="height: 0px; width: 0px;">
@@ -278,6 +277,27 @@
 	            				</div>
 	          				</div>
 	        			</div>
+					</div>
+				</div>
+			</a>
+		</div> -->
+
+		<div class="row" ng-repeat="x in tNameArr" style="width: 100%; margin-top: 50px; margin-left: 0px;">
+			<a ng-repeat="y in x.test" ng-init="myMargin=getMargin()" href="{{'Test1.html#'+y}}">
+				<div class="wrapper">
+					<div class="col_third" style="height: 0px; width: 0px;">
+		       			<div class="hover panel" style="height: 0px; width: 0px; border: 0px;">
+		       				<div class="front" style="margin-left: {{myMargin}}">
+		           				<div class="box1">
+		           					<h4>{{y}}</h4>
+		           				</div>
+		       				</div>
+		       				<div class="back" style="margin-left: {{myMargin}}">
+		           				<div class="box2">
+		           					<h4>Open</h4>
+		           				</div>
+		       				</div>
+		       			</div>
 					</div>
 				</div>
 			</a>

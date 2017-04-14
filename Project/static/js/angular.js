@@ -317,4 +317,31 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 		$(".right").css('display', 'inline');
 		console.log("Correct Answers: " + correct);
 	}
+
+
+	// Main page controller
+
+	// Get test names for main.html page
+	$scope.loadTestNames = function() {
+		$http({
+			method: "POST",
+			url: "/testNames",
+		}).then(function(response) {
+			$scope.tNameArr = response.data;
+			// for(x in $scope.tNameArr) {
+			//  	console.log($scope.tNameArr[x]);
+			//  	for(y in $scope.tNameArr[x].test) {
+			//  		console.log($scope.tNameArr[x].test[y]);
+			//  	}
+			// }
+		});
+	};
+
+	var curr = 0;
+	$scope.getMargin = function() {
+		var c = curr+"px";
+		curr = curr + 200;
+		console.log(c);
+		return c;
+	}
 });

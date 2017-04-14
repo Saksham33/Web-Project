@@ -243,6 +243,16 @@ app.post('/showTest/', function(req, res) {
 	});
 });
 
+// Show test names on main.html
+app.post('/testNames/', function(req, res) {
+	McqTests.getTests(function(err, myTests) {
+		if(err) {
+			throw err;
+		}
+		res.send(myTests);
+	});
+});
+
 // app.get('/stack/', function(req, res) {
 // 	var topic = "Stack";
 // 	MCQ.getStackQues(topic, function(err, ques) {

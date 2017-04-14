@@ -14,3 +14,7 @@ module.exports.findTest = function(test, callback) {
 module.exports.addNewTest = function(test, callback) {
 	McqTests.update({id: "1"}, {$push: {test: test}}, {upsert: true}, callback);
 }
+
+module.exports.getTests = function(callback) {
+	McqTests.find(callback);
+}
