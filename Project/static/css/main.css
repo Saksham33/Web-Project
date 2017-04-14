@@ -233,7 +233,8 @@ a:hover {
   color: #666666; 
   text-align: center; 
 }*/
-h4 { color: #ffffff; margin-top: 0; margin-bottom: 0;}
+.box1 > h4 { color: #ffffff; margin-top: 0; margin-bottom: 0;}
+.box2 > h4 { color: #ffffff; margin-top: 0; margin-bottom: 0;}
 
 /*-=-=-=-=-=-=-=-=-=-*/
 /* Column Grids */

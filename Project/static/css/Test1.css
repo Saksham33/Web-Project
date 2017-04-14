@@ -11,3 +11,11 @@
     zoom: 0.52;
     -moz-transform: scale(0.5)
 }
+
+.flip-clock-label {
+	display: none;
+}
+
+.seconds > .top, .bottom {
+	background: #ccc;
+}

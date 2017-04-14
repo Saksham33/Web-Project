@@ -290,30 +290,37 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 				console.log(checkedAns[i]);
 			}
 		}
-		if(checkedAns.length != $scope.tAns.length) {
+		swal({
+			title: "Are you sure?",
+			text: "You won't be able to change the answers again!",
+	    	type: "warning",
+	    	showCancelButton: true,
+	  		confirmButtonColor: "#3085d6",
+	  		cancelButtonColor: "#d33",
+	  		confirmButtonText: "Confirm"
+		}).then(function() {
 			swal(
-		  		"Check Again!",
-		  		"Please answer all the questions!",
-		  		"warning"
-			)
-			return;
-		}
-		else {
-			if(correct == $scope.tAns.length) {
-				swal(
-			  		"Good job!",
-			  		"You've got all the answers correct!",
-			  		"success"
-				)
-			}
-			else {
-				swal(
-			  		"Try Again!",
-			  		"You've got "+correct+" answers correct!",
-			  		"error"
-				)
-			}
-		}
+    			"Result",
+	    		"You've got " + correct + " out of " + $scope.tAns.length + " answers correct!",
+	    		"success"
+			).then(function() {
+				$window.location.href = './Main.html';
+			})
+		})
+			// if(correct == $scope.tAns.length) {
+			// 	swal(
+			//   		"Good job!",
+			//   		"You've got all the answers correct!",
+			//   		"success"
+			// 	)
+			// }
+			// else {
+			// 	swal(
+			//   		"Try Again!",
+			//   		"You've got " + correct + " answers correct!",
+			//   		"error"
+			// 	)
+			// }
 		$(".right").css('display', 'inline');
 		console.log("Correct Answers: " + correct);
 	}
@@ -341,7 +348,13 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 	$scope.getMargin = function() {
 		var c = curr+"px";
 		curr = curr + 200;
-		console.log(c);
 		return c;
+	}
+
+	$scope.flip = function() {
+		$(".hover").addClass('flip');
+	}
+	$scope.unFlip = function() {
+		$(".hover").removeClass('flip');
 	}
 });

@@ -43,10 +43,12 @@ $(document).ready(function() {
 	});
 
 
-	$('.hover').hover(function(){
-			$(this).addClass('flip');
-		}, function(){
-			$(this).removeClass('flip');
-		}
-	);
+	// $('.hover').hover(function(){
+	// 		$(this).addClass('flip');
+	// 		console.log("hello");
+	// 	}, function(){
+	// 		$(this).removeClass('flip');
+	// 		console.log("hello2");
+	// 	}
+	// );
 });
