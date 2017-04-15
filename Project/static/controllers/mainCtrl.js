@@ -39,11 +39,13 @@ app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 	$scope.add = function() {
 		console.log("Register function");	// uname2 email2 pass2 pass3
 
+		// If 2 passwords entered by user don't match, print error and return
 		if($scope.pass2 != $scope.pass3) {
 			console.log("Passwords don't match!");
 			return;
 		}
 
+		// Post request to send email, username and password to database
 		$http({
 			method: "POST",
 			url: "/register/",
@@ -164,16 +166,19 @@ app.controller("loginCtrl", function($scope, $http, $window, $cookies) {
 
 // MCQ page ctrl
 app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
+	// If user is not logged in, send him/her to login page
 	if($cookies.get('login') == 'false') {
 		alert('Please login to continue');
 		$window.location.href='./index.html';
 	}
 
+	// Select topic for dropdown menu in create questions page
 	$scope.setTopic = "Select Topic";
 	$scope.selectTop = function(text) {
 		$scope.setTopic = text;
 	};
 
+	// Add new question to database
 	$scope.addQuestion = function() {
 		console.log("Add ques function");
 
@@ -183,31 +188,31 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		$("#emptyAnswer").css('display', 'none');
 		$("#emptyTopic").css('display', 'none');
 
-		var testPage = false;
 		// Test part won't exist for create question page but it will be there for create test page.
+		var testPage = false;	// Variable to check if it is test page or create question page
 		if($("#emptyTest").length != 0) {
 			testPage = true;
 			$("#emptyTest").css('display', 'none');
-			var myTest = $("#tName").val().trim();
-			if(myTest == "") {
+			var myTest = $("#tName").val().trim();	// Name of test
+			if(myTest == "") {	// If test name is not displayed, show error
 				$("#emptyTest").css('display', 'inline');
 				return;
 			}
 		}	
 
-		var question = $("#t1").val().trim();
+		var question = $("#t1").val().trim();	// Question name
 		if(question == "") {
 			$("#emptyQues").css('display','inline');
 			return;
 		}
 
-		var optionsArray = new Array();
-		var answer = $("input[name=mcq]:checked").val();
+		var optionsArray = new Array();		// Array to store options for mcq
+		var answer = $("input[name=mcq]:checked").val();	// Answer of mcq
 		$("#options").find("span").each(function() {
 			optionsArray.push($(this).text());
 		});
 
-		if(optionsArray.length < 2) {
+		if(optionsArray.length < 2) {		// If no of options is less than 2, show error
 			$("#emptyOptions").css('display', 'block');
 			return;
 		}
@@ -217,7 +222,7 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 			return;
 		}
 
-		if($scope.setTopic == "Select Topic") {
+		if($scope.setTopic == "Select Topic") {		// If no topic is selected, show error
 			$("#emptyTopic").css('display', 'block');
 			return;
 		}
@@ -227,7 +232,7 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		console.log(answer);
 		console.log($scope.setTopic);
 
-		// http request
+		// http request to add question
 		var testName;
 		if(testPage == true) {
 			testName = $("#tName").val().trim();
@@ -300,7 +305,7 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		});
 	}
 
-	// Give names to checkboxes
+	// Give names to checkboxes and radio buttons
 	var index = 0;
 	$scope.getName = function() {
 		var chName = 'mcq'+index;
@@ -324,6 +329,7 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 			return;
 		}
 
+		// Add selected questions from sidebar to test and return all questions selected for the test
 		$http({
 			method: "POST",
 			url: "/testQues",
@@ -358,10 +364,10 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		$(x).parent().remove();
 	}
 
-	if($cookies.get('login') == 'false') {
-		alert('Please login to continue');
-		$window.location.href='./index.html';
-	}
+	// if($cookies.get('login') == 'false') {
+	// 	alert('Please login to continue');
+	// 	$window.location.href='./index.html';
+	// }
 
 	$scope.myText = $cookies.get('myUname');
 
@@ -434,82 +440,82 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 	}
 });
 
-app.controller("testCtrl", function($scope, $http, $cookies, $window) {
-	if($cookies.get('login') == 'false') {
-		alert('Please login to continue');
-		$window.location.href='./index.html';
-	}
+// app.controller("testCtrl", function($scope, $http, $cookies, $window) {
+// 	if($cookies.get('login') == 'false') {
+// 		alert('Please login to continue');
+// 		$window.location.href='./index.html';
+// 	}
 
-	$scope.myText = $cookies.get('myUname');
+// 	$scope.myText = $cookies.get('myUname');
 
-	$scope.checkTeacher = function() {
-		if($cookies.get('teacher') == "true")
-			return true;
-		else
-			return false;
-	}
+// 	$scope.checkTeacher = function() {
+// 		if($cookies.get('teacher') == "true")
+// 			return true;
+// 		else
+// 			return false;
+// 	}
 
-	$scope.delAccount = function() {
-		// http request to delete account
-		$("#passMismatch").css('display', 'none');
-		$("#invPass").css('display', 'none');
+// 	$scope.delAccount = function() {
+// 		// http request to delete account
+// 		$("#passMismatch").css('display', 'none');
+// 		$("#invPass").css('display', 'none');
 
-		var pass1 = $scope.delPass1;
-		var pass2 = $scope.delPass2;
+// 		var pass1 = $scope.delPass1;
+// 		var pass2 = $scope.delPass2;
 
-		if(pass1 == pass2) {
-			$http({
-				method: "POST",
-				url: "/delAccount/",
-				data: {
-					userName: $cookies.get('myUname'),
-					password: pass1,
-				}
-			}).then(function(response) {
-				if(response.data == "yes") {
-					$window.location.href='./index.html';
-				}
-				else {
-					$("#invPass").css('display', 'block');
-				}
-			});
-		}
-		else {
-			$("#passMismatch").css('display', 'block');
-		}
-		// window.location.href = "./Quiz.html#/check"
-	}
+// 		if(pass1 == pass2) {
+// 			$http({
+// 				method: "POST",
+// 				url: "/delAccount/",
+// 				data: {
+// 					userName: $cookies.get('myUname'),
+// 					password: pass1,
+// 				}
+// 			}).then(function(response) {
+// 				if(response.data == "yes") {
+// 					$window.location.href='./index.html';
+// 				}
+// 				else {
+// 					$("#invPass").css('display', 'block');
+// 				}
+// 			});
+// 		}
+// 		else {
+// 			$("#passMismatch").css('display', 'block');
+// 		}
+// 		// window.location.href = "./Quiz.html#/check"
+// 	}
 
-	$scope.changePass = function() {
-		$("#passMismatch2").css('display', 'none');
-		$("#passMatch").css('display', 'none');
+// 	$scope.changePass = function() {
+// 		$("#passMismatch2").css('display', 'none');
+// 		$("#passMatch").css('display', 'none');
 
-		var oldPass = $scope.changePass1;
-		var newPass = $scope.changePass2;
+// 		var oldPass = $scope.changePass1;
+// 		var newPass = $scope.changePass2;
 
-		$http({
-			method: "POST",
-			url: "/changePass/",
-			data: {
-				userName: $cookies.get('myUname'),
-				currPass: oldPass,
-				nextPass: newPass,
-			}
-		}).then(function(response) {
-			if(response.data == "no") {
-				$("#passMismatch2").css('display', 'block');
-			}
-			else {
-				$("#passMatch").css('display', 'block');
-			}
-		});
-	}
+// 		$http({
+// 			method: "POST",
+// 			url: "/changePass/",
+// 			data: {
+// 				userName: $cookies.get('myUname'),
+// 				currPass: oldPass,
+// 				nextPass: newPass,
+// 			}
+// 		}).then(function(response) {
+// 			if(response.data == "no") {
+// 				$("#passMismatch2").css('display', 'block');
+// 			}
+// 			else {
+// 				$("#passMatch").css('display', 'block');
+// 			}
+// 		});
+// 	}
 
-	$scope.logout = function() {
-		$cookies.put('login', 'false');
-	 	$window.location.href='./index.html';
-	}
+// 	$scope.logout = function() {
+// 		$cookies.put('login', 'false');
+// 	 	$window.location.href='./index.html';
+// 	}
 
-	$scope.check = window.location.hash.substr(1);
-	console.log($scope.check);
-});
+// 	$scope.check = window.location.hash.substr(1);
+// 	console.log($scope.check);
+// });

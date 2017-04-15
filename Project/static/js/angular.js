@@ -24,7 +24,7 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 		$window.location.href='./index.html';
 	}
 
-	$scope.check = window.location.hash.substr(2);
+	$scope.check = window.location.hash.substr(2);	// Get the part of url after #
 	$scope.myText = $cookies.get('myUname');
 
 	$scope.delAccount = function() {
@@ -97,7 +97,7 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
     	// console.log($scope.check);
     }
     
-	// Give names to dynamically added radio buttons. Deleted quesController
+	// Give names to dynamically added radio buttons.
 	var index = 0;
 	$scope.getName = function() {
 		var radName = 'mcq'+index;
@@ -129,6 +129,7 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 	$scope.answers = new Array();
 	// $scope.answers.push('Stack'); // Static for stack. To be removed later
 
+	// Load questions for quiz.html page
 	$scope.loadData = function(myUrl) {
 		$http({
 			method: "POST",
@@ -223,6 +224,7 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 		}
 	}
 
+	// Delete questions from quiz.html/templ.html page
 	$scope.deleteQues = function() {
 		var checkedCheckbox = new Array();
 		for(i = 0; i < index1; i++) {
@@ -321,7 +323,7 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 			//   		"error"
 			// 	)
 			// }
-		$(".right").css('display', 'inline');
+		// $(".right").css('display', 'inline');
 		console.log("Correct Answers: " + correct);
 	}
 
@@ -344,7 +346,7 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 		});
 	};
 
-	var curr = 0;
+	var curr = 0;	// Set different margin for each test button
 	$scope.getMargin = function() {
 		var c = curr+"px";
 		curr = curr + 200;

@@ -125,8 +125,6 @@ app.post('/addQues/', function(req, res) {
 		if(err) {
 			throw err;
 		}
-		console.log("Added the question");
-		console.log("Test " + test);
 
 		// Add test name to question
 		if(test != null) {
