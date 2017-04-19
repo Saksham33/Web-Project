@@ -1,5 +1,10 @@
 var app = angular.module("myRoute", ['ngRoute', 'ngCookies']);
 
+anss = 0;
+total = 0;
+var getAns = function() {}
+var getTotal = function() {}
+
 app.config(function($routeProvider) {
 	$routeProvider
 	.when("/Stacks", {
@@ -271,6 +276,41 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 			}
 			// console.log("Answers: " + $scope.answers);
 		});
+
+		// Timer function
+		clock = $('.clock').FlipClock(20, {
+			clockFace: 'MinuteCounter',
+	        countdown: true,
+	        callbacks: {
+	        	stop: function() {
+	        		var checkedAns = new Array();
+					for(i = 0; i < index; i++) {
+						var x = $("input[name=mcq"+i+"]:radio:checked").val();
+						console.log('Selected ' + x);
+						checkedAns.push(x);
+					}
+
+					// Count no of correct answers
+					var correct = 0;
+					for(i = 0; i < checkedAns.length; i++) {
+						if(checkedAns[i] == $scope.tAns[i]) {
+							correct += 1;
+							console.log(checkedAns[i]);
+						}
+					}
+	        		swal(
+	    				"Result",
+		    			"You've got " + correct + " out of " + $scope.tAns.length + " answers correct!",
+		    			"success"
+					).then(function() {
+						window.location = './Main.html';
+					}).catch(function() {
+						window.location = './Main.html';	
+					})
+					
+	        	}
+	        }
+	    });
 	}
 
 	// Check test answers
@@ -279,9 +319,7 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 		for(i = 0; i < index; i++) {
 			var x = $("input[name=mcq"+i+"]:radio:checked").val();
 			console.log('Selected ' + x);
-			if(x != null) {
-				checkedAns.push(x);
-			}
+			checkedAns.push(x);
 		}
 
 		// Count no of correct answers
@@ -292,6 +330,7 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 				console.log(checkedAns[i]);
 			}
 		}
+
 		swal({
 			title: "Are you sure?",
 			text: "You won't be able to change the answers again!",
@@ -362,3 +401,4 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 		// $event.target.removeClass('flip');
 	}
 });
+
