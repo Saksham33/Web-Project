@@ -277,8 +277,47 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 			// console.log("Answers: " + $scope.answers);
 		});
 
+
 		// Timer function
-		clock = $('.clock').FlipClock(20, {
+
+		// http request to get value of test duration for a user
+		var uName = $cookies.get('myUname');
+		var timerDuration = 10;
+		console.log("Insideee");
+
+		getTimer = function() {
+			$http({
+				method: "POST",
+				url: '/getTestTime/',
+				data: {
+					test: tName,
+					user: uName
+				}
+			}).then(function(response) {
+				var res = response.data;
+				console.log("Duration received: " + res);
+				for(x in res) {
+					console.log(res[x]);
+					console.log(res[x].name);
+					console.log(res[x].time);
+					if(res[x].name == null) {	// User opens test for first time
+						timerDuration = res[x].time;
+						break;
+					}
+
+					if(res[x].name == uName) {	// Use previous value of timer
+						timerDuration = res[x].time;
+						break;
+					}
+				}
+				console.log("Timer duration: " + timerDuration);
+				return timerDuration;
+			});
+		}
+
+		var myTime = getTimer();
+		console.log("MyTimer:" + myTime);
+		clock = $('.clock').FlipClock(myTime, {
 			clockFace: 'MinuteCounter',
 	        countdown: true,
 	        callbacks: {

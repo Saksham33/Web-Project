@@ -207,6 +207,7 @@ app.post('/delTestQues/', function(req, res) {
 // Add test name to test collection
 app.post('/addNewTest/', function(req, res) {
 	var test = req.body.test;
+	var time = req.body.time;
 
 	McqTests.findTest(test, function(err, myTest) {
 		if(err) {
@@ -214,7 +215,7 @@ app.post('/addNewTest/', function(req, res) {
 		}
 		if(myTest.length == 0) {
 			console.log("Not found");
-			McqTests.addNewTest(test, function(err, myTest1) {
+			McqTests.addNewTest(test, time, function(err, myTest1) {
 				if(err) {
 					throw err;
 				}
@@ -248,6 +249,34 @@ app.post('/testNames/', function(req, res) {
 			throw err;
 		}
 		res.send(myTests);
+	});
+});
+
+app.post('/getTestTime/', function(req, res) {
+	var test = req.body.test;
+	var name = req.body.user;
+
+	McqTests.findUser(test, name, function(err, myTime1) {
+		if(err) {
+			throw err;
+		}
+		// If user never started the test
+		if(myTime1.length == 0) {
+			McqTests.getTime(test, function(err, myTime2) {
+				if(err) {
+					throw err;
+				}
+				// var retTime2 = myTime2[0].time;
+				// console.log("Time2: " + retTime2);
+				// res.send(retTime2);
+				console.log("Time2: " + myTime2);
+				res.send(myTime2);
+			});
+		}
+		else {
+			console.log("Time1: " + myTime1[0].users);
+			res.send(myTime1[0].users);
+		}
 	});
 });
 

@@ -193,9 +193,17 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		if($("#emptyTest").length != 0) {
 			testPage = true;
 			$("#emptyTest").css('display', 'none');
+			$("#emptyTestTime").css('display', 'none');
+
 			var myTest = $("#tName").val().trim();	// Name of test
 			if(myTest == "") {	// If test name is not displayed, show error
-				$("#emptyTest").css('display', 'inline');
+				$("#emptyTest").css('display', 'block');
+				return;
+			}
+
+			var duration = $("#tTime").val().trim();	// Duration of the test
+			if(duration == "") {
+				$("#emptyTestTime").css('display', 'block');
 				return;
 			}
 		}	
@@ -282,15 +290,19 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 	// Add new test to test collection
 	$scope.addNewTest = function() {
 		var myTest = $("#tName").val().trim();
+		var duration = $scope.testTime;
+		
 		$http({
 			method: "POST",
 			url: "/addNewTest",
 			data: {
-				test: myTest
+				test: myTest,
+				time: duration
 			}
 		}).then(function(response) {
 			$window.location.href="./Main.html";
 		});
+		
 	}
 
 	// Show all questions in sidebar

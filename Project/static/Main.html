@@ -282,7 +282,7 @@
 			</a>
 		</div> -->
 
-		<div class="row" ng-repeat="x in tNameArr" style="width: 100%; margin-top: 50px; margin-left: 0px;">
+		<!-- <div class="row" ng-repeat="x in tNameArr" style="width: 100%; margin-top: 50px; margin-left: 0px;">
 			<a ng-repeat="y in x.test" ng-init="myMargin=getMargin()" href="{{'Test1.html#'+y}}">
 				<div class="wrapper">
 					<div class="col_third" style="height: 0px; width: 0px;">
@@ -290,6 +290,27 @@
 		       				<div class="front" style="margin-left: {{myMargin}}">
 		           				<div class="box1">
 		           					<h4>{{y}}</h4>
+		           				</div>
+		       				</div>
+		       				<div class="back" style="margin-left: {{myMargin}}">
+		           				<div class="box2">
+		           					<h4>Open</h4>
+		           				</div>
+		       				</div>
+		       			</div>
+					</div>
+				</div>
+			</a>
+		</div> -->
+
+		<div class="row" style="width: 100%; margin-top: 50px; margin-left: 0px;">
+			<a ng-repeat="x in tNameArr" ng-init="myMargin=getMargin()" href="{{'Test1.html#'+x.test}}">
+				<div class="wrapper">
+					<div class="col_third" style="height: 0px; width: 0px;">
+		       			<div class="hover panel" ng-mouseover="flip($event)" ng-mouseout="unFlip($event)" style="height: 0px; width: 0px; border: 0px;">
+		       				<div class="front" style="margin-left: {{myMargin}}">
+		           				<div class="box1">
+		           					<h4>{{x.test}}</h4>
 		           				</div>
 		       				</div>
 		       				<div class="back" style="margin-left: {{myMargin}}">
