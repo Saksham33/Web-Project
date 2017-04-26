@@ -23,7 +23,7 @@ app.config(function($routeProvider) {
 	});
 });
 
-app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
+app.controller("setActive", function($scope, $cookies, $window, $http, $route, $rootScope) {
 	if($cookies.get('login') == 'false') {
 		alert('Please login to continue');
 		$window.location.href='./index.html';
@@ -282,74 +282,84 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 
 		// http request to get value of test duration for a user
 		var uName = $cookies.get('myUname');
-		var timerDuration = 10;
-		console.log("Insideee");
+		
+		$http({
+			method: "POST",
+			url: '/getUserTestTime/',
+			data: {
+				test: tName,
+				user: uName
+			}
+		}).then(function(response) {
+			var res = response.data;
+			for(x in res) {
+				console.log(res[x]);
+				console.log(res[x].name);
+				console.log(res[x].time);
 
-		getTimer = function() {
-			$http({
-				method: "POST",
-				url: '/getTestTime/',
-				data: {
-					test: tName,
-					user: uName
-				}
-			}).then(function(response) {
-				var res = response.data;
-				console.log("Duration received: " + res);
-				for(x in res) {
-					console.log(res[x]);
-					console.log(res[x].name);
-					console.log(res[x].time);
-					if(res[x].name == null) {	// User opens test for first time
-						timerDuration = res[x].time;
-						break;
-					}
+				if(res[x].name == uName) {	// User tries to re-open test
+					// $scope.timerDuration = res[x].time;
+					var openTime = res[x].time;		// Time at which user first opened the test
+					var d = new Date();
+					var currTime = d.getTime();		// Current time
 
-					if(res[x].name == uName) {	// Use previous value of timer
-						timerDuration = res[x].time;
-						break;
-					}
-				}
-				console.log("Timer duration: " + timerDuration);
-				return timerDuration;
-			});
-		}
-
-		var myTime = getTimer();
-		console.log("MyTimer:" + myTime);
-		clock = $('.clock').FlipClock(myTime, {
-			clockFace: 'MinuteCounter',
-	        countdown: true,
-	        callbacks: {
-	        	stop: function() {
-	        		var checkedAns = new Array();
-					for(i = 0; i < index; i++) {
-						var x = $("input[name=mcq"+i+"]:radio:checked").val();
-						console.log('Selected ' + x);
-						checkedAns.push(x);
-					}
-
-					// Count no of correct answers
-					var correct = 0;
-					for(i = 0; i < checkedAns.length; i++) {
-						if(checkedAns[i] == $scope.tAns[i]) {
-							correct += 1;
-							console.log(checkedAns[i]);
+					// http req to find total duration of test
+					$http({
+						method: "POST",
+						url: "/getTestTime/",
+						data: {
+							test: tName
 						}
-					}
-	        		swal(
-	    				"Result",
-		    			"You've got " + correct + " out of " + $scope.tAns.length + " answers correct!",
-		    			"success"
-					).then(function() {
-						window.location = './Main.html';
-					}).catch(function() {
-						window.location = './Main.html';	
-					})
-					
-	        	}
-	        }
-	    });
+					}).then(function(response) {
+						var duration = response.data;
+						console.log("open: " + openTime);
+						console.log("curr: " + currTime)
+						console.log("duration: " + duration);
+						console.log("Remaining: " + Math.ceil(duration - (currTime - openTime)/1000));
+						$rootScope.timerDuration = Math.ceil(duration - (currTime - openTime)/1000);
+						if($rootScope.timerDuration < 0)
+							$rootScope.timerDuration = 0;
+						console.log("Inner Timer duration1: " + $rootScope.timerDuration);
+
+						console.log("Timer duration1: " + $rootScope.timerDuration);
+						clock = $('.clock').FlipClock($rootScope.timerDuration, {
+							clockFace: 'MinuteCounter',
+					        countdown: true,
+					        callbacks: {
+					        	stop: function() {
+					        		var checkedAns = new Array();
+									for(i = 0; i < index; i++) {
+										var x = $("input[name=mcq"+i+"]:radio:checked").val();
+										console.log('Selected ' + x);
+										checkedAns.push(x);
+									}
+
+									// Count no of correct answers
+									var correct = 0;
+									for(i = 0; i < checkedAns.length; i++) {
+										if(checkedAns[i] == $scope.tAns[i]) {
+											correct += 1;
+											console.log(checkedAns[i]);
+										}
+									}
+					        		swal(
+					    				"Result",
+						    			"You've got " + correct + " out of " + $scope.tAns.length + " answers correct!",
+						    			"success"
+									).then(function() {
+										window.location = './Main.html';
+									}).catch(function() {
+										window.location = './Main.html';	
+									})
+									
+					        	}
+					        }
+					    });
+					});
+					break;
+				}
+			}
+		});
 	}
 
 	// Check test answers
@@ -439,5 +449,25 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route) {
 		$($event.currentTarget).removeClass("flip");
 		// $event.target.removeClass('flip');
 	}
-});
 
+
+	// Add test start time to database
+	$scope.updateTime = function(myTest) {
+		console.log("Test name: " + myTest);
+		var uname = $cookies.get('myUname');
+		var d = new Date();
+		var currTime = d.getTime();
+
+		$http({
+			method: "POST",
+			url: "/updateTestTime/",
+			data: {
+				test: myTest,
+				user: uname,
+				time: currTime
+			}
+		}).then(function(response) {
+			console.log(response.data);
+		});
+	}
+});

@@ -304,7 +304,8 @@
 		</div> -->
 
 		<div class="row" style="width: 100%; margin-top: 50px; margin-left: 0px;">
-			<a ng-repeat="x in tNameArr" ng-init="myMargin=getMargin()" href="{{'Test1.html#'+x.test}}">
+			<!-- <a ng-repeat="x in tNameArr" ng-init="myMargin=getMargin()" ng-click="updateTime({{x.test}})" href="{{'Test1.html#'+x.test}}"> -->
+			<a ng-repeat="x in tNameArr" ng-init="myMargin=getMargin()" ng-click="updateTime(x.test)" href="{{'Test1.html#'+x.test}}">
 				<div class="wrapper">
 					<div class="col_third" style="height: 0px; width: 0px;">
 		       			<div class="hover panel" ng-mouseover="flip($event)" ng-mouseout="unFlip($event)" style="height: 0px; width: 0px; border: 0px;">

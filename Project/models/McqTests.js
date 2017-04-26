@@ -36,3 +36,7 @@ module.exports.findUser = function(test, name, callback) {
 module.exports.getTime = function(test, callback) {
 	McqTests.find({	test: test}, callback);
 }
+
+module.exports.setTime = function(test, name, time, callback) {
+	McqTests.update({test: test}, {$push: {users: {name: name, time: time}}}, callback);
+}

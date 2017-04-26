@@ -252,30 +252,79 @@ app.post('/testNames/', function(req, res) {
 	});
 });
 
-app.post('/getTestTime/', function(req, res) {
+// app.post('/getUserTestTime/', function(req, res) {
+// 	var test = req.body.test;
+// 	var name = req.body.user;
+
+// 	McqTests.findUser(test, name, function(err, myTime1) {
+// 		if(err) {
+// 			throw err;
+// 		}
+// 		// If user never started the test
+// 		if(myTime1.length == 0) {
+// 			McqTests.getTime(test, function(err, myTime2) {
+// 				if(err) {
+// 					throw err;
+// 				}
+// 				// var retTime2 = myTime2[0].time;
+// 				// console.log("Time2: " + retTime2);
+
+// 				// console.log("Time2: " + myTime2);
+// 				res.send(myTime2);
+// 			});
+// 		}
+// 		else {
+// 			// console.log("Time1: " + myTime1[0].users);
+// 			res.send(myTime1[0].users);
+// 		}
+// 	});
+// });
+
+app.post('/getUserTestTime/', function(req, res) {
 	var test = req.body.test;
 	var name = req.body.user;
 
 	McqTests.findUser(test, name, function(err, myTime1) {
+ 		if(err) {
+ 			throw err;
+ 		}
+ 		console.log("Time1: " + myTime1[0].users);
+ 		res.send(myTime1[0].users);
+ 	});
+});
+
+app.post('/getTestTime/', function(req, res) {
+	var test = req.body.test;
+	McqTests.getTime(test, function(err, myTime) {
 		if(err) {
 			throw err;
 		}
-		// If user never started the test
-		if(myTime1.length == 0) {
-			McqTests.getTime(test, function(err, myTime2) {
+		console.log("Test duration: " + myTime[0].time);
+		res.send(myTime[0].time);
+	});
+});
+
+// Update test time for Main.html
+app.post('/updateTestTime/', function(req, res) {
+	var test = req.body.test;
+	var user = req.body.user;
+	var time = req.body.time;
+
+	McqTests.findUser(test, user, function(err, myUser1) {
+		if(err) {
+			throw err;
+		}
+		if(myUser1.length == 0) {
+			console.log("User has not taken the test before");
+			McqTests.setTime(test, user, time, function(err, myUser2) {
 				if(err) {
 					throw err;
 				}
-				// var retTime2 = myTime2[0].time;
-				// console.log("Time2: " + retTime2);
-				// res.send(retTime2);
-				console.log("Time2: " + myTime2);
-				res.send(myTime2);
+				res.send("Updated time");
 			});
 		}
 		else {
-			console.log("Time1: " + myTime1[0].users);
-			res.send(myTime1[0].users);
+			res.send("Already taken test");
 		}
 	});
 });
