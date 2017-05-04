@@ -26,7 +26,7 @@ $(document).ready(function() {
 		}
 	});
 
-	arr = $("#quizTopics").children();
+	arr1 = $("#quizTopics").children();
 	// for(var i = 0; i < arr.length; i++) {
 	// 	var j = i;
 	// 	setTimeout(function() {
@@ -35,14 +35,21 @@ $(document).ready(function() {
 	// 	}, i*500);
 	// 	console.log(i);
 	// }
-	$(arr).each(function(index) {
+	$(arr1).each(function(index) {
 		setTimeout(function() {
-			$(arr[index]).removeClass("ng-hide");
-			$(arr[index]).attr("ng-hide", "false");
+			$(arr1[index]).removeClass("ng-hide");
+			$(arr1[index]).attr("ng-hide", "false");
 		}, index*400);
 	});
 
+	arr2 = $("#codingTopics").children();
 
+	$(arr2).each(function(index) {
+		setTimeout(function() {
+			$(arr2[index]).removeClass("ng-hide");
+			$(arr2[index]).attr("ng-hide", "false");
+		}, index*400);
+	});
 	// $('.hover').hover(function(){
 	// 		$(this).addClass('flip');
 	// 		console.log("hello");
