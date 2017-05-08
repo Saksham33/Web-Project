@@ -17,11 +17,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="controllers/mainCtrl.js"></script>
     <script type="text/javascript" src="js/ct-navbar.js"></script>
-    <script type="text/javascript" src="js/angular.js"></script>
+    <!-- <script type="text/javascript" src="js/angular.js"></script> -->
 		<script src="js/include_image_path.js"></script>
     <script src="js/append_options.js"></script>
 	</head>
-	<body ng-app="myRoute" ng-controller="setActive" style="font-family: 'Quicksand', sans-serif;">
+	<body ng-app="myApp" ng-controller="QuesCtrl" style="font-family: 'Quicksand', sans-serif;">
     <div class="container">
       <div id="delModal" class="modal fade in">
           <div class="modal-dialog" style="width:350px">
@@ -171,7 +171,7 @@
               </div>
           </div>
       </div>
-      <span class="dropdown" ng-controller="selectTopic">
+      <span class="dropdown">
         <button class="btn btn-primary btn-default" data-toggle="dropdown" class="dropdown-toggle" id="button2">{{setTopic}} <b class="caret"></b>
         </button>
         <ul class="dropdown-menu">
