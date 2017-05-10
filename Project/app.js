@@ -329,6 +329,20 @@ app.post('/updateTestTime/', function(req, res) {
 	});
 });
 
+// Store marks of test in db
+app.post('/setTestmarks/', function(req, res) {
+	var test = req.body.test;
+	var user = req.body.user;
+	var marks = req.body.marks;
+
+	McqTests.setMarks(test, user, marks, function(err, myMarks) {
+		if(err) {
+			throw err;
+		}
+		res.send("Done");
+	});
+});
+
 // app.get('/stack/', function(req, res) {
 // 	var topic = "Stack";
 // 	MCQ.getStackQues(topic, function(err, ques) {

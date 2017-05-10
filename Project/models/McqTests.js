@@ -40,3 +40,7 @@ module.exports.getTime = function(test, callback) {
 module.exports.setTime = function(test, name, time, callback) {
 	McqTests.update({test: test}, {$push: {users: {name: name, time: time}}}, callback);
 }
+
+module.exports.setMarks = function(test, name, marks, callback) {
+	McqTests.update({test: test, "users.name": name}, {"users.$.marks": marks}, {upsert: true}, callback);
+}

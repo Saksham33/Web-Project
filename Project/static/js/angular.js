@@ -317,8 +317,11 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route, $
 						console.log("duration: " + duration);
 						console.log("Remaining: " + Math.ceil(duration - (currTime - openTime)/1000));
 						$rootScope.timerDuration = Math.ceil(duration - (currTime - openTime)/1000);
-						if($rootScope.timerDuration < 0)
+						if($rootScope.timerDuration <= 0) {
 							$rootScope.timerDuration = 0;
+							alert("You have already taken this test!");
+							return;
+						}
 						console.log("Inner Timer duration1: " + $rootScope.timerDuration);
 
 						console.log("Timer duration1: " + $rootScope.timerDuration);
@@ -347,10 +350,22 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route, $
 						    			"You've got " + correct + " out of " + $scope.tAns.length + " answers correct!",
 						    			"success"
 									).then(function() {
+										// Store marks in database
+										$http({
+												method: "POST",
+												url: "/setTestMarks/",
+												data: {
+													test: tName,
+													user: uName,
+													marks: correct
+												}
+											}).then(function(response) {
+												console.log("Added marks to db");	
+											});
 										window.location = './Main.html';
 									}).catch(function() {
 										window.location = './Main.html';	
-									})
+									});
 									
 					        	}
 					        }
@@ -380,6 +395,9 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route, $
 			}
 		}
 
+		var tName = $scope.check;
+		var uName = $cookies.get('myUname');
+
 		swal({
 			title: "Are you sure?",
 			text: "You won't be able to change the answers again!",
@@ -394,6 +412,18 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route, $
 	    		"You've got " + correct + " out of " + $scope.tAns.length + " answers correct!",
 	    		"success"
 			).then(function() {
+				// Store marks in database
+				$http({
+						method: "POST",
+						url: "/setTestMarks/",
+						data: {
+							test: tName,
+							user: uName,
+							marks: correct
+						}
+					}).then(function(response) {
+						console.log("Added marks to db");	
+					});
 				$window.location.href = './Main.html';
 			})
 		})
