@@ -9,7 +9,7 @@
 
 .timer{
     zoom: 0.52;
-    -moz-transform: scale(0.5)
+    -moz-transform: scale(0.5);
 }
 
 .flip-clock-label {
@@ -19,3 +19,4 @@
 .seconds > .top, .bottom {
 	background: #ccc;
 }
+

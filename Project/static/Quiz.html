@@ -81,8 +81,8 @@
 
         <div id="navbar-full">
             <div id="navbar">
-                <nav class="navbar navbar-fixed-top transparents" role="navigation" style="border-style: solid; border-color: black; margin-bottom: 0cm; height: 100px;">
-                    <div style="padding-right: 20px;">
+                <nav class="navbar navbar-fixed-top navy" role="navigation" style="border-style: solid; border-color: black; margin-bottom: 0cm;">
+                    <div style="padding-right: 20px;" class="transparents" >
                         <div class="navbar-header">
                             <button type="button" id="checkButt" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                                 <span class="sr-only">Toggle navigation</span>
@@ -101,9 +101,9 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div class="collapse navbar-collapse collap " id="bs-example-navbar-collapse-1" >
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown" id="padd">
+                                <li class="dropdown hidden-xs" id="padd">
                                     <a href="check" class="navbar-brand navbar-brand-logo navbar dropdown-toggle" data-toggle="dropdown" style="height: 72px;" id="user">
                                         <div class="logo">
                                             <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
@@ -118,6 +118,22 @@
                                         <li class="divider visible-xs"></li>
                                     </ul>
                                 </li>
+                                <li class="dropdown visible-xs" id="padd"  >
+                                    <a href="check" class="navbar-brand navbar-brand-logo navbar dropdown-toggle" data-toggle="dropdown" style="height: 72px" id="user">
+                                        <div class="logo">
+                                            <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
+                                        </div>
+                                        <div class="brand" style="padding-top: 9%; color: white;padding-right: 0px"> {{myText}} </div>
+                                    </a>
+                                    <ul class="dropdown-menu faf" style="text-align: center ; float:left;">
+                                        <li ><a data-toggle="modal" href="#delModal"><i class="pe-7s-trash" style="font-size: 20px; float: left;"></i>Delete Account</a></li>
+                                        <li><a data-toggle="modal" href="#passModal" ><i class="pe-7s-refresh" style="font-size: 20px; float: left;"></i>&nbsp;Change Password</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="" ng-click="logout()" >Logout</a></li>
+                                        <li class="divider visible-xs"></li>
+                                    </ul>
+                                </li>
+                                
                             </ul>
                         </div>
                     </div>

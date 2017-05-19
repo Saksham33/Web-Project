@@ -3,7 +3,7 @@ body{
 }
 .form-control::-moz-placeholder{
    color: #DDDDDD;
-   opacity: 1;
+   opacity: 1;  
 }
 .form-control:-moz-placeholder{
    color: #DDDDDD;
@@ -432,15 +432,15 @@ h1 .subtitle{
     
 }
 
-@media (max-width: 768px){ 
+@media (max-width: 767px){ 
     .navbar-transparent{
         padding-top: 15px;
         background-color: rgba(0, 0, 0, 0.45);
     }
     .navbar-transparent .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-transparent .navbar-nav .open .dropdown-menu > li > a:focus, .navbar-transparent .dropdown-menu > li > a:hover, .navbar-transparent .dropdown-menu > li > a:focus, [class*="navbar-ct"] .dropdown-menu > li > a:hover, [class*="navbar-ct"] .dropdown-menu > li > a:focus{
-        color: #FFFFFF;
-        background-color: rgba(0,0,0,0);
-        opacity: 1;
+        color: black;
+        /*background-color: rgba(0,0,0,0);*/
+        opacity: 0;
     }
     .navbar-transparent .navbar-nav .open .dropdown-menu > li > a, [class*="navbar-ct"] .dropdown-menu > li > a {
         color: #FFFFFF;
@@ -458,7 +458,13 @@ h1 .subtitle{
         margin: 0 auto;
     }
     
+.dropdown-menu > li > a {
+    padding: 8px 20px;
+    color: #ffffff;
 }
+}
+
+
 
 
 .blurred-container{

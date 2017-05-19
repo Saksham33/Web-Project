@@ -29,7 +29,7 @@ $(document).ready(function(){
 
     $("#checkButt").click(function() {
         if($("#checkButt").hasClass("collapsed")) {
-            $(".containers").css("margin-top", "190px");
+            $(".containers").css("margin-top", "240px");
         }
         else {
             $(".containers").css("margin-top", "100px");

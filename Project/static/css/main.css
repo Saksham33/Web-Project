@@ -91,10 +91,130 @@
   box-shadow: 0 0 0 0 transparent;
 }
 
+
+
 @media only screen and (min-width: 768px) {
 	#padd {
 		padding-left: 50px;
 	}
+
+}
+
+
+.navbar
+{
+  margin-bottom: 0px;
+}
+.under {
+  display:block;
+  border:none;
+  color:white;
+  height:1px;
+  background:black;
+  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#000), to(#fff));
+}
+
+ .fadeInLeft
+{
+margin-left: 13%;
+}
+.fadeInRight
+{
+margin-right: 20%;
+}
+.toph1
+{
+margin-left: 40%;
+}
+.toph2{
+margin-left: 30%;
+}
+
+.createres
+{
+  display:none;
+}
+
+.exam
+{
+  height: 0px;
+  float: left; 
+  margin-right: 2%; 
+  width: 22%; 
+  margin-bottom: 100px;
+}
+
+@media only screen and (max-width:699px) and (min-width: 100px) {
+
+  
+  .quiz1,.coding{
+              padding-right:10%;
+              padding-left:10%;
+  }
+  .quiz1 ,.coding{
+    margin-top:25px;
+  }
+
+  .quiz
+  {
+    padding-right: 21%;
+    padding-left: 26%;
+  }
+  .topd1
+  {
+    display:none;
+  }
+  .toph2,.toph1{
+    margin-left: 0%;
+  }
+   .exam
+{
+   
+  width: 85%; 
+  
+}
+
+  
+}
+@media only screen and (max-width:990px) and (min-width: 700px) {
+
+  .quiz1,.coding{
+              padding-right:10%;
+              padding-left:10%;
+  }
+  .quiz1 ,.coding{
+    margin-top:25px;
+  }
+
+  .quiz
+  {
+    padding-right: 5%;
+    padding-left: 5%;
+
+  }
+  .topd1{
+    display:none;
+  }
+  .exam
+{
+   
+  width: 40%; 
+  
+}
+
+}
+
+
+
+@media only screen and (min-width: 991px)
+{
+  .quiz1 ,.coding{
+              padding-right:0px;
+              padding-left:0px;
+              margin-top: 20px;
+  }
+  
+  
 }
 
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
@@ -165,14 +285,7 @@ svg {
   background:rgba(0,0,0,0.5);
 }
 
-.under {
-  display:block;
-  border:none;
-  color:white;
-  height:1px;
-  background:black;
-  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#000), to(#fff));
-}
+
 
 a:hover {
   color: white;
@@ -194,6 +307,7 @@ a:hover {
   color: white;
   font-size: x-large;
 }
+
 
 
 
@@ -253,12 +367,12 @@ a:hover {
 .col_fourth,
 .col_three_fourth,
 .col_fifth{
-  position: relative;
+  /*position: relative;
   display:inline;
-  display: inline-block;
+  display: inline-block;*/
   float: left;
   margin-right: 2%;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
 }
 .end { margin-right: 0 !important; }
 
@@ -266,7 +380,7 @@ a:hover {
 /* Flip Panel */
 /*-=-=-=-=-=-=-=-=-=-=- */
 
-.wrapper{ width: 980px; margin: 0 auto;  background-color: #bdd3de; hoverflow: hidden;}
+.wrapper{ width: 100%; margin: 0 auto;  background-color: #bdd3de; hoverflow: hidden;}
 
 .panel {
   margin: 0 auto;

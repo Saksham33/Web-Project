@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/ct-navbar.css">
     <link rel="stylesheet" type="text/css" href="css/modal.css">
     <link rel="stylesheet" type="text/css" href="css/Challenge.css">
+    <link rel="stylesheet" type="text/css" href="css/mcq.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -16,6 +17,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="controllers/mainCtrl.js"></script>
+    <script type="text/javascript" src="js/mcq.js"></script>
     <script type="text/javascript" src="js/ct-navbar.js"></script>
     <!-- <script type="text/javascript" src="js/angular.js"></script> -->
 		<script src="js/include_image_path.js"></script>
@@ -75,50 +77,66 @@
         </div>
     </div>
     <div id="navbar-full">
-        <div id="navbar">
-            <nav class="navbar navbar-fixed-top" role="navigation" style="border-style: solid; border-color: black; margin-bottom: 0cm; height: 100px; background: url(images/img4.jpg)">
-                <div style="padding-right: 20px;" class="transparents">
-                    <div class="navbar-header">
-                        <button type="button" id="checkButt" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a href="Main.html" class="hidden-xs">
-                            <div style="padding-left: 10%; padding-top: 4%">
-                                <img src="images/logo2.png" style="height: 80px; width: 100px;">
-                            </div>
-                        </a>
-                        <a href="Main.html" class="visible-xs">
-                            <div style="float: left;">
-                                <img src="images/logo2.png" style="height: 80px; width: 100px;">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown" id="padd">
-                                <a href="#" class="navbar-brand navbar-brand-logo navbar dropdown-toggle" data-toggle="dropdown" style="height: 72px;" id="user">
-                                    <div class="logo">
-                                        <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
-                                    </div>
-                                    <div class="brand" style="padding-top: 9%; padding-right: 75px; color: white;"> {{myText}} </div>
-                                </a>
-                                <ul class="dropdown-menu" style="text-align: center;">
-                                    <li><a data-toggle="modal" href="#delModal"><i class="pe-7s-trash" style="font-size: 20px; float: left;"></i>Delete Account</a></li>
-                                    <li><a data-toggle="modal" href="#passModal"><i class="pe-7s-refresh" style="font-size: 20px; float: left;"></i>&nbsp;Change Password</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="" ng-click="logout()">Logout</a></li>
-                                    <li class="divider visible-xs"></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
+          <div id="navbar">
+              <nav class="navbar navbar-fixed-top navy" id="navyy" role="navigation" style="border-style: solid; border-color: black; margin-bottom: 0cm;background: url(images/img4.jpg)">
+                  <div style="padding-right: 20px;" class="transparents">
+                      <div class="navbar-header">
+                          <button type="button" id="checkButt" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                              <span class="sr-only">Toggle navigation</span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                          </button>
+                          <a href="Main.html" class="hidden-xs">
+                              <div style="padding-left: 10%; padding-top: 4%">
+                                  <img src="images/logo2.png" style="height: 80px; width: 100px;">
+                              </div>
+                          </a>
+                          <a href="Main.html" class="visible-xs">
+                              <div style="float: left;">
+                                  <img src="images/logo2.png" style="height: 80px; width: 100px;">
+                              </div>
+                          </a>
+                      </div>
+                      <div class="collapse navbar-collapse collap" id="bs-example-navbar-collapse-1">
+                          <ul class="nav navbar-nav navbar-right">
+                            
+                              <li class="dropdown hidden-xs" id="padd">
+                                    <a href="check" class="navbar-brand navbar-brand-logo navbar dropdown-toggle" data-toggle="dropdown" style="height: 72px;" id="user">
+                                        <div class="logo">
+                                            <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
+                                        </div>
+                                        <div class="brand" style="padding-top: 9%; padding-right: 75px; color: white;"> {{myText}} </div>
+                                    </a>
+                                    <ul class="dropdown-menu" style="text-align: center;">
+                                        <li><a data-toggle="modal" href="#delModal"><i class="pe-7s-trash" style="font-size: 20px; float: left;"></i>Delete Account</a></li>
+                                        <li><a data-toggle="modal" href="#passModal"><i class="pe-7s-refresh" style="font-size: 20px; float: left;"></i>&nbsp;Change Password</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="" ng-click="logout()">Logout</a></li>
+                                        <li class="divider visible-xs"></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown visible-xs" id="padd"  >
+                                    <a href="check" class="navbar-brand navbar-brand-logo navbar dropdown-toggle" data-toggle="dropdown" style="height: 72px" id="user">
+                                        <div class="logo">
+                                            <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
+                                        </div>
+                                        <div class="brand" style="padding-top: 9%; color: white;padding-right: 0px"> {{myText}} </div>
+                                    </a>
+                                    <ul class="dropdown-menu faf" style="text-align: center ; float:left;">
+                                        <li ><a data-toggle="modal" href="#delModal"><i class="pe-7s-trash" style="font-size: 20px; float: left;"></i>Delete Account</a></li>
+                                        <li><a data-toggle="modal" href="#passModal" ><i class="pe-7s-refresh" style="font-size: 20px; float: left;"></i>&nbsp;Change Password</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="" ng-click="logout()" >Logout</a></li>
+                                        <li class="divider visible-xs"></li>
+                                    </ul>
+                                </li>
+                          </ul>
+                      </div>
+                  </div>
+              </nav>
+          </div>
+      </div>
 		<form class="container" style="margin-top: 120px;">
 			<div>
 				<p style="font-size: 40px;">Create Challenge</p>
