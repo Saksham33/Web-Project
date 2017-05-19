@@ -450,6 +450,110 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		$cookies.put('login', 'false');
 	 	$window.location.href='./index.html';
 	}
+
+
+	// Create challenge page
+
+	// Add challenge
+	$scope.addChallenge	= function() {
+		// Clear every error message first
+		$("#emptyChallenge").css('display', 'none');
+		$("#emptyStatement").css('display', 'none');
+		$("#emptyIpFormat").css('display', 'none');
+		$("#emptyConstr").css('display', 'none');
+		$("#emptyOpFormat").css('display', 'none');
+		$("#emptyTCase").css('display', 'none');
+		$("#emptyTopic").css('display', 'none');
+
+		var challenge = $("#ch1").val().trim();
+		if(challenge == "") {
+			$("#emptyChallenge").css('display', 'inline');
+			return;
+		}
+
+		var statement = $("#ch2").val().trim();
+		if(statement == "") {
+			$("#emptyStatement").css('display', 'inline');
+			return;
+		}
+
+		var ip = $("#ch3").val().trim();
+		if(ip == "") {
+			$("#emptyIpFormat").css('display', 'inline');
+			return;
+		}
+
+		var constr = $("#ch4").val().trim();
+		if(constr == "") {
+			$("#emptyConstr").css('display', 'inline');
+			return;
+		}
+
+		var op = $("#ch5").val().trim();
+		if(op == "") {
+			$("#emptyOpFormat").css('display', 'inline');
+			return;
+		}
+
+		var optionsArray = new Array();		// Array to store test cases
+		$("#options").find("span").each(function() {
+			optionsArray.push($(this).text());
+		});
+
+		if(optionsArray.length < 1) {		// If no of test cases is less than 1, show error
+			$("#emptyTCase").css('display', 'block');
+			return;
+		}
+
+		if($scope.setTopic == "Select Topic") {		// If no topic is selected, show error
+			$("#emptyTopic").css('display', 'block');
+			return;
+		}
+
+		console.log('Challenge ' + challenge);
+		console.log('Stat ' + statement);
+		console.log('ip ' + ip);
+		console.log('constr ' + constr);
+		console.log('op ' + op);
+		console.log('topic ' + $scope.setTopic);
+
+		// http request to add challenge
+		$http({
+			method: "POST",
+			url: "/addChallenge/",
+			data: {
+				challenge: challenge,
+				statement: statement,
+				input: ip,
+				output: op,
+				constraints: constr,
+				topic: $scope.setTopic,
+				testcases: optionsArray,
+			}
+		}).then(function(response) {
+			console.log("Response");
+		});
+
+		// Reset everything
+		var form = document.getElementById("challenge_form");
+		form.reset();
+		$("#options").children().remove();
+		$scope.setTopic = "Select Topic";
+
+		swal({
+			title: '<font color="#5cb85c">Success!</font>',
+		  	text: 'You successfully created the question!',
+		  	timer: 2000
+			}).then(
+		  	function () {},
+		  	// handling the promise rejection
+		  	function (dismiss) {
+		    	if (dismiss === 'timer') {
+		    		console.log('Timer expired')
+		    	}
+		  	}
+		)
+	}
 });
 
 // app.controller("testCtrl", function($scope, $http, $cookies, $window) {

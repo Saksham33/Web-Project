@@ -14,6 +14,7 @@ app.use(express.static(__dirname + '/static/'));
 Student = require('./models/Student');	// Student.js file for login info in login db
 MCQ = require('./models/MCQ');			// MCQ.js file for mcqs in login db
 McqTests = require('./models/McqTests');  // McqTests.js files which contains names of all tests
+Challenge = require('./models/Challenge');  // Challenge.js file for coding questions
 
 mongoose.connect(config.connectionString);	// config file where mongodb connection path is present
 var db = mongoose.connection;
@@ -339,6 +340,24 @@ app.post('/setTestmarks/', function(req, res) {
 	var marks = req.body.marks;
 
 	McqTests.setMarks(test, user, marks, function(err, myMarks) {
+		if(err) {
+			throw err;
+		}
+		res.send("Done");
+	});
+});
+
+// Add coding questions
+app.post('/addChallenge/', function(req, res) {
+	var chall = req.body.challenge;
+	var stat = req.body.statement;
+	var ip = req.body.input;
+	var op = req.body.output;
+	var constr = req.body.constraints;
+	var topic = req.body.topic;
+	var tcase = req.body.testcases;
+
+	Challenge.addNewChall(chall, stat, ip, op, constr, topic, tcase, function(err, resp) {
 		if(err) {
 			throw err;
 		}
