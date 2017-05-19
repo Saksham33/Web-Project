@@ -158,7 +158,7 @@
 	    </div>
 	    <div style="margin-top: 100px;" class="containers">
 	    	<div ng-init="sidebarQues()">
-				<div id="sidebar-wrapper">
+				<div id="sidebar-wrapper" class="sidy">
   					<ul class="sidebar-nav">
   						<a id="checkSidebar" ng-click="showTestQues()" href="" class="btn btn-success btn-lg"><i class="fa fa-check" aria-hidden="true"></i></a>
 		    			<a id="menu-close" href="#" class="btn btn-default btn-lg pull-right toggle"><i class="glyphicon glyphicon-remove"></i></a>
@@ -213,11 +213,11 @@
 	   				<span class="dropdown">
 	   					<button class="btn btn-primary btn-default" data-toggle="dropdown" class="dropdown-toggle" id="button2">{{setTopic}} <b class="caret"></b>
 	   					</button>
-			            <ul class="dropdown-menu">
-			                <li><a ng-click="selectTop('Stacks')">Stacks</a></li>
-			                <li><a ng-click="selectTop('Queues')">Queues</a></li>
-			                <li><a ng-click="selectTop('Trees')">Trees</a></li>
-			                <li><a ng-click="selectTop('Graphs')">Graphs</a></li>
+			            <ul class="dropdown-menu" style="top:75%" >
+			                <li><a ng-click="selectTop('Stacks')" style="padding: 5px 20px;color:#333">Stacks</a></li>
+			                <li><a ng-click="selectTop('Queues')" style="padding: 5px 20px;color:#333">Queues</a></li>
+			                <li><a ng-click="selectTop('Trees')" style="padding: 5px 20px ;color:#333">Trees</a></li>
+			                <li><a ng-click="selectTop('Graphs')" style="padding: 5px 20px;color:#333">Graphs</a></li>
 			            </ul><br><br>
 	   				</span>
 	   				<div align="center">

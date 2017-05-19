@@ -33,6 +33,13 @@
   filter: blur(5px);
 }*/
 
+
+.back
+{
+  background: rgba(0,0,0,0.5);
+}
+
+
 .transparency {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 	filter: alpha(opacity=50);

@@ -82,7 +82,30 @@
   -ms-transition: all 0.5s ease-out 0s;
   -o-transition: all 0.5s ease-out 0s;
 }
-
 .toggle {
   margin: 5px 5px 0 0;
+}
+
+#menu-close
+{
+  margin-right: 5px;
+}
+
+/*.sidy
+{
+  width:500px;
+}
+
+
+*/
+@media only screen and (max-width:767px)
+{
+  #sidebar-wrapper.active
+  {
+    width:300px;
+  }
+  #menu-close
+  {
+    margin-right: 200px;
+  }
 }
