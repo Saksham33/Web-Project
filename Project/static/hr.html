@@ -33,57 +33,57 @@
   </head>
   <body ng-app="myApp" ng-controller="QuesCtrl" style="font-family: 'Quicksand', sans-serif;">
       <div class="container">
-            <div id="delModal" class="modal fade in">
-                <div class="modal-dialog" style="width:350px">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-                            <h4 class="modal-title">Delete Account</h4>
-                        </div>
-                        <div class="modal-body" style="padding-left: 11px">
-                            <div id="passMismatch" style="color: red; text-align: center; display: none;">Passwords don't match</div><br>
-                            <div id="invPass" style="color: red; text-align: center; display: none;">Incorrect Password</div><br>
-                           <label>Password<input type="Password" ng-model="delPass1" style="margin-left: 65px"></label><br/><br/>
-                           <label>Confirm Password<input type="Password" ng-model="delPass2" style="margin-left: 10px"></label>
-                        </div><br>
-                        <div class="modal-footer" style="text-align: center;padding-bottom:5px;padding-top: 5px">
-                            <div class="btn-group" style="margin :1px">
-                                <button class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                                <button class="btn btn-primary" ng-click="delAccount()"><span class="glyphicon glyphicon-check"></span> Confirm</button>
-                            </div>
-                        </div>
-     
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dalog -->
-            </div>
-        </div>
+          <div id="delModal" class="modal fade in">
+              <div class="modal-dialog" style="width:350px">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                          <h4 class="modal-title">Delete Account</h4>
+                      </div>
+                      <div class="modal-body" style="padding-left: 11px">
+                          <div id="passMismatch" style="color: red; text-align: center; display: none;">Passwords don't match</div><br>
+                          <div id="invPass" style="color: red; text-align: center; display: none;">Incorrect Password</div><br>
+                         <label>Password<input type="Password" ng-model="delPass1" style="margin-left: 65px"></label><br/><br/>
+                         <label>Confirm Password<input type="Password" ng-model="delPass2" style="margin-left: 10px"></label>
+                      </div><br>
+                      <div class="modal-footer" style="text-align: center;padding-bottom:5px;padding-top: 5px">
+                          <div class="btn-group" style="margin :1px">
+                              <button class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                              <button class="btn btn-primary" ng-click="delAccount()"><span class="glyphicon glyphicon-check"></span> Confirm</button>
+                          </div>
+                      </div>
+   
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dalog -->
+          </div>
+      </div>
 
         <!-- Change Password model -->
-        <div class="container">
-            <div id="passModal" class="modal fade in">
-                <div class="modal-dialog" style="width:400px">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-                            <h4 class="modal-title">Change Password</h4>
-                        </div>
-                        <div class="modal-body" style="padding-left: 11px">
-                            <div id="passMismatch2" style="color: red; text-align: center; display: none;">Incorrect Password</div><br>
-                            <div id="passMatch" style="color: green; text-align: center; display: none;">Password Updated</div><br>
-                           <label>Current Password<input type="Password" ng-model="changePass1" style="margin-left: 15px"></label><br/><br/>
-                           <label>New Password<input type="Password" ng-model="changePass2" style="margin-left: 34px"></label>
-                        </div><br>
-                        <div class="modal-footer" style="text-align: center;padding-bottom:5px;padding-top: 5px">
-                            <div class="btn-group" style="margin :1px">
-                                <button class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                                <button class="btn btn-primary" ng-click="changePass()"><span class="glyphicon glyphicon-check"></span> Confirm</button>
-                            </div>
-                        </div>
-     
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dalog -->
-            </div>
-        </div>
+      <div class="container">
+          <div id="passModal" class="modal fade in">
+              <div class="modal-dialog" style="width:400px">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                          <h4 class="modal-title">Change Password</h4>
+                      </div>
+                      <div class="modal-body" style="padding-left: 11px">
+                          <div id="passMismatch2" style="color: red; text-align: center; display: none;">Incorrect Password</div><br>
+                          <div id="passMatch" style="color: green; text-align: center; display: none;">Password Updated</div><br>
+                         <label>Current Password<input type="Password" ng-model="changePass1" style="margin-left: 15px"></label><br/><br/>
+                         <label>New Password<input type="Password" ng-model="changePass2" style="margin-left: 34px"></label>
+                      </div><br>
+                      <div class="modal-footer" style="text-align: center;padding-bottom:5px;padding-top: 5px">
+                          <div class="btn-group" style="margin :1px">
+                              <button class="btn btn-danger " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                              <button class="btn btn-primary" ng-click="changePass()"><span class="glyphicon glyphicon-check"></span> Confirm</button>
+                          </div>
+                      </div>
+   
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dalog -->
+          </div>
+      </div>
 
       <div id="navbar-full">
           <div id="navbar">
@@ -125,35 +125,35 @@
                                   </ul>
                               </li> -->
                               <li class="dropdown hidden-xs" id="padd">
-                                    <a href="check" class="navbar-brand navbar-brand-logo navbar dropdown-toggle" data-toggle="dropdown" style="height: 72px;" id="user">
-                                        <div class="logo">
-                                            <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
-                                        </div>
-                                        <div class="brand" style="padding-top: 9%; padding-right: 75px; color: white;"> {{myText}} </div>
-                                    </a>
-                                    <ul class="dropdown-menu" style="text-align: center;">
-                                        <li><a data-toggle="modal" href="#delModal"><i class="pe-7s-trash" style="font-size: 20px; float: left;"></i>Delete Account</a></li>
-                                        <li><a data-toggle="modal" href="#passModal"><i class="pe-7s-refresh" style="font-size: 20px; float: left;"></i>&nbsp;Change Password</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="" ng-click="logout()">Logout</a></li>
-                                        <li class="divider visible-xs"></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown visible-xs" id="padd"  >
-                                    <a href="check" class="navbar-brand navbar-brand-logo navbar dropdown-toggle" data-toggle="dropdown" style="height: 72px" id="user">
-                                        <div class="logo">
-                                            <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
-                                        </div>
-                                        <div class="brand" style="padding-top: 9%; color: white;padding-right: 0px"> {{myText}} </div>
-                                    </a>
-                                    <ul class="dropdown-menu faf" style="text-align: center ; float:left;">
-                                        <li ><a data-toggle="modal" href="#delModal"><i class="pe-7s-trash" style="font-size: 20px; float: left;"></i>Delete Account</a></li>
-                                        <li><a data-toggle="modal" href="#passModal" ><i class="pe-7s-refresh" style="font-size: 20px; float: left;"></i>&nbsp;Change Password</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="" ng-click="logout()" >Logout</a></li>
-                                        <li class="divider visible-xs"></li>
-                                    </ul>
-                                </li>
+                                  <a href="check" class="navbar-brand navbar-brand-logo navbar dropdown-toggle" data-toggle="dropdown" style="height: 72px;" id="user">
+                                      <div class="logo">
+                                          <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
+                                      </div>
+                                      <div class="brand" style="padding-top: 9%; padding-right: 75px; color: white;"> {{myText}} </div>
+                                  </a>
+                                  <ul class="dropdown-menu" style="text-align: center;">
+                                      <li><a data-toggle="modal" href="#delModal"><i class="pe-7s-trash" style="font-size: 20px; float: left;"></i>Delete Account</a></li>
+                                      <li><a data-toggle="modal" href="#passModal"><i class="pe-7s-refresh" style="font-size: 20px; float: left;"></i>&nbsp;Change Password</a></li>
+                                      <li class="divider"></li>
+                                      <li><a href="" ng-click="logout()">Logout</a></li>
+                                      <li class="divider visible-xs"></li>
+                                  </ul>
+                              </li>
+                              <li class="dropdown visible-xs" id="padd"  >
+                                  <a href="check" class="navbar-brand navbar-brand-logo navbar dropdown-toggle" data-toggle="dropdown" style="height: 72px" id="user">
+                                      <div class="logo">
+                                          <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
+                                      </div>
+                                      <div class="brand" style="padding-top: 9%; color: white;padding-right: 0px"> {{myText}} </div>
+                                  </a>
+                                  <ul class="dropdown-menu faf" style="text-align: center ; float:left;">
+                                      <li ><a data-toggle="modal" href="#delModal"><i class="pe-7s-trash" style="font-size: 20px; float: left;"></i>Delete Account</a></li>
+                                      <li><a data-toggle="modal" href="#passModal" ><i class="pe-7s-refresh" style="font-size: 20px; float: left;"></i>&nbsp;Change Password</a></li>
+                                      <li class="divider"></li>
+                                      <li><a href="" ng-click="logout()" >Logout</a></li>
+                                      <li class="divider visible-xs"></li>
+                                  </ul>
+                              </li>
                           </ul>
                       </div>
                   </div>
@@ -161,79 +161,107 @@
           </div>
       </div>
 
-
-
-
-
-      <div class="containers">
-
-      <div class="row">
-
-        <div class="col-md-2 col-sm-1 hidden-xs"></div> <!-- Empty col on the left -->
-
-        <div class="col-md-6 col-sm-7 col-xs-12">
-          <h1><a href="#" target="_blank">Codediction</a></h1>
-          <hr>
-          <!-- Ace editor Here -->
-          <div id="editor"></div>
-          <hr>
-          <input type="text" class="form-control" id="hackerRankApi" name="hackerRankApi" placeholder="Enter Hacker Rank API Key" />
-          <p style="text-align: center;">You need to enter hacker rank api. To get your own set of keys visit: <a href="https://www.hackerrank.com/api/docs" target="_blank">Link</a></p>
-          <hr>
-          <div id="status">
-            <h4>
-              Console:
-            </h4>
-            <p style="text-align: right;">
-              <input type="button" id="clearConsole" class="btn btn-xs btn-primary" value="Clear Console" />
-            </p>
-            <pre>$ Write your code.</pre>
+      <div class="containers" style="margin-left:20px;margin-right: 20px;margin-top: 120px">
+          <div id="phead">
+              <h1 style="font-weight: bold;">Simple Array Sum</h1>
           </div>
-        </div>
 
-        <div class="col-md-2 col-sm-3 col-xs-12">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <h1>Settings</h1>
-              <hr>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <p style="text-align: center;">
-                <input type="button" class="btn btn-primary" id="submitCode" name="submitCode" value="Submit Code" />
-              </p>
-              <hr>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <select class="form-control" id="editorLanguage"></select>
-              <p style="text-align: center;"><b>Select Language</b><br>Check out the supported Languages at this <a href="http://api.hackerrank.com/checker/languages.json" target="_blank">Link</a>.</p>
-              <hr>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <textarea class="form-control" id="testCases" name="testCases" placeholder='Enter test cases in format: ["1", "2"]'></textarea>
-              <p style="text-align: center;">
-                Please enter test cases as shown here, otherwise it will show error. Format: ["testcase1", "testcase2"]
-              </p>
-              <hr>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <select class="form-control" id="editorTheme" name="editorTheme"></select>
-              <p style="text-align: center;"><b>Select Editor Theme</b></p>
-            </div>
+          <div id="problem">
+              <div id="statement">
+                  <p >Given an array of integers N, can you find the sum of its elements?</p>
+              </div>
+              <div id="inputhead" style="font-weight: bold">
+                  <p>Input Format</p>
+              </div>
+              <div id="inputdetail">
+                  <p>The first line contains an integer,N, denoting the size of the array.<br/>
+                  The second line contains N space-separated integers representing the array's elements. </p>
+              </div>
+              <div id="outputhead" style="font-weight: bold">
+                  <p>Output Format</p>
+              </div>
+              <div id="outputdetail">
+                  <p>Print the sum of the array's elements as a single integer.</p>
+              </div>
+              <div id="sampleip">
+                  <p style="font-weight: bold">Sample Input</p>
+                  <pre id="sampleinput" style="width:35%">6<br/>1 2 3 4 10 11</pre>
+              </div>
+              <div id="sampleop">
+                  <p style="font-weight:<br/>">Sample Output</p>
+                  <pre id="sampleouput" style="width:35%">31</pre>
+              </div>
           </div>
-        </div>
 
-        <div class="col-md-2 col-sm-1 hidden-xs"></div> <!-- Empty col on the right -->
+          <h3><a href="#" target="_blank">Editor :-</a></h3>
+          
+          <div class="row ">
+              <div class="col-md-6 col-sm-12 col-xs-12 edit" >
+              <!-- Ace editor Here -->
+                  <div id="editor"></div>
+                  <hr>
+                  <input type="text" class="form-control" id="hackerRankApi" name="hackerRankApi" placeholder="Enter Hacker Rank API Key" />
+                  <p style="text-align: center;">You need to enter hacker rank api. To get your own set of keys visit: <a href="https://www.hackerrank.com/api/docs" target="_blank">Link</a></p>
+                  <hr>
+              </div>
 
-      </div>
+              <div class="edit2 col-md-4">
+                  <div class="row">
+                      <div >
+                          <p style="text-align: center;">
+                              <input type="button" class="btn btn-primary" id="submitCode" name="submitCode" value="Submit Code" />
+                          </p>
+                          <hr>
+                      </div>
+                      <div >
+                          <select class="form-control" id="editorLanguage"></select>
+                          <p style="text-align: center;font-size:14px"><b>Select Language</b><br>Check out the supported Languages at this <a href="http://api.hackerrank.com/checker/languages.json" target="_blank">Link</a>.</p>
+                          <hr>
+                      </div>
+                      <div >
+                          <textarea class="form-control" id="testCases" name="testCases" placeholder='Enter test cases in format: ["1", "2"]'></textarea>
+                          <p style="text-align: center;font-size:14px">
+                          Please enter test cases as shown here, otherwise it will show error. Format: ["testcase1", "testcase2"]
+                          </p>
+                          <hr>
+                      </div>
+                      <div >
+                          <select class="form-control" id="editorTheme" name="editorTheme"></select>
+                          <p style="text-align: center;font-size:14px"><b>Select Editor Theme</b></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+          <div id="status" style="display: flex;">
+              <p style="width:65%;font-size: 18px;color:#1084ff">Console :-</p>
+              <input style="font-size: 16px"type="button" id="clearConsole" class="btn btn-xs btn-primary" value="Clear Console" />
+          </div>
+          <div>
+              <pre style="width:65%">$ Write your code.</pre>
+          </div>
+          <div class="row" id="checking" style="margin-top: 10px;">
+              <div id="custom" class="col-md-6 col-xs-6">
+                <label style="font-size: 20px ;margin-right: 8px">Custom input</label><input type="checkbox" id="cust">
+                <textarea class="form-control" rows="5" style="display:none;" id="custarea"></textarea>
+              </div>
+          </div>    
+          <div class="row" id="console" style="margin-top: 10px ;margin-left: 0px;margin-right: 0px">
+              <div style="font-weight: 100"><p>My Output</p></div>
+              <pre id="MyOutput" style="width:35%"></pre>
+              <div style="font-weight: 100"><p>Expected Output</p></div>
+              <pre id="ExOutput" style="width:35%"></pre>
+          </div>
+      </div>    
 
-      <div class="row">
-        <div class="col-md-2 col-sm-1 hidden-xs"></div> <!-- Empty col on the right -->
-        <div class="col-md-8 col-sm-10 col-xs-12"></div>
-        <div class="col-md-2 col-sm-1 hidden-xs"></div> <!-- Empty col on the right -->
-      </div>
+      <script>
+          $(document).ready(function(){
+              $("#cust").click(function(){
+                  $("#custarea").toggle();
 
-    </div>
-
+                });
+            });
+      </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>

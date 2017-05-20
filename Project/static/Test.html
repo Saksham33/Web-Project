@@ -160,7 +160,7 @@
 				<div id="sidebar-wrapper" class="sidy">
   					<ul class="sidebar-nav">
   						<a id="checkSidebar" ng-click="showTestQues()" href="" class="btn btn-success btn-lg"><i class="fa fa-check" aria-hidden="true"></i></a>
-		    			<a id="menu-close" href="#" class="btn btn-default btn-lg pull-right toggle"><i class="glyphicon glyphicon-remove"></i></a>
+		    			<a id="menu-close" href="#" class="btn btn-default btn-lg pull-right toggle" style="margin-top: 0px"><i class="glyphicon glyphicon-remove"></i></a>
 			    		<li class="sidebar-brand">
 			      			<a href="#">All Questions</a>
 			    		</li>
@@ -173,7 +173,7 @@
 					    <li>
 					      <input type="checkbox" name="ques" value="Question 3">&nbsp;&nbsp;<span style="color: white;">Ques3</span>
 					    </li> -->
-					    <li ng-repeat="x in sideArr" ng-init="checkName=getName()">
+					    <li ng-repeat="x in sideArr" ng-init="checkName=getName()" style="line-height: 20px;margin-top: 10px;font-size: 16px" >
 					    	<input type="checkbox" name={{checkName}} value={{x.question}}>&nbsp;&nbsp;<span style="color: white;">{{x.question}}</span>
 					    </li>
 		  			</ul>
@@ -219,7 +219,7 @@
 			                <li><a ng-click="selectTop('Graphs')" style="padding: 5px 20px;color:#333">Graphs</a></li>
 			            </ul><br><br>
 	   				</span>
-	   				<div align="center">
+	   				<div align="center" style="padding-top: 25px">
 	   					<button id="b2" style="width: 7em;" type="button" class="btn btn-success" ng-click="addQuestion()">Create</button>
 	   				</div>
 				</div>
