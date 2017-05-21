@@ -2,6 +2,12 @@ var editor = ace.edit("editor");
 
 $(document).ready(function() {
 
+
+
+$("#cust").click(function(){
+    $("#custarea").toggle();
+});
+
   $('#consoleModal').modal('show');
 
   //Editor initialization
@@ -32,7 +38,8 @@ $(document).ready(function() {
     codeChecker();
   });
 
-});
+}
+);
 
 function getEditorThemes() {
   //Getting ace themes from ace_themes.json

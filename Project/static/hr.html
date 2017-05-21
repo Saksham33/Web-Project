@@ -20,9 +20,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js""></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/mcq.js"></script>
     <script type="text/javascript" src="js/ct-navbar.js"></script>
     <script type="text/javascript" src="js/append_options.js"></script>
@@ -161,7 +161,7 @@
           </div>
       </div>
 
-      <div class="containers" style="margin-left:20px;margin-right: 20px;margin-top: 120px">
+      <div  style="margin-left:20px;margin-right: 20px;margin-top: 120px">
           <div id="phead">
               <h1 style="font-weight: bold;">Simple Array Sum</h1>
           </div>
@@ -238,9 +238,9 @@
               <input style="font-size: 16px"type="button" id="clearConsole" class="btn btn-xs btn-primary" value="Clear Console" />
           </div>
           <div>
-              <pre style="width:65%">$ Write your code.</pre>
+              <pre style="width:65% ;margin-top:10px">$ Write your code.</pre>
           </div>
-          <div class="row" id="checking" style="margin-top: 10px;">
+          <div class="row" id="checking" style="margin-top: 20px;">
               <div id="custom" class="col-md-6 col-xs-6">
                 <label style="font-size: 20px ;margin-right: 8px">Custom input</label><input type="checkbox" id="cust">
                 <textarea class="form-control" rows="5" style="display:none;" id="custarea"></textarea>
@@ -254,18 +254,8 @@
           </div>
       </div>    
 
-      <script>
-          $(document).ready(function(){
-              $("#cust").click(function(){
-                  $("#custarea").toggle();
-
-                });
-            });
-      </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="script.js" type="text/javascript"></script>
-  </body>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
+      <script src="script.js" type="text/javascript"></script>
+   </body>
 </html>
