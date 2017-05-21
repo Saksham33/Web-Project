@@ -373,7 +373,18 @@ app.post('/getChallengeContent/', function(req, res) {
 		if(err) {
 			throw err;
 		}
-		res.json(resp);
+		res.send(resp);
+	});
+});
+
+// Get names of coding questions
+app.post('/getChallengeNames/', function(req, res) {
+	var topic = req.body.topic;
+	Challenge.findChallenge(topic, function(err, resp) {
+		if(err) {
+			throw err;
+		}
+		res.send(resp);
 	});
 });
 

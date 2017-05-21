@@ -46,3 +46,8 @@ module.exports.getChallenge = function(challenge, callback) {
 	var query = {challenge: challenge};
 	Challenge.find(query, callback);
 }
+
+module.exports.findChallenge = function(topic, callback) {
+	var query = {topic: topic};
+	Challenge.find(query, callback);
+}

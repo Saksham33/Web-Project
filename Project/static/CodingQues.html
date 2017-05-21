@@ -26,7 +26,7 @@
 		<!-- <script src="js/dropdown_effect.js"></script> -->
 	</head>
 	
-	<body ng-app="myRoute" ng-controller="setActive" style="font-family: 'Quicksand', sans-serif;">
+	<body ng-app="myRoute" ng-controller="setActive" ng-init="loadChallengeNames()" style="font-family: 'Quicksand', sans-serif;">
 		<div class="container">
             <div id="delModal" class="modal fade in">
                 <div class="modal-dialog" style="width:350px">
@@ -142,20 +142,13 @@
 	    </div>
 	    <div style="margin-top: 120px;">
 	    	<ol type="1" style="font-size: x-large;">
-	    		<li>
-	    			<a href="hr.html">
-	    				<div style="border: 1px solid black; border-radius: 5px;">
-	    					<p style="margin-left: 10px;">Simple Array Sum</p>
-	    				</div>
-	    			</a>
-	    		</li>
-	    		<li style="margin-top: 10px;">
-	    			<a href="hr.html">
-	    				<div style="border: 1px solid black; border-radius: 5px;">
-	    					<p style="margin-left: 10px;">Multiply the arrays</p>
-	    				</div>
-	    			</a>
-	    		</li>
+                <li ng-repeat="x in cNames">
+                    <a href="{{'hr.html#'+x.challenge}}">
+                        <div style="border: 1px solid black; border-radius: 5px;">
+                            <p style="margin-left: 10px;">{{x.challenge}}</p>
+                        </div>
+                    </a>
+                </li>
 	    	</ol>
 	    </div>
 	</body>

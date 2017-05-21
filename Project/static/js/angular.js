@@ -500,4 +500,20 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route, $
 			console.log(response.data);
 		});
 	}
+
+	// CodingQues.html page
+	$scope.loadChallengeNames = function() {
+		console.log($scope.check);
+
+		// http request to fetch test names from database
+		$http({
+			method: "POST",
+			url: "/getChallengeNames/",
+			data: {
+				topic: $scope.check
+			}
+		}).then(function(response) {
+			$scope.cNames = response.data;
+		});
+	}
 });
