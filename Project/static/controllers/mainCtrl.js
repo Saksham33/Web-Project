@@ -495,12 +495,17 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 			return;
 		}
 
-		var optionsArray = new Array();		// Array to store test cases
-		$("#options").find("span").each(function() {
-			optionsArray.push($(this).text());
+		var inputArray = new Array();		// Array to store test cases
+		var outputArray = new Array();
+		$("#options").find(".myInp").each(function() {
+			inputArray.push($(this).text());
 		});
 
-		if(optionsArray.length < 1) {		// If no of test cases is less than 1, show error
+		$("#options").find(".myOp").each(function() {
+			outputArray.push($(this).text());
+		});
+
+		if(inputArray.length < 1) {		// If no of test cases is less than 1, show error
 			$("#emptyTCase").css('display', 'block');
 			return;
 		}
@@ -516,6 +521,15 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		console.log('constr ' + constr);
 		console.log('op ' + op);
 		console.log('topic ' + $scope.setTopic);
+		console.log("Inputs: ");
+		for(i in inputArray) {
+			console.log(inputArray[i]);
+		}
+
+		console.log("Outputs:");
+		for(i in outputArray) {
+			console.log(outputArray[i]);
+		}
 
 		// http request to add challenge
 		$http({
@@ -524,11 +538,12 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 			data: {
 				challenge: challenge,
 				statement: statement,
-				input: ip,
-				output: op,
+				ipFormat: ip,
+				opFormat: op,
 				constraints: constr,
 				topic: $scope.setTopic,
-				testcases: optionsArray,
+				inputTC: inputArray,
+				outputTC: outputArray,
 			}
 		}).then(function(response) {
 			console.log("Response");

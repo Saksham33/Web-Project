@@ -351,13 +351,14 @@ app.post('/setTestmarks/', function(req, res) {
 app.post('/addChallenge/', function(req, res) {
 	var chall = req.body.challenge;
 	var stat = req.body.statement;
-	var ip = req.body.input;
-	var op = req.body.output;
+	var ipFormat = req.body.ipFormat;
+	var opFormat = req.body.opFormat;
 	var constr = req.body.constraints;
 	var topic = req.body.topic;
-	var tcase = req.body.testcases;
+	var inputTC = req.body.inputTC;
+	var outputTC = req.body.outputTC;
 
-	Challenge.addNewChall(chall, stat, ip, op, constr, topic, tcase, function(err, resp) {
+	Challenge.addNewChall(chall, stat, ipFormat, opFormat, constr, topic, inputTC, outputTC, function(err, resp) {
 		if(err) {
 			throw err;
 		}

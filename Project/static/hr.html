@@ -26,12 +26,12 @@
     <script type="text/javascript" src="js/mcq.js"></script>
     <script type="text/javascript" src="js/ct-navbar.js"></script>
     <script type="text/javascript" src="js/append_options.js"></script>
-    <script type="text/javascript" src="controllers/mainCtrl.js"></script>
+    <!-- <script type="text/javascript" src="controllers/mainCtrl.js"></script> -->
     <script src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
     <!-- <script src="js/dropdown_effect.js"></script> -->
     
   </head>
-  <body ng-app="myApp" ng-controller="QuesCtrl" style="font-family: 'Quicksand', sans-serif;">
+  <body ng-app="myApp" ng-controller="myCtrl" style="font-family: 'Quicksand', sans-serif;">
       <div class="container">
           <div id="delModal" class="modal fade in">
               <div class="modal-dialog" style="width:350px">
@@ -233,11 +233,11 @@
               </div>
           </div>
           
-          <div id="status" style="display: flex;">
+          <div style="display: flex;">
               <p style="width:65%;font-size: 18px;color:#1084ff">Console :-</p>
-              <input style="font-size: 16px"type="button" id="clearConsole" class="btn btn-xs btn-primary" value="Clear Console" />
+              <input style="font-size: 16px" type="button" id="clearConsole" class="btn btn-xs btn-primary" value="Clear Console" />
           </div>
-          <div>
+          <div id="status">
               <pre style="width:65% ;margin-top:10px">$ Write your code.</pre>
           </div>
           <div class="row" id="checking" style="margin-top: 20px;">

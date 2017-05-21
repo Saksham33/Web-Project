@@ -6,10 +6,10 @@ var mySchema = mongoose.Schema({
 	statement:{
 		type: String
 	},
-	input:{
+	inputFormat:{
 		type: String
 	},
-	output:{
+	outputFormat:{
 		type: String
 	},
 	constraints:{
@@ -18,22 +18,26 @@ var mySchema = mongoose.Schema({
 	topic:{
 		type: String
 	},
-	tcase:{
+	inputTC:{
+		type: [String]
+	},
+	outputTC:{
 		type: [String]
 	}
 });
 
 var Challenge = module.exports = mongoose.model('logindb3', mySchema, 'Challenge');
 
-module.exports.addNewChall = function(chall, stat, ip, op, constr, topic, tcase, callback) {
+module.exports.addNewChall = function(chall, stat, ip, op, constr, topic, ipTC, opTC, callback) {
 	var query = {
 		challenge: chall,
 		statement: stat,
-		input: ip,
-		output: op,
+		inputFormat: ip,
+		outputFormat: op,
 		constraints: constr,
 		topic: topic,
-		tcase: tcase
+		inputTC: ipTC,
+		outputTC: opTC
 	};
 	Challenge.create(query, callback);
 }

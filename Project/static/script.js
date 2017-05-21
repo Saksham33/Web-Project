@@ -1,8 +1,8 @@
+var app = angular.module("myApp", ['ngCookies']);
+
 var editor = ace.edit("editor");
 
 $(document).ready(function() {
-
-
 
 $("#cust").click(function(){
     $("#custarea").toggle();
@@ -38,8 +38,7 @@ $("#cust").click(function(){
     codeChecker();
   });
 
-}
-);
+});
 
 function getEditorThemes() {
   //Getting ace themes from ace_themes.json
@@ -180,3 +179,91 @@ function showStatusMsg(msg) {
   //Show status message
   $("#status pre").append("\n$ " + msg);
 }
+
+
+// Controller
+app.controller("myCtrl", function($scope, $http, $window, $cookies) {
+    console.log("Inside");
+    
+    // If user is not logged in, send him/her to login page
+    if($cookies.get('login') == 'false') {
+      alert('Please login to continue');
+      $window.location.href='./index.html';
+    }
+
+    $scope.myText = $cookies.get('myUname');
+
+    $scope.checkTeacher = function() {
+      if($cookies.get('teacher') == "true")
+        return true;
+      else
+        return false;
+    }
+
+    $scope.delAccount = function() {
+      // http request to delete account
+      $("#passMismatch").css('display', 'none');
+      $("#invPass").css('display', 'none');
+
+      var pass1 = $scope.delPass1;
+      var pass2 = $scope.delPass2;
+
+      if(pass1 == pass2) {
+        $http({
+          method: "POST",
+          url: "/delAccount/",
+          data: {
+            userName: $cookies.get('myUname'),
+            password: pass1,
+          }
+        }).then(function(response) {
+          if(response.data == "yes") {
+            $window.location.href='./index.html';
+          }
+          else {
+            $("#invPass").css('display', 'block');
+          }
+        });
+      }
+      else {
+        $("#passMismatch").css('display', 'block');
+      }
+      // window.location.href = "./Quiz.html#/check"
+    }
+
+    $scope.changePass = function() {
+      $("#passMismatch2").css('display', 'none');
+      $("#passMatch").css('display', 'none');
+
+      var oldPass = $scope.changePass1;
+      var newPass = $scope.changePass2;
+
+      $http({
+        method: "POST",
+        url: "/changePass/",
+        data: {
+          userName: $cookies.get('myUname'),
+          currPass: oldPass,
+          nextPass: newPass,
+        }
+      }).then(function(response) {
+        if(response.data == "no") {
+          $("#passMismatch2").css('display', 'block');
+        }
+        else {
+          $("#passMatch").css('display', 'block');
+        }
+      });
+    }
+
+    $scope.logout = function() {
+      $cookies.put('login', 'false');
+      $window.location.href='./index.html';
+    }
+
+    $scope.loadData = function() {
+      $scope.check = window.location.hash.substr(2);  // Get part of url after #
+      var challenge = $scope.check;
+      console.log("Chellenge: " + challenge);
+    }
+});
