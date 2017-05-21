@@ -41,3 +41,8 @@ module.exports.addNewChall = function(chall, stat, ip, op, constr, topic, ipTC, 
 	};
 	Challenge.create(query, callback);
 }
+
+module.exports.getChallenge = function(challenge, callback) {
+	var query = {challenge: challenge};
+	Challenge.find(query, callback);
+}

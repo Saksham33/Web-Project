@@ -40,8 +40,32 @@ $("#cust").click(function(){
 
 });
 
+// function getAllContent() {
+
+//   var challenge = window.location.hash.substr(1);
+//   var challData = {};
+//   challData["challenge"] = challenge;
+
+//   $.ajax({
+//     url: "//localhost:9090/getChallengeContent/",
+//     type: "POST",
+//     data: JSON.stringify(challData),
+//     cache: false,
+//     dataType: 'json',
+//     processData: false,
+//     contentType: false,
+//     success: function(data) {
+//       console.log(data);
+//     },
+//     error: function(error) {
+//       console.log("Error in getting supported languages. Please refresh the page, or check your internet connection.")
+//     }
+//   });
+// }
+
 function getEditorThemes() {
   //Getting ace themes from ace_themes.json
+
   $.ajax({
     url: "ace_themes.json",
     type: "GET",
@@ -261,9 +285,33 @@ app.controller("myCtrl", function($scope, $http, $window, $cookies) {
       $window.location.href='./index.html';
     }
 
-    $scope.loadData = function() {
-      $scope.check = window.location.hash.substr(2);  // Get part of url after #
+    angular.element(document).ready(function() {
+      $scope.check = window.location.hash.substr(1);  // Get part of url after #
       var challenge = $scope.check;
-      console.log("Chellenge: " + challenge);
-    }
+      console.log("Challenge: " + challenge);
+
+      $http({
+        method: "POST",
+        url: "/getChallengeContent/",
+        data: {
+          challenge: challenge,
+        }
+      }).then(function(response) {
+        var res = response.data;
+        console.log(res[0].constraints);
+
+        $("#myChall").html(res[0].challenge);
+        $("#myStat").html(res[0].statement);
+        $("#ipFormat").html(res[0].inputFormat);
+        $("#opFormat").html(res[0].outputFormat);
+        $("#sampleinput").html(res[0].inputTC[0]);
+        $("#sampleoutput").html(res[0].outputTC[0]);
+        $("#ExOutput").html(res[0].outputTC[0]);
+      });
+
+    });
+
+    // $scope.loadData = function() {
+      
+    // }
 });

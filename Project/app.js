@@ -366,6 +366,17 @@ app.post('/addChallenge/', function(req, res) {
 	});
 });
 
+// Get coding page content
+app.post('/getChallengeContent/', function(req, res) {
+	var challenge = req.body.challenge;
+	Challenge.getChallenge(challenge, function(err, resp) {
+		if(err) {
+			throw err;
+		}
+		res.json(resp);
+	});
+});
+
 // app.get('/stack/', function(req, res) {
 // 	var topic = "Stack";
 // 	MCQ.getStackQues(topic, function(err, ques) {
@@ -440,8 +451,8 @@ var server = app.listen('9090', function(){
 });
 
 // Everything else
-codeChecker();
 gettingSupportedLanguages();
+codeChecker();
 function codeChecker() {
   app.post('/code_checker', multer().single(), function(req, res, next) {
     var returnContent;

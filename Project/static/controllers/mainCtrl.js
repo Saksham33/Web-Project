@@ -498,11 +498,11 @@ app.controller("QuesCtrl", function($scope, $http, $cookies, $window) {
 		var inputArray = new Array();		// Array to store test cases
 		var outputArray = new Array();
 		$("#options").find(".myInp").each(function() {
-			inputArray.push($(this).text());
+			inputArray.push($(this).html());
 		});
 
 		$("#options").find(".myOp").each(function() {
-			outputArray.push($(this).text());
+			outputArray.push($(this).html());
 		});
 
 		if(inputArray.length < 1) {		// If no of test cases is less than 1, show error
