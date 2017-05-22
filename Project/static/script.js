@@ -2,16 +2,11 @@ var app = angular.module("myApp", ['ngCookies']);
 
 var editor = ace.edit("editor");
 
-// $(document).ready(function() {
-
-
-
-  
-
-// });
 
 // Controller
 app.controller("myCtrl", function($scope, $http, $window, $cookies) {
+
+  var count = 0;
 
 // function getAllContent() {
 
@@ -266,11 +261,10 @@ function showStatusMsg(msg) {
         console.log("New " + $scope.newChar);
       });
 
-      //Code Submission
-      $("#submitCode").click(function() {
+      // Run code
+      $("#runCode").click(function() {
         $("#status pre").empty();   // Clear console
 
-        // function codeChecker() {
         //Checking code and giving result.
         var language = $("#editorLanguage").val();
         var code = editor.getValue().trim();
@@ -291,7 +285,7 @@ function showStatusMsg(msg) {
               data.append("testCases", testCases);
               data.append("hackerRankApi", hackerRankApi);
 
-              showStatusMsg("Code submitted. Processing, please wait.");
+              showStatusMsg("Running code");
 
               $.ajax({
                 url: "//localhost:9090/code_checker",
@@ -302,10 +296,30 @@ function showStatusMsg(msg) {
                 processData: false,
                 contentType: false,
                 success: function(data) {
-                  showStatusMsg("Result:\n\tstdout: " + data.result.stdout + "\n\tstderr: " + data.result.stderr);
-                  console.log($scope.res[0].outputTC[0]);
-                  if(data.result.stdout)
-                    console.log(data.result.stdout.toString());
+                  if(data.result.stderr != "false")
+                    showStatusMsg(data.result.stderr);
+
+                  // Check if answer is correct
+                  else {
+                    var codeRes = data.result.stdout.toString();
+                    while(codeRes.charAt(codeRes.length - 1) == "\n" || codeRes.charAt(codeRes.length - 1) == " ")
+                      codeRes = codeRes.slice(0, -1);
+                    $("#MyOutput").html(codeRes);
+
+                    var correctRes = $scope.res[0].outputTC[0];
+                    while(correctRes.charAt(correctRes.length - 1) == " ")
+                      correctRes = correctRes.slice(0, -1);
+
+                    if(correctRes == codeRes) {
+                      showStatusMsg("Sample test case passed\nYour output:\n" + codeRes);
+                    }
+                    else {
+                      showStatusMsg("No test case passed\nYour output:\n" + codeRes);
+                    }
+
+                    // console.log($scope.res[0].outputTC[0]);
+                  }
+                  // showStatusMsg("Result:\nstdout:\n" + data.result.stdout + "\nstderr:\n" + data.result.stderr);
                 },
                 error: function(err) {
                   showStatusMsg("Error: " + err);
@@ -324,13 +338,93 @@ function showStatusMsg(msg) {
           showStatusMsg("Please write some code before submitting.");
         }
 
-      //}
-
-
-        // var code = codeChecker();
-
       });
 
-    });
 
+      // Submit code
+      $("#submitCode").click(function() {
+        $("#status pre").empty();   // Clear console
+
+        var totalCount = $scope.res[0].inputTC.length;
+        count = 0;
+        var i = 0;
+        $($scope.res[0].inputTC).each(function(i) {
+          console.log("i " + i);
+          $scope.newChar = $scope.res[0].inputTC[i].replace(/\n/g, " ");
+          var language = $("#editorLanguage").val();
+          var code = editor.getValue().trim();
+          // var testCases = $("#testCases").val();
+          // console.log(testCases);
+          var testCases = "[\"" + $scope.newChar + "\"]";
+          var hackerRankApi = $("#hackerRankApi").val();
+
+          if(code && code.length) {
+
+            if(hackerRankApi && hackerRankApi.length) {
+
+              if(testCases && testCases.length) {
+
+                var data = new FormData();
+                data.append("language", language);
+                data.append("code", code);
+                data.append("testCases", testCases);
+                data.append("hackerRankApi", hackerRankApi);
+
+                showStatusMsg("Code submitted. Processing, please wait.");
+
+                $.ajax({
+                  url: "//localhost:9090/code_checker",
+                  type: "POST",
+                  data: data,
+                  cache: false,
+                  dataType: 'json',
+                  processData: false,
+                  contentType: false,
+                  success: function(data) {
+                    if(data.result.stderr != "false")
+                      showStatusMsg(data.res.stderr.toString());
+                    else {
+                      var codeRes = data.result.stdout.toString();
+                      console.log("codeRes\n" + codeRes);
+                      while(codeRes.charAt(codeRes.length - 1) == "\n" || codeRes.charAt(codeRes.length - 1) == " ")
+                        codeRes = codeRes.slice(0, -1);
+                      $("#MyOutput").html(codeRes);
+
+                      var correctRes = $scope.res[0].outputTC[i];
+                      console.log("correctRes\n" + correctRes);
+                      while(correctRes.charAt(correctRes.length - 1) == " ")
+                        correctRes = correctRes.slice(0, -1);
+
+                      if(correctRes == codeRes) {
+                        showStatusMsg("Sample test case passed\nYour output:\n" + codeRes);
+                        count = count + 1;
+                        console.log("Count " + count.toString());
+                      }
+                      else {
+                        showStatusMsg("No test case passed\nYour output:\n" + codeRes);
+                      }
+                    }
+                  },
+                  error: function(err) {
+                    showStatusMsg("Error: " + err);
+                  }
+                });
+
+              } else {
+                showStatusMsg("Please enter test cases before submitting.");
+              }
+
+            } else {
+              showStatusMsg("Please enter Hacker Rank API key before submitting.");
+            }
+
+          } else {
+            showStatusMsg("Please write some code before submitting.");
+          }
+        });
+        alert(count.toString() + " test cases passed");
+        console.log("Final count " + count);
+      });   // submit code end
+
+    });
 });
