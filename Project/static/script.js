@@ -6,8 +6,6 @@ var editor = ace.edit("editor");
 // Controller
 app.controller("myCtrl", function($scope, $http, $window, $cookies) {
 
-  var count = 0;
-
 // function getAllContent() {
 
 //   var challenge = window.location.hash.substr(1);
@@ -340,23 +338,20 @@ function showStatusMsg(msg) {
 
       });
 
-
       // Submit code
       $("#submitCode").click(function() {
         $("#status pre").empty();   // Clear console
 
-        var totalCount = $scope.res[0].inputTC.length;
-        count = 0;
-        var i = 0;
-        $($scope.res[0].inputTC).each(function(i) {
-          console.log("i " + i);
-          $scope.newChar = $scope.res[0].inputTC[i].replace(/\n/g, " ");
-          var language = $("#editorLanguage").val();
-          var code = editor.getValue().trim();
-          // var testCases = $("#testCases").val();
-          // console.log(testCases);
-          var testCases = "[\"" + $scope.newChar + "\"]";
-          var hackerRankApi = $("#hackerRankApi").val();
+        var myString = JSON.stringify($scope.res[0].inputTC);
+        console.log("myString\n" + myString);
+        
+        var language = $("#editorLanguage").val();
+        var code = editor.getValue().trim();
+        // var testCases = $("#testCases").val();
+        // console.log(testCases);
+        // var testCases = "[\"" + $scope.newChar + "\"]";
+        var testCases = myString;
+        var hackerRankApi = $("#hackerRankApi").val();
 
           if(code && code.length) {
 
@@ -381,6 +376,34 @@ function showStatusMsg(msg) {
                   processData: false,
                   contentType: false,
                   success: function(data) {
+                    console.log("OUT  " + data.result.stdout[1]);
+                    console.log("len " + data.result.stdout.length);
+                    var index = 0;
+                    var count = 0;
+                    while(index < data.result.stdout.length) {
+                      if(data.result.stderr[index] != false) {
+                        showStatusMsg(data.result.stderr[index]);
+                      }
+                      else {
+                        var myOut = data.result.stdout[index];
+                        var reqOut = $scope.res[0].outputTC[index];
+
+                        while(myOut.charAt(myOut.length - 1) == "\n" || myOut.charAt(myOut.length - 1) == " ")
+                          myOut = myOut.slice(0, -1);
+                        while(reqOut.charAt(reqOut.length - 1) == "\n" || reqOut.charAt(reqOut.length - 1) == " ")
+                          reqOut = reqOut.slice(0, -1);
+
+                        console.log("myOut " + myOut);
+                        console.log("reqOut " + reqOut);
+                        if(myOut == reqOut) {
+                          console.log("YES");
+                          count++;
+                        }
+                      }
+                        index++;
+                    }
+                    console.log("Total count " + count);
+                    /*
                     if(data.result.stderr != "false")
                       showStatusMsg(data.res.stderr.toString());
                     else {
@@ -397,13 +420,12 @@ function showStatusMsg(msg) {
 
                       if(correctRes == codeRes) {
                         showStatusMsg("Sample test case passed\nYour output:\n" + codeRes);
-                        count = count + 1;
-                        console.log("Count " + count.toString());
                       }
                       else {
                         showStatusMsg("No test case passed\nYour output:\n" + codeRes);
                       }
-                    }
+                    }*/
+                    showStatusMsg("Result:\nstdout:\n" + data.result.stdout + "\nstderr:\n" + data.result.stderr);
                   },
                   error: function(err) {
                     showStatusMsg("Error: " + err);
@@ -421,9 +443,6 @@ function showStatusMsg(msg) {
           } else {
             showStatusMsg("Please write some code before submitting.");
           }
-        });
-        alert(count.toString() + " test cases passed");
-        console.log("Final count " + count);
       });   // submit code end
 
     });
