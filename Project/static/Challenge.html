@@ -192,61 +192,62 @@
             </div> -->
 
         <form class="container" style="margin-top: 120px;" id="challenge_form">
-          <div>
-            <p style="font-size: 40px;">Create Challenge</p>
-          </div>
-          <div class="form-group">
-              <div>
-                <label for="challenge">Challenge Name</label>
-                <label id="emptyChallenge" style="color: red; float: right; display: none">Please enter the challenge name</label>
-                <input id="ch1" class="form-control" type="text" placeholder="Eg: Simple Addition"><br>
-              </div>
-              <div>
-                <label for="statement">Problem Statement</label>
-                <label id="emptyStatement" style="color: red; float: right; display: none">Please enter the statement</label>
-                <textarea id="ch2" class="form-control" placeholder="Eg: Write a program to add two numbers." style="resize: none"></textarea><br>
-              </div>
-              <div>
-                <label for="statement">Input Format</label>
-                <label id="emptyIpFormat" style="color: red; float: right; display: none">Please enter a format</label>
-                <textarea id="ch3" class="form-control" placeholder="Eg: The first line contains two integers (a and b respectively) separated by a space." style="resize: none"></textarea><br>
-              </div>
-              <div>
-                <label for="statement">Constraints</label>
-                <label id="emptyConstr" style="color: red; float: right; display: none">Please enter the constraints</label>
-                <textarea id="ch4" class="form-control" placeholder="Eg: 1 <= a, b <= 100" style="resize: none"></textarea><br>
-              </div>
-              <div>
-                <label for="statement">Output Format</label>
-                <label id="emptyOpFormat" style="color: red; float: right; display: none">Please enter a format</label>
-                <textarea id="ch5" class="form-control" placeholder="Eg: Output the addition value of a and b." style="resize: none"></textarea><br>
-              </div>
-
-              <div>
-                  <label>Test cases</label>
-                  <label id="emptyTCase" style="color: red; float: right; display: none">Please enter some test cases</label>
-                  <div id="options"></div>
-                  <div>
-                    <textarea class="form-control" type="text" id="i1" placeholder="Enter test case" name="option" style="width: 18%; float: left"></textarea>
-                    <textarea class="form-control" type="text" id="i2" placeholder="Expected output" name="option" style="width: 18%; float: left; margin-left: 10px;"></textarea>&nbsp;
+            <div>
+                <p style="font-size: 40px;">Create Challenge</p>
+            </div>
+            <div class="form-group">
+                <div>
+                    <label for="challenge">Challenge Name</label>
+                    <label id="emptyChallenge" style="color: red; float: right; display: none">Please enter the challenge name</label>
+                    <input id="ch1" class="form-control" type="text" placeholder="Eg: Simple Addition"><br>
+                </div>
+                <div>
+                    <label for="statement">Problem Statement</label>
+                    <label id="emptyStatement" style="color: red; float: right; display: none">Please enter the statement</label>
+                    <textarea id="ch2" class="form-control" placeholder="Eg: Write a program to add two numbers." style="resize: none"></textarea><br>
+                </div>
+                <div>
+                    <label for="statement">Input Format</label>
+                    <label id="emptyIpFormat" style="color: red; float: right; display: none">Please enter a format</label>
+                    <textarea id="ch3" class="form-control" placeholder="Eg: The first line contains two integers (a and b respectively) separated by a space." style="resize: none"></textarea><br>
+                </div>
+                <div>
+                    <label for="statement">Constraints</label>
+                    <label id="emptyConstr" style="color: red; float: right; display: none">Please enter the constraints</label>
+                    <textarea id="ch4" class="form-control" placeholder="Eg: 1 <= a, b <= 100" style="resize: none"></textarea><br>
+                </div>
+                <div>
+                    <label for="statement">Output Format</label>
+                    <label id="emptyOpFormat" style="color: red; float: right; display: none">Please enter a format</label>
+                    <textarea id="ch5" class="form-control" placeholder="Eg: Output the addition value of a and b." style="resize: none"></textarea><br>
+                </div>
+                <div>
+                    <label>Test cases</label>
+                    <label id="emptyTCase" style="color: red; float: right; display: none">Please enter some test cases</label>
+                    <div id="options"></div>
+                    <div>
+                        <textarea class="form-control" type="text" id="i1" placeholder="Enter test case" name="option" style="width: 18%; float: left"></textarea>
+                        <textarea class="form-control" type="text" id="i2" placeholder="Expected output" name="option" style="width: 18%; float: left; margin-left: 10px;"></textarea>&nbsp;
                     <button id="b1" type="button" class="btn btn-primary">Add test case</button>
-                  </div>
-              </div>
-          </div>
-          <label id="emptyTopic" style="color: red; display: none">Please select a topic</label>
-          <span class="dropdown">
-              <button class="btn btn-primary btn-default" data-toggle="dropdown" class="dropdown-toggle" id="button2">{{setTopic}} <b class="caret"></b>
-              </button>
-              <ul class="dropdown-menu" style="top:150%" >
-                  <li><a ng-click="selectTop('Arrays')" style="padding: 5px 20px;color:#333">Arrays</a></li>
-                  <li><a ng-click="selectTop('Sorting')" style="padding: 5px 20px;color:#333">Sorting</a></li>
-                  <li><a ng-click="selectTop('DP')" style="padding: 5px 20px ;color:#333">DP</a></li>
-                  <li><a ng-click="selectTop('Greedy')" style="padding: 5px 20px;color:#333">Greedy</a></li>
-              </ul>
-          </span>
-          <div style="text-align: center; padding-top: 100px"><br>
-            	<button style="width: 7em" type="button" class="btn btn-success" ng-click="addChallenge()">Create</button>
-          </div>
+                    </div>
+                </div>
+                <div style="margin-top: 40px">
+                    <label id="emptyTopic" style="color: red; display: none">Please select a topic</label>
+                    <span class="dropdown">
+                        <button class="btn btn-primary btn-default" data-toggle="dropdown" class="dropdown-toggle" id="button2">{{setTopic}} <b class="caret"></b>
+                        </button>
+                        <ul class="dropdown-menu" style="top:150%" >
+                            <li><a ng-click="selectTop('Arrays')" style="padding: 5px 20px;color:#333">Arrays</a></li>
+                            <li><a ng-click="selectTop('Sorting')" style="padding: 5px 20px;color:#333">Sorting</a></li>
+                            <li><a ng-click="selectTop('DP')" style="padding: 5px 20px ;color:#333">DP</a></li>
+                            <li><a ng-click="selectTop('Greedy')" style="padding: 5px 20px;color:#333">Greedy</a></li>
+                        </ul>
+                    </span>
+                </div>
+            </div>  
+            <div style="text-align: center; padding-top: 80px"><br>
+                <button style="width: 7em" type="button" class="btn btn-success" ng-click="addChallenge()">Create</button>
+            </div>
         </form>
     </body>
 </html>
