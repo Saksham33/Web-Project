@@ -518,10 +518,31 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route, $
 	}
 
 	// Delete questions
-	$scope.deleteChall = function() {
-		alert("Please select a question");
-		$(".list").click(function() {
-			var challenge = $(this).text().trim();
+	// $scope.deleteChall = function() {
+	// 	alert("Please select a question");
+	// 	$(".list").click(function() {
+	// 		var challenge = $(this).text().trim();
+			
+	// 		 $http({
+	// 			method: "POST",
+	// 			url: "/deleteChall/",
+	// 			data: {
+	// 				challenge: challenge
+	// 			}
+	// 		}).then(function(response) {
+	// 			console.log("Deleted");
+	// 		});
+
+	// 		$window.location.reload();
+	// 	});
+	// }
+
+
+		$scope.deleteChall=function(){
+
+			swal("Please select the question");
+			$(".list").click(function(){
+				var challenge = $(this).text().trim();
 			
 			 $http({
 				method: "POST",
@@ -533,7 +554,9 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route, $
 				console.log("Deleted");
 			});
 
+			swal("Deleted", "This challenge has been deleted", "success");
 			$window.location.reload();
 		});
-	}
-});
+		}
+	});
+

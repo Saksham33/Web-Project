@@ -439,6 +439,10 @@ function showStatusMsg(msg) {
                         index++;
                     }
                     console.log("Total count " + count);
+
+                    swal("Result",
+                      "You've passed " + count + " testCases!",
+                      "success");
                     /*
                     if(data.result.stderr != "false")
                       showStatusMsg(data.res.stderr.toString());
