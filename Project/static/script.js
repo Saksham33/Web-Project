@@ -2,43 +2,16 @@ var app = angular.module("myApp", ['ngCookies']);
 
 var editor = ace.edit("editor");
 
-$(document).ready(function() {
+// $(document).ready(function() {
 
-$("#cust").click(function(){
-    $("#custarea").toggle();
-});
 
-  $('#consoleModal').modal('show');
 
-  //Editor initialization
-  editor.setTheme("ace/theme/chrome");
-  editor.session.setMode("ace/mode/javascript");
-  getEditorThemes();
-  getSuppotedLanguages();
+  
 
-  //Theme changing
-  $('#editorTheme').on('change', function() {
-    editor.setTheme(this.value);
-    showStatusMsg("Editor Theme Changed: " + this.value);
-  });
+// });
 
-  //Language Changes
-  $('#editorLanguage').on('change', function() {
-    getAceEditorMode(this.value);
-  });
-
-  //Clear the console
-  $("#clearConsole").click(function() {
-    $("#status pre").empty();
-    $("#status pre").append("$ Console clear");
-  });
-
-  //Code Submission
-  $("#submitCode").click(function() {
-    codeChecker();
-  });
-
-});
+// Controller
+app.controller("myCtrl", function($scope, $http, $window, $cookies) {
 
 // function getAllContent() {
 
@@ -148,56 +121,7 @@ function setAceEditorMode(mode) {
   showStatusMsg("Language changed.");
 }
 
-function codeChecker() {
-  //Checking code and giving result.
-  var language = $("#editorLanguage").val();
-  var code = editor.getValue().trim();
-  var testCases = $("#testCases").val();
-  var hackerRankApi = $("#hackerRankApi").val();
-
-  if(code && code.length) {
-
-    if(hackerRankApi && hackerRankApi.length) {
-
-      if(testCases && testCases.length) {
-
-        var data = new FormData();
-        data.append("language", language);
-        data.append("code", code);
-        data.append("testCases", testCases);
-        data.append("hackerRankApi", hackerRankApi);
-
-        showStatusMsg("Code submitted. Processing, please wait.");
-
-        $.ajax({
-          url: "//localhost:9090/code_checker",
-          type: "POST",
-          data: data,
-          cache: false,
-          dataType: 'json',
-          processData: false,
-          contentType: false,
-          success: function(data) {
-            showStatusMsg("Result:\n\tstdout: " + data.result.stdout + "\n\tstderr: " + data.result.stderr);
-          },
-          error: function(err) {
-            showStatusMsg("Error: " + err);
-          }
-        });
-
-      } else {
-        showStatusMsg("Please enter test cases before submitting.");
-      }
-
-    } else {
-      showStatusMsg("Please enter Hacker Rank API key before submitting.");
-    }
-
-  } else {
-    showStatusMsg("Please write some code before submitting.");
-  }
-
-}
+// Code checker
 
 function showStatusMsg(msg) {
   //Show status message
@@ -205,8 +129,7 @@ function showStatusMsg(msg) {
 }
 
 
-// Controller
-app.controller("myCtrl", function($scope, $http, $window, $cookies) {
+
     console.log("Inside");
     
     // If user is not logged in, send him/her to login page
@@ -286,6 +209,37 @@ app.controller("myCtrl", function($scope, $http, $window, $cookies) {
     }
 
     angular.element(document).ready(function() {
+
+      $("#cust").click(function(){
+        $("#custarea").toggle();
+      });
+
+      $('#consoleModal').modal('show');
+
+      //Editor initialization
+      editor.setTheme("ace/theme/chrome");
+      editor.session.setMode("ace/mode/javascript");
+      getEditorThemes();
+      getSuppotedLanguages();
+
+      //Theme changing
+      $('#editorTheme').on('change', function() {
+        editor.setTheme(this.value);
+        showStatusMsg("Editor Theme Changed: " + this.value);
+      });
+
+      //Language Changes
+      $('#editorLanguage').on('change', function() {
+        getAceEditorMode(this.value);
+      });
+
+      //Clear the console
+      $("#clearConsole").click(function() {
+        $("#status pre").empty();
+        $("#status pre").append("$ Console clear");
+      });
+
+
       $scope.check = window.location.hash.substr(1);  // Get part of url after #
       var challenge = $scope.check;
       console.log("Challenge: " + challenge);
@@ -297,21 +251,86 @@ app.controller("myCtrl", function($scope, $http, $window, $cookies) {
           challenge: challenge,
         }
       }).then(function(response) {
-        var res = response.data;
-        console.log(res[0].constraints);
+        $scope.res = response.data;
+        
 
-        $("#myChall").html(res[0].challenge);
-        $("#myStat").html(res[0].statement);
-        $("#ipFormat").html(res[0].inputFormat);
-        $("#opFormat").html(res[0].outputFormat);
-        $("#sampleinput").html(res[0].inputTC[0]);
-        $("#sampleoutput").html(res[0].outputTC[0]);
-        $("#ExOutput").html(res[0].outputTC[0]);
+        $("#myChall").html($scope.res[0].challenge);
+        $("#myStat").html($scope.res[0].statement);
+        $("#ipFormat").html($scope.res[0].inputFormat);
+        $("#opFormat").html($scope.res[0].outputFormat);
+        $("#sampleinput").html($scope.res[0].inputTC[0]);
+        $("#sampleoutput").html($scope.res[0].outputTC[0]);
+        $("#ExOutput").html($scope.res[0].outputTC[0]);
+        console.log($scope.res[0].inputTC[0]);
+        $scope.newChar = $scope.res[0].inputTC[0].replace(/\n/g, " ");
+        console.log("New " + $scope.newChar);
+      });
+
+      //Code Submission
+      $("#submitCode").click(function() {
+        $("#status pre").empty();   // Clear console
+
+        // function codeChecker() {
+        //Checking code and giving result.
+        var language = $("#editorLanguage").val();
+        var code = editor.getValue().trim();
+        // var testCases = $("#testCases").val();
+        // console.log(testCases);
+        var testCases = "[\"" + $scope.newChar + "\"]";
+        var hackerRankApi = $("#hackerRankApi").val();
+
+        if(code && code.length) {
+
+          if(hackerRankApi && hackerRankApi.length) {
+
+            if(testCases && testCases.length) {
+
+              var data = new FormData();
+              data.append("language", language);
+              data.append("code", code);
+              data.append("testCases", testCases);
+              data.append("hackerRankApi", hackerRankApi);
+
+              showStatusMsg("Code submitted. Processing, please wait.");
+
+              $.ajax({
+                url: "//localhost:9090/code_checker",
+                type: "POST",
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                  showStatusMsg("Result:\n\tstdout: " + data.result.stdout + "\n\tstderr: " + data.result.stderr);
+                  console.log($scope.res[0].outputTC[0]);
+                  if(data.result.stdout)
+                    console.log(data.result.stdout.toString());
+                },
+                error: function(err) {
+                  showStatusMsg("Error: " + err);
+                }
+              });
+
+            } else {
+              showStatusMsg("Please enter test cases before submitting.");
+            }
+
+          } else {
+            showStatusMsg("Please enter Hacker Rank API key before submitting.");
+          }
+
+        } else {
+          showStatusMsg("Please write some code before submitting.");
+        }
+
+      //}
+
+
+        // var code = codeChecker();
+
       });
 
     });
 
-    // $scope.loadData = function() {
-      
-    // }
 });
