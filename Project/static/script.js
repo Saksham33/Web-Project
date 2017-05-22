@@ -121,8 +121,6 @@ function showStatusMsg(msg) {
   $("#status pre").append("\n$ " + msg);
 }
 
-
-
     console.log("Inside");
     
     // If user is not logged in, send him/her to login page
@@ -232,6 +230,25 @@ function showStatusMsg(msg) {
         $("#status pre").append("$ Console clear");
       });
 
+      // Get previous submission
+      $("#preSub").click(function() {
+        $http({
+          method: "POST",
+          url: "/getSubmission/",
+          data: {
+            user: $cookies.get('myUname'),
+            challenge: window.location.hash.substr(1),
+          }
+        }).then(function(response) {
+          if(response.data == "empty") {
+            console.log("No prev submission");
+          }
+          else {
+            console.log(response.data[0].code);
+            editor.setValue(response.data[0].code);
+          }
+        });
+      });
 
       $scope.check = window.location.hash.substr(1);  // Get part of url after #
       var challenge = $scope.check;
@@ -263,12 +280,17 @@ function showStatusMsg(msg) {
       $("#runCode").click(function() {
         $("#status pre").empty();   // Clear console
 
+        var custom = $("#custarea").val().trim();   // For custom inputs
         //Checking code and giving result.
         var language = $("#editorLanguage").val();
         var code = editor.getValue().trim();
         // var testCases = $("#testCases").val();
         // console.log(testCases);
-        var testCases = "[\"" + $scope.newChar + "\"]";
+        var testCases;
+        if(custom)
+          testCases = custom;
+        else
+          testCases = "[\"" + $scope.newChar + "\"]";
         var hackerRankApi = $("#hackerRankApi").val();
 
         if(code && code.length) {
@@ -283,7 +305,7 @@ function showStatusMsg(msg) {
               data.append("testCases", testCases);
               data.append("hackerRankApi", hackerRankApi);
 
-              showStatusMsg("Running code");
+              $("#status pre").append("$ Running code");
 
               $.ajax({
                 url: "//localhost:9090/code_checker",
@@ -325,15 +347,15 @@ function showStatusMsg(msg) {
               });
 
             } else {
-              showStatusMsg("Please enter test cases before submitting.");
+              $("#status pre").append("Please enter test cases before submitting.");
             }
 
           } else {
-            showStatusMsg("Please enter Hacker Rank API key before submitting.");
+            $("#status pre").append("Please enter Hacker Rank API key before submitting.");
           }
 
         } else {
-          showStatusMsg("Please write some code before submitting.");
+          $("#status pre").append("Please write some code before submitting.");
         }
 
       });
@@ -350,6 +372,20 @@ function showStatusMsg(msg) {
         // var testCases = $("#testCases").val();
         // console.log(testCases);
         // var testCases = "[\"" + $scope.newChar + "\"]";
+
+        // http request to save code to db
+        $http({
+          method: "POST",
+          url: "/saveCode/",
+          data: {
+            user: $cookies.get('myUname'),
+            challenge: window.location.hash.substr(1),
+            code: code,
+          }
+        }).then(function(response) {
+          console.log("Submitted!");
+        });
+
         var testCases = myString;
         var hackerRankApi = $("#hackerRankApi").val();
 
@@ -365,7 +401,7 @@ function showStatusMsg(msg) {
                 data.append("testCases", testCases);
                 data.append("hackerRankApi", hackerRankApi);
 
-                showStatusMsg("Code submitted. Processing, please wait.");
+                $("#status pre").append("$ Code submitted. Processing, please wait.");
 
                 $.ajax({
                   url: "//localhost:9090/code_checker",
@@ -425,7 +461,7 @@ function showStatusMsg(msg) {
                         showStatusMsg("No test case passed\nYour output:\n" + codeRes);
                       }
                     }*/
-                    showStatusMsg("Result:\nstdout:\n" + data.result.stdout + "\nstderr:\n" + data.result.stderr);
+                    // showStatusMsg("Result:\nstdout:\n" + data.result.stdout + "\nstderr:\n" + data.result.stderr);
                   },
                   error: function(err) {
                     showStatusMsg("Error: " + err);

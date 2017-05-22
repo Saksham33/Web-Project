@@ -15,6 +15,7 @@ Student = require('./models/Student');	// Student.js file for login info in logi
 MCQ = require('./models/MCQ');			// MCQ.js file for mcqs in login db
 McqTests = require('./models/McqTests');  // McqTests.js files which contains names of all tests
 Challenge = require('./models/Challenge');  // Challenge.js file for coding questions
+Submission = require('./models/Submission');	// Submission.js file for user codes
 
 mongoose.connect(config.connectionString);	// config file where mongodb connection path is present
 var db = mongoose.connection;
@@ -385,6 +386,51 @@ app.post('/getChallengeNames/', function(req, res) {
 			throw err;
 		}
 		res.send(resp);
+	});
+});
+
+// Save code to db
+app.post('/saveCode/', function(req, res) {
+	var user = req.body.user;
+	var challenge = req.body.challenge;
+	var code = req.body.code;
+
+	Submission.storeCode(user, challenge, code, function(err, resp) {
+		if(err)
+			throw err;
+		res.send("Done");
+	});
+});
+
+// Get code saved by user
+app.post('/getSubmission/', function(req, res) {
+	var user = req.body.user;
+	var challenge = req.body.challenge;
+
+	Submission.findCode(user, challenge, function(err, resp) {
+		if(err)
+			throw err;
+		if(resp.length != 0) {
+			res.send(resp);
+		}
+		else {
+			res.send("empty");
+		}
+	});
+});
+
+// Delete a challenge
+app.post('/deleteChall/', function(req, res) {
+	var challenge = req.body.challenge;
+
+	Challenge.delChallenge(challenge, function(err, resp) {
+		if(err)
+			throw err;
+		Submission.delSubmission(challenge, function(err, resp) {
+			if(err)
+				throw err;
+			res.send("Deleted");
+		});
 	});
 });
 

@@ -516,4 +516,24 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route, $
 			$scope.cNames = response.data;
 		});
 	}
+
+	// Delete questions
+	$scope.deleteChall = function() {
+		alert("Please select a question");
+		$(".list").click(function() {
+			var challenge = $(this).text().trim();
+			
+			 $http({
+				method: "POST",
+				url: "/deleteChall/",
+				data: {
+					challenge: challenge
+				}
+			}).then(function(response) {
+				console.log("Deleted");
+			});
+
+			$window.location.reload();
+		});
+	}
 });
