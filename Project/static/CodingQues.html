@@ -4,6 +4,7 @@
 		<title>Display Coding Questions</title>
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 		<link href="css/pe-icon-7-stroke.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/ct-navbar.css">
@@ -26,7 +27,7 @@
 		<!-- <script src="js/dropdown_effect.js"></script> -->
 	</head>
 	
-	<body ng-app="myRoute" ng-controller="setActive" ng-init="loadChallengeNames()" style="font-family: 'Quicksand', sans-serif;">
+	<body ng-app="myRoute" ng-controller="setActive" style="font-family: 'Quicksand', sans-serif;">
 		<div class="container">
             <div id="delModal" class="modal fade in">
                 <div class="modal-dialog" style="width:350px">
@@ -140,16 +141,20 @@
 	            </nav>
 	        </div>
 	    </div>
-	    <div style="margin-top: 120px;">
-	    	<ol type="1" style="font-size: x-large;">
-                <li ng-repeat="x in cNames">
-                    <a href="{{'hr.html#'+x.challenge}}">
-                        <div style="border: 1px solid black; border-radius: 5px;">
-                            <p style="margin-left: 10px;">{{x.challenge}}</p>
-                        </div>
-                    </a>
+
+        <div class="ques">
+            <ol class="olist" type="1" style="font-size: 36px">
+                <li class="list">
+                    <div class="qb hvr-bounce-to-right">
+                        <a class="link" href="hr.html">Sort the array</a>
+                    </div>
                 </li>
-	    	</ol>
-	    </div>
+                <li class="list">
+                    <div class="qb hvr-bounce-to-right">
+                        <a class="link" href="hr.html">Multiply the arrays</a>
+                    </div>
+                </li>
+            </ol>
+        </div> 
 	</body>
 </html>

@@ -17,15 +17,20 @@
 p{
 	font-size: 20px;
 }
-.edit , .edit2
+
+#myChall
+{
+  margin-top:5px;
+}
+/*.edit , .edit2
 {
 	margin-left: 70px;
-}
+}*/
 
-@media only screen and (max-width: 988px)
+/*@media only screen and (max-width: 988px)
 {
 	.edit , .edit2
 	{
 		margin-left: 0px;
 	}
-}
+}*/
