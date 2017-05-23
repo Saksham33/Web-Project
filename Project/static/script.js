@@ -401,7 +401,7 @@ function showStatusMsg(msg) {
                 data.append("testCases", testCases);
                 data.append("hackerRankApi", hackerRankApi);
 
-                $("#status pre").append("$ Code submitted. Processing, please wait.");
+                $("#status pre").append("$ Submitting");
 
                 $.ajax({
                   url: "//localhost:9090/code_checker",
@@ -416,6 +416,7 @@ function showStatusMsg(msg) {
                     console.log("len " + data.result.stdout.length);
                     var index = 0;
                     var count = 0;
+                    var totalCount = $scope.res[0].outputTC.length;
                     while(index < data.result.stdout.length) {
                       if(data.result.stderr[index] != false) {
                         showStatusMsg(data.result.stderr[index]);
@@ -441,7 +442,7 @@ function showStatusMsg(msg) {
                     console.log("Total count " + count);
 
                     swal("Result",
-                      "You've passed " + count + " testCases!",
+                      "You've passed " + count + " out of " + totalCount + " Test Cases!",
                       "success");
                     /*
                     if(data.result.stderr != "false")
