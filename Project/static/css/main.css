@@ -104,6 +104,10 @@
 	#padd {
 		padding-left: 50px;
 	}
+  .back
+  {
+    display: none;
+  }
 
 }
 
