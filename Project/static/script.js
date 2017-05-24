@@ -316,8 +316,14 @@ function showStatusMsg(msg) {
                 processData: false,
                 contentType: false,
                 success: function(data) {
-                  if(data.result.stderr != "false")
-                    showStatusMsg(data.result.stderr);
+                  if(data.result.stderr == null || data.result.stderr.length == 0) {
+                    if(data.result.compilemessage) {
+                      var compMsg = data.result.compilemessage.replace(/[^\x00-\x7F]/g, "");
+                      showStatusMsg(compMsg);
+                    }
+                    if(data.result.stderr != null)
+                      showStatusMsg(data.result.stderr); 
+                  }
 
                   // Check if answer is correct
                   else {
@@ -339,7 +345,7 @@ function showStatusMsg(msg) {
 
                     // console.log($scope.res[0].outputTC[0]);
                   }
-                  // showStatusMsg("Result:\nstdout:\n" + data.result.stdout + "\nstderr:\n" + data.result.stderr);
+                   // showStatusMsg("Result:\nstdout:\n" + data.result.stdout + "\nstderr:\n" + data.result.stderr);
                 },
                 error: function(err) {
                   showStatusMsg("Error: " + err);
@@ -412,32 +418,38 @@ function showStatusMsg(msg) {
                   processData: false,
                   contentType: false,
                   success: function(data) {
-                    console.log("OUT  " + data.result.stdout[1]);
-                    console.log("len " + data.result.stdout.length);
                     var index = 0;
                     var count = 0;
                     var totalCount = $scope.res[0].outputTC.length;
-                    while(index < data.result.stdout.length) {
-                      if(data.result.stderr[index] != false) {
-                        showStatusMsg(data.result.stderr[index]);
-                      }
-                      else {
-                        var myOut = data.result.stdout[index];
-                        var reqOut = $scope.res[0].outputTC[index];
-
-                        while(myOut.charAt(myOut.length - 1) == "\n" || myOut.charAt(myOut.length - 1) == " ")
-                          myOut = myOut.slice(0, -1);
-                        while(reqOut.charAt(reqOut.length - 1) == "\n" || reqOut.charAt(reqOut.length - 1) == " ")
-                          reqOut = reqOut.slice(0, -1);
-
-                        console.log("myOut " + myOut);
-                        console.log("reqOut " + reqOut);
-                        if(myOut == reqOut) {
-                          console.log("YES");
-                          count++;
+                    if(data.result.stdout) {
+                      while(index < data.result.stdout.length) {
+                        if(data.result.stderr[index] == null || data.result.stderr[index].length == 0) {
+                          if(data.result.compilemessage[index]) {
+                            var compMsg = data.result.compilemessage[index].replace(/[^\x00-\x7F]/g, "");
+                            showStatusMsg(compMsg);
+                          }
+                          if(data.result.stderr[index] != null)
+                            showStatusMsg(data.result.stderr[index]);
                         }
-                      }
+                        else {
+                          var myOut = data.result.stdout[index];
+                          var reqOut = $scope.res[0].outputTC[index];
+
+                          while(myOut.charAt(myOut.length - 1) == "\n" || myOut.charAt(myOut.length - 1) == " ")
+                            myOut = myOut.slice(0, -1);
+                          while(reqOut.charAt(reqOut.length - 1) == "\n" || reqOut.charAt(reqOut.length - 1) == " ")
+                            reqOut = reqOut.slice(0, -1);
+
+                          console.log("myOut " + myOut);
+                          console.log("reqOut " + reqOut);
+                          if(myOut == reqOut) {
+                            console.log("YES");
+                            count++;
+                          }
+                        }
+                        showStatusMsg("Result:\nstdout:\n" + data.result.stdout[index] + "\nstderr:\n" + data.result.stderr[index]);
                         index++;
+                      }
                     }
                     console.log("Total count " + count);
 
