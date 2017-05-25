@@ -319,7 +319,15 @@ app.controller("setActive", function($scope, $cookies, $window, $http, $route, $
 						$rootScope.timerDuration = Math.ceil(duration - (currTime - openTime)/1000);
 						if($rootScope.timerDuration <= 0) {
 							$rootScope.timerDuration = 0;
-							alert("You have already taken this test!");
+
+								swal(
+					    				"You have already taken this test!"
+									).then(function() {
+										window.location = './Main.html';
+									}).catch(function() {
+										window.location = './Main.html';	
+									});
+							 //setTimeout(function(){$window.location.href = './Main.html'},2000);
 							return;
 						}
 						console.log("Inner Timer duration1: " + $rootScope.timerDuration);

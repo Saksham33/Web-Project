@@ -17,7 +17,7 @@ $(document).ready(function() {
     $("#fafy").click(function(){
 
            	$("#faf").toggle();
-        	$("#faf").toggleClass("back");
+        	$("#faf").toggleClass("backy");
         
 	});
 
